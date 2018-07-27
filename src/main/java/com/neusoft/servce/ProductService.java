@@ -29,11 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductService {
 	
 	@RequestMapping("/index")
-	public String show(){
-		
-		return "/home/introduction.html";
-	}
-	@RequestMapping("/index2")
 	public void show2(HttpServletRequest rq,HttpServletResponse rp) throws IOException{
 				rp.sendRedirect("/ssm/home/introduction.html");
 	}
