@@ -56,7 +56,8 @@
 	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" 
 		> <property name="mapperInterface" value="com.neusoft.dao.TUserMapper"></property> 
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> </bean> -->
-
+		
+		
 	<!-- 解决多个Mapper 重复定义 的问题 扫描指定的包下面的 Mapper.java接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.neusoft.dao"></property>
