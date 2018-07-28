@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'upload.jsp' starting page</title>
+    <title>My JSP 'show.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,10 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   
-   	<form action="/noobweb/uppic/pic" method="post" enctype="multipart/form-data" >
-   		<input type="file" name="pic" />  
-   		<input type="submit" />
-   	</form>
+    This is my JSP page. <br>
   </body>
 </html>

@@ -6,8 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.neusoft.dao.ProductMapper;
+import com.neusoft.domain.Product;
+import com.neusoft.domain.ProductExample;
+import com.neusoft.domain.ProductExample.Criteria;
 
 /**
  * <p><b>Project:</b>  		《ssm-0726》</p>
@@ -25,11 +31,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 
-@Controller
-public class ProductService {
-	
-	@RequestMapping("/index")
-	public void show2(HttpServletRequest rq,HttpServletResponse rp) throws IOException{
-				rp.sendRedirect("/ssm/home/introduction.html");
+
+	@Controller
+	public class ProductService {
+		@Autowired
+		ProductMapper productMapper;
+		public  Product queryByProductid(int num){
+			ProductExample produc = new ProductExample();
+			//Criteria cr = produc.createCriteria();
+			//cr.andProductidEqualTo(num);
+		//	cr.andProductidEqualTo(1);
+			Product product = productMapper.selectByPrimaryKey(num); 
+	//		System.out.println(product.size());
+			return product;
+		}
 	}
-}

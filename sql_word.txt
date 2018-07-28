@@ -1,0 +1,101 @@
+base:
+CREATE TABLE `noobweb`.`user` (
+  `userid` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(20) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `money` DOUBLE NULL DEFAULT 0,
+  PRIMARY KEY (`userid`));
+
+
+CREATE TABLE `noobweb`.`address` (
+  `userid` INT NULL,
+  `province` VARCHAR(45) NOT NULL,
+  `city` VARCHAR(45) NOT NULL,
+  `detailedaddress` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(45) NOT NULL,
+  INDEX `user-address_idx` (`userid` ASC),
+  CONSTRAINT `user-address`
+    FOREIGN KEY (`userid`)
+    REFERENCES `noobweb`.`user` (`userid`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `noobweb`.`product` (
+  `productid` INT NOT NULL AUTO_INCREMENT,
+  `productname` VARCHAR(45) NOT NULL,
+  `price` DOUBLE NOT NULL,
+  `productdetail` VARCHAR(500) NULL,
+  `remain` INT NULL DEFAULT 0,
+  PRIMARY KEY (`productid`));
+
+
+
+CREATE TABLE `noobweb`.`shoppingcar` (
+  `userid` INT NOT NULL,
+  `productid` INT NOT NULL,
+  `amount` INT NULL DEFAULT 1,
+  INDEX `user-shoppingcar_idx` (`userid` ASC),
+  INDEX `product-shoppingcar_idx` (`productid` ASC),
+  CONSTRAINT `user-shoppingcar`
+    FOREIGN KEY (`userid`)
+    REFERENCES `noobweb`.`user` (`userid`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `product-shoppingcar`
+    FOREIGN KEY (`productid`)
+    REFERENCES `noobweb`.`product` (`productid`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `noobweb`.`order` (
+  `orderid` INT NOT NULL AUTO_INCREMENT,
+  `userid` INT NOT NULL,
+  `productid` VARCHAR(500) NOT NULL,
+  `trade_status` VARCHAR(45) NOT NULL DEFAULT 'unpaid',
+  PRIMARY KEY (`orderid`),
+  INDEX `user-order_idx` (`userid` ASC),
+  CONSTRAINT `user-order`
+    FOREIGN KEY (`userid`)
+    REFERENCES `noobweb`.`user` (`userid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `noobweb`.`comment` (
+  `userid` INT NOT NULL,
+  `productid` INT NOT NULL,
+  `content` VARCHAR(400) NULL,
+  `commentdate` VARCHAR(45) NOT NULL,
+  INDEX `user-comment_idx` (`userid` ASC),
+  INDEX `product-comment_idx` (`productid` ASC),
+  CONSTRAINT `user-comment`
+    FOREIGN KEY (`userid`)
+    REFERENCES `noobweb`.`user` (`userid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `product-comment`
+    FOREIGN KEY (`productid`)
+    REFERENCES `noobweb`.`product` (`productid`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE `noobweb`.`admin` (
+  `adminid` INT NOT NULL,
+  `adminname` VARCHAR(45) NOT NULL,
+  `adminpassword` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`adminid`));
+
+wz(7/27):
+	Alter table product add before_p int; //增加原价
+
+	Alter table product add  main_picture varchar(100);//增加主图地址
+
+	Alter table product add side_picture_1 varchar(100);	
+	Alter table product add side_picture_2 varchar(100);
+	Alter table product add side_picture_3 varchar(100);
+	Alter table product add side_picture_4 varchar(100);
+	Alter table product add side_picture_5 varchar(100);  //增加5个副图地址
+
+	Alter table product add type varchar(20);//添加商品类型
