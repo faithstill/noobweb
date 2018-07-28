@@ -3,7 +3,7 @@
   type="WEB"
   name="ssm-0726"
   id="myeclipse.1532394179977"
-  context-root="/ssm"
+  context-root="/noobweb"
   j2ee-spec="6.0"
   archive="ssm-0726.war">
   <attributes>
