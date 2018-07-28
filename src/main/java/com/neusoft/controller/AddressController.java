@@ -20,28 +20,8 @@ public class AddressController {
 	@Autowired
 	AddressService addressService;
 	
-	@RequestMapping("/m1.action")
-	public ModelAndView method1(){
-	System.out.println("我是  User的  Hello");
-
-	ModelAndView mav = new ModelAndView();
-	mav.addObject("sitename", "欢迎使用注解");
-
-	mav.setViewName("/hello.jsp");
-
-	return mav;
-	}
-	
 	@RequestMapping("/query")
 	public ModelAndView query(){
-		
-//		userService.queryList();
-//		
-//		System.out.println("RestFul 风格的URL:");
-		
-		//做转账操作
-		
-		
 		int userid = 1;
 		List<Address> addresslist = addressService.queryByUser(userid);
 		//System.out.println("userid---"+userid);
@@ -54,16 +34,16 @@ public class AddressController {
 //			mav.addObject("addresslist"+i,addresslist);
 //			i++;
 //		}
-		//Request.set
 		mav.addObject("addresslist",addresslist);
 		mav.setViewName("/home/pay.jsp");
+		//mav.setViewName("/test.jsp");
 		return mav;
 	}
 	
 	//<input type="text" name="jasonnb"  
 	
 	@RequestMapping("/add")
-	public String address_add(Address address){
+	public ModelAndView address_add(Address address){
 		//Address t_address = new Address(address.getUserid(),address.getName(),address.getPhone(),address.getProvince(),address.getCity(),address.getDetailedaddress());
 		System.out.println("id:"+address.getUserid());
 		System.out.println("name:"+address.getName());
@@ -73,9 +53,39 @@ public class AddressController {
 		System.out.println("detail:"+address.getDetailedaddress());
 		
 		addressService.address_add(address);
-		return "/address/query";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/address/query"); 
+		return mav;
+		
+	}
+		
+	@RequestMapping("/deleteById")
+	public ModelAndView address_deleteById(int addressid)
+	{
+		addressService.address_deleteById(addressid);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/address/query"); 
+		return mav;
 		
 	}
 	
-
+	@RequestMapping("/update_queryById")
+	public  ModelAndView update_queryById(int addressid)
+	{
+		//System.out.println("up-que");
+		ModelAndView mav = new ModelAndView();
+		Address address =  addressService.address_queryById(addressid);
+		mav.addObject("update_address",address);
+		mav.setViewName("/home/addressupdate.jsp"); 
+		return mav;
+	}
+	
+	@RequestMapping("/update")
+	public ModelAndView address_update(Address address)
+	{
+		addressService.address_update(address);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/address/query");
+		return mav;
+	}
 }

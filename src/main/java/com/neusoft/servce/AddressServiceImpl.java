@@ -32,6 +32,23 @@ public class AddressServiceImpl implements AddressService {
 		return suc>0;
 	}
 	
+	public boolean address_deleteById(int addressid)
+	{
+		int suc = addressMapper.deleteByPrimaryKey(addressid);
+		System.out.println("address_deleteByIdsuc----"+suc);
+		return suc>0;
+	}
 	
+	public Address address_queryById(int addressid)
+	{
+		Address address = addressMapper.selectByPrimaryKey(addressid);
+		return address;
+	}
 	
+	public boolean address_update(Address address)
+	{
+		int suc = addressMapper.updateByPrimaryKey(address);
+		System.out.println(suc);
+		return suc>0;
+	}
 }
