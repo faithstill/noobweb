@@ -35,7 +35,6 @@ public class SearchController {
 	//	rp.sendRedirect("/noobweb/home/introduction.html");
 		return "/home/introduction.jsp";
 	}
-	
 	@RequestMapping("/bytype")
 	public String querybytype(HttpServletRequest request,HttpServletResponse rp){
 		return null;
