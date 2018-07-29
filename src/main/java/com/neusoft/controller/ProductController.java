@@ -118,5 +118,13 @@ public class ProductController {
 		mav.setViewName("/product/query");
 		return mav;
 	}
+	
+	@RequestMapping("/home")
+	public ModelAndView homeController(){
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/home/home.jsp");
+		return mav;
+	}
 
 }
