@@ -26,7 +26,7 @@ public class AddressController {
 		List<Address> addresslist = addressService.queryByUser(userid);
 		//System.out.println("userid---"+userid);
 		ModelAndView mav = new ModelAndView();
-		int i=1;
+		
 //		for(Address address: addresslist)
 //		{
 //			//System.out.println("address----"+address);
@@ -40,7 +40,7 @@ public class AddressController {
 		return mav;
 	}
 	
-	//<input type="text" name="jasonnb"  
+	
 	
 	@RequestMapping("/add")
 	public ModelAndView address_add(Address address){
