@@ -93,4 +93,10 @@ public interface UserMapper {
      * @mbg.generated Fri Jul 27 14:27:21 CST 2018
      */
     int updateByPrimaryKey(User record);
+    
+    public List<User> getUserList(User user);
+	public void insertUser(User user);
+	public void updateUser(User user);
+	public void deleteUser(User user);
+	public User loginValidate(User user);
 }
