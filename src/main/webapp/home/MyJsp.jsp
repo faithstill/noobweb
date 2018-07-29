@@ -389,7 +389,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="clear"></div>
 
 									<ul class="am-comments-list am-comments-list-flip">
-							<c:forEach items = "${commentlist}" var="comment" varStatus="commentcount">
+							<c:forEach items = "${commentlist}" var="comment" varStatus="addresscount">
 								<li class="am-comment">
 									<!-- 评论容器 -->
 									<a href="">
@@ -417,10 +417,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 
 										</div>
-									</div>
 										<!-- 评论内容 -->
-									<div class="tc-btn am-btn ">
-									<a href="comment/deleteById?commentid=${commentcount.current.getcommentid()}"  onclick="delClick(this);">删除</a><br>
 									</div>
 								</li>
 						</c:forEach>
@@ -428,12 +425,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</ul>
 						<div class="clear"></div>
 						<div class="am-comment-bd">
-							<form action="comment/add" method="POST">
+							<form action="/comment/add" method="POST">
 								<div class="tb-rev-item " data-id="255776406962">
 									<input type ="text" name="comment_write" id="cw"  size="100"  placeholder="快来评论一下吧！" class="J_TbcRate_ReviewContent tb-tbcr-content">
 								</div>
 								<div style="margin-top:20px">
-									<input type="hidden" value="${product.productid}" name="product_id">
 									<button id="publish" type="submit">发布</button>
 									<!-- <button type="button" id="cancel">取消</button> -->
 								</div>

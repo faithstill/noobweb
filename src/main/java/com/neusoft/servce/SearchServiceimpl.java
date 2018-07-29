@@ -24,7 +24,19 @@ public class SearchServiceimpl implements SearchService {
 		cr.andProductnameLike("%key%");
 		cr.andProductnameLike("key%");
 		List<Product> product = productMapper.selectByExample(produc);
-		
+	}
+
+	@Override
+	public void searchbytpye(String type) {
+		 
+		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void direct(int productid) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
