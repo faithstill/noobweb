@@ -25,10 +25,6 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-<<<<<<< HEAD
-	@RequestMapping("/querybyid")
-	public ModelAndView query() {
-=======
 	@RequestMapping("/queryall")
 	public ModelAndView queryall() {
 		ModelAndView mav = new ModelAndView();
@@ -67,20 +63,13 @@ public class ProductController {
 	
 	@RequestMapping("/queryByProductid")
 	public ModelAndView queryByProductid() {
->>>>>>> 8dad6cc4daf70c2f1be268126f6bfe30c9353b49
 		int productid = 1;
 		Product product = productService.queryByProductid(productid);
 			System.out.println("product----"+product.getProductname());
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("product",product);
-<<<<<<< HEAD
 		//	mav.setViewName("/home/introduction.jsp");
 			mav.setViewName("/comment/querybyproductid");
-=======
-			//mav.setViewName("/home/introduction.jsp");
-			mav.setViewName("/comment/query");
-
->>>>>>> 8dad6cc4daf70c2f1be268126f6bfe30c9353b49
 			return mav;
 	}
 	

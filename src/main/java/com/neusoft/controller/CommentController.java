@@ -33,8 +33,8 @@ public class CommentController {
 		mav.setViewName("/home/introduction.jsp");
 		return mav;
 	}
-		
-		
+	
+	
 	@RequestMapping("/add")
 	public ModelAndView Comment_add(String comment_write,int product_id){
 		int userid=1;
