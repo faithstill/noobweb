@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.neusoft.dao.ProductMapper;
 import com.neusoft.domain.Product;
+import com.neusoft.domain.Product;
 import com.neusoft.domain.ProductExample;
 import com.neusoft.domain.ProductExample.Criteria;
 
@@ -32,25 +33,15 @@ import com.neusoft.domain.ProductExample.Criteria;
  */
 	
 public interface ProductService {
+	
+	
+	public List queryall();
+	public List queryByType(String producttype);
+	public List queryByName(String productname);
+	public Product queryByProductid(int productid);
+	public boolean product_deleteById(int productid);
+	public boolean product_add(Product product);
+	public boolean product_update(Product product);
+	public Product product_queryById(int productid);
 
-<<<<<<< HEAD
-	public  Product queryByProductid(int num);
-		
-		
-=======
-
-	@Controller
-	public class ProductService {
-		@Autowired
-		ProductMapper productMapper;
-		public  Product queryByProductid(int num){
-			ProductExample produc = new ProductExample();
-			//Criteria cr = produc.createCriteria();
-			//cr.andProductidEqualTo(num);
-		//	cr.andProductidEqualTo(1);
-			Product product = productMapper.selectByPrimaryKey(num); 
-	//		System.out.println(product.size());
-			return product;
-	}
->>>>>>> 85e0bba466875687700852547feec050f5e7696f
 }

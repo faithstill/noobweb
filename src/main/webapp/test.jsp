@@ -61,10 +61,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 			</tr> -->
 <!-- 		</table> -->
 <!-- 	</form> -->
-		<c:forEach items="${addresslist }" var = "address"  varStatus="addresscount" >
-		${addresscount.current.getAddressid()}
-		${address}
-		<a href="address/deleteById?addressid=${addresscount.current.getAddressid()}"  onclick="delClick(this);">删除</a><br>
+		<form method="post" action="product/queryByName">
+<!-- 				<input type="submit" name="producttype" value="牛奶"> -->
+<!-- 				<input type="submit" name="producttype" value="零食"> -->
+				
+				<input type="text" name="productname">
+				<input type="submit"  value="搜索">
+		</form>
+
+		<c:forEach items="${productlist_byname}" var = "product"  varStatus="productcount" >
+		
+		${product}
+		
 		</c:forEach>
     
   </body>

@@ -20,27 +20,13 @@ public class AddressController {
 	@Autowired
 	AddressService addressService;
 	
-<<<<<<< HEAD
-	@RequestMapping("/m1.action")
-	public ModelAndView method1(){
-	System.out.println("我是  User的  Hello");
-	ModelAndView mav = new ModelAndView();
-	mav.addObject("sitename", "欢迎使用注解");
-
-	mav.setViewName("/hello.jsp");
-
-	return mav;
-	}
-	
-=======
->>>>>>> 22484a578c6b5b05317ee80324f3d73a1dba7189
 	@RequestMapping("/query")
 	public ModelAndView query(){
 		int userid = 1;
 		List<Address> addresslist = addressService.queryByUser(userid);
 		//System.out.println("userid---"+userid);
 		ModelAndView mav = new ModelAndView();
-		int i=1;
+		
 //		for(Address address: addresslist)
 //		{
 //			//System.out.println("address----"+address);
@@ -54,7 +40,7 @@ public class AddressController {
 		return mav;
 	}
 	
-	//<input type="text" name="jasonnb"  
+	
 	
 	@RequestMapping("/add")
 	public ModelAndView address_add(Address address){
