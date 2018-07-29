@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neusoft.domain.Comment;
 import com.neusoft.domain.Product;
 import com.neusoft.servce.ProductService;
 
@@ -21,7 +22,6 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	
 	@RequestMapping("/query")
 	public ModelAndView query() {
 		int productid = 1;
@@ -29,8 +29,13 @@ public class ProductController {
 			System.out.println("product----"+product.getProductname());
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("product",product);
+<<<<<<< HEAD
 			mav.setViewName("/home/introduction.jsp");
 			//mav.setViewName("/comment/query");
+=======
+		//	mav.setViewName("/home/introduction.jsp");
+			mav.setViewName("/comment/query");
+>>>>>>> 85e0bba466875687700852547feec050f5e7696f
 			return mav;
 	}
 

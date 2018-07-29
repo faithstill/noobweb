@@ -100,7 +100,18 @@ wz(7/27):
 
 	Alter table product add type varchar(20);//添加商品类型
 
+<<<<<<< HEAD
 zhy(7/29  default  utf-8)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
+=======
+
+jason（7/28):
+	ALTER TABLE `noobweb`.`user` 
+ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC);ALTER TABLE `noobweb`.`user` 
+ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC);
+
+wz(7/28):
+	Alter table comment add comment_id Int;
+>>>>>>> 85e0bba466875687700852547feec050f5e7696f

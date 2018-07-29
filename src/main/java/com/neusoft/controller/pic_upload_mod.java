@@ -24,3 +24,4 @@ public class pic_upload_mod {
 		return "";
 	}
 }
+ 

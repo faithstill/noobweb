@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							<div class="per-border"></div>
 							
-						<c:forEach items="${addresslist }" var = "address"  varStatus="addresscount" >
+						<c:forEach items="${addresslist}" var = "address"  varStatus="addresscount" >
 							<li class="user-addresslist">
 								<div class="address-left">
 									<div class="user DefaultAddr">
