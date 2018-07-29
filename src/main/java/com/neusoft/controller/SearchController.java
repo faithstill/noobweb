@@ -27,12 +27,6 @@ public class SearchController {
 		if (search_num == "1"){
 		//	SearchService.
 		}
-
-		
-		//Product product = productService.queryByProductid(userid);
-		//	System.out.println("product----"+product.getProductname());
-	//	request.setAttribute("product", product);
-	//	rp.sendRedirect("/noobweb/home/introduction.html");
 		return "/home/introduction.jsp";
 	}
 	@RequestMapping("/bytype")

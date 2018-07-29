@@ -389,7 +389,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="clear"></div>
 
 									<ul class="am-comments-list am-comments-list-flip">
-							<c:forEach items = "${commentlist}" var="comment" varStatus="addresscount">
+							<c:forEach items = "${commentlist}" var="comment" varStatus="commentcount">
 								<li class="am-comment">
 									<!-- 评论容器 -->
 									<a href="">
@@ -417,7 +417,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 
 										</div>
+									</div>
 										<!-- 评论内容 -->
+									<div class="tc-btn am-btn ">
+									<a href="comment/deleteById?commentid=${commentcount.current.getcommentid()}"  onclick="delClick(this);">删除</a><br>
 									</div>
 								</li>
 						</c:forEach>

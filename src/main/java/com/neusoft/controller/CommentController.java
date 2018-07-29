@@ -22,7 +22,7 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 		
-	@RequestMapping("/query")
+	@RequestMapping("/querybyproductid")
 	public ModelAndView querybyid(){		
 		int productid = 1;
 		List<Comment> commentlist = commentService.queryByProductid(productid);
@@ -36,24 +36,35 @@ public class CommentController {
 		
 		
 	@RequestMapping("/add")
-	public String Comment_add(String comment_write,int product_id){
+	public ModelAndView Comment_add(String comment_write,int product_id){
 		int userid=1;
+		//request.getSession(userid);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
-		System.out.println(product_id);
-		System.out.println(date);
-		//Address t_address = new Address(address.getUserid(),address.getName(),address.getPhone(),address.getProvince(),address.getCity(),address.getDetailedaddress());
-//		System.out.println("data:"+ comment.getCommentdate());
-//		System.out.println("content:"+comment.getContent());
-//		System.out.println("commentid:"+comment.getCommentId());
-//		System.out.println("productid:"+comment.getProductid());
-//		System.out.println("userid:"+comment.getUserid());
-		//CommentService.add_comment(comment);
-		//addressService.address_add(address);
-		System.out.println(comment_write);
-		return "/Product/query";
+		String username="wz";
+		//selectusernamebyid();
+		//System.out.println(product_id);
+		//System.out.println(date);
+		Comment t_Comment = new Comment();
+		t_Comment.setCommentdate(date);
+		t_Comment.setContent(comment_write);
+		t_Comment.setProductid(product_id);
+		t_Comment.setUserid(userid);
+		t_Comment.setUsername(username);
+		commentService.add_comment(t_Comment);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/product/querybyid"); 
+		return mav;
 	}
-		
-
+	
+	@RequestMapping("/deleteById")
+	public ModelAndView comment_deleteById(int commentid)
+	{
+		commentService.del_commentbyid(commentid);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/product/querybyid"); 
+		return mav;
+	}
+	
 }
 

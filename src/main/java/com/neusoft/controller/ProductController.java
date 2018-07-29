@@ -17,12 +17,12 @@ import com.neusoft.domain.Product;
 import com.neusoft.servce.ProductService;
 
 @Controller
-@RequestMapping("/Product") 
+@RequestMapping("/product") 
 public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	@RequestMapping("/query")
+	@RequestMapping("/querybyid")
 	public ModelAndView query() {
 		int productid = 1;
 		Product product = productService.queryByProductid(productid);
@@ -30,7 +30,7 @@ public class ProductController {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("product",product);
 		//	mav.setViewName("/home/introduction.jsp");
-			mav.setViewName("/comment/query");
+			mav.setViewName("/comment/querybyproductid");
 			return mav;
 	}
 }
