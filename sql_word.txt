@@ -99,3 +99,12 @@ wz(7/27):
 	Alter table product add side_picture_5 varchar(100);  //增加5个副图地址
 
 	Alter table product add type varchar(20);//添加商品类型
+
+
+jason（7/28):
+	ALTER TABLE `noobweb`.`user` 
+ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC);ALTER TABLE `noobweb`.`user` 
+ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC);
+
+wz(7/28):
+	Alter table comment add comment_id Int;

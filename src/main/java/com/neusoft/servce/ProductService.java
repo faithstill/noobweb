@@ -44,5 +44,5 @@ import com.neusoft.domain.ProductExample.Criteria;
 			Product product = productMapper.selectByPrimaryKey(num); 
 	//		System.out.println(product.size());
 			return product;
-		}
 	}
+}

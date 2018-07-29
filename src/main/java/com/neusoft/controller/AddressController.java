@@ -23,7 +23,6 @@ public class AddressController {
 	@RequestMapping("/m1.action")
 	public ModelAndView method1(){
 	System.out.println("我是  User的  Hello");
-
 	ModelAndView mav = new ModelAndView();
 	mav.addObject("sitename", "欢迎使用注解");
 

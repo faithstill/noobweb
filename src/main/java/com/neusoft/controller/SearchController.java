@@ -19,15 +19,15 @@ public class SearchController {
 	@Autowired
 	SearchService SearchService;
 		
-	@RequestMapping("/byname")
-	public String querybyname(HttpServletRequest request,HttpServletResponse rp) throws IOException{
+	@RequestMapping("/show")
+	public String ShowSearch(HttpServletRequest request,HttpServletResponse rp) throws IOException{
 		
 		String search_num=request.getParameter("num");
 		String search_key = request.getParameter("key");
 		if (search_num == "1"){
 		//	SearchService.
 		}
-		
+
 		
 		//Product product = productService.queryByProductid(userid);
 		//	System.out.println("product----"+product.getProductname());
