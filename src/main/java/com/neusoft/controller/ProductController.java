@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.neusoft.domain.Product;
 import com.neusoft.servce.ProductService;
@@ -22,12 +23,15 @@ public class ProductController {
 	
 	
 	@RequestMapping("/query")
-	public String query(HttpServletRequest request,HttpServletResponse rp) throws IOException{
-		int userid = 1;
-		Product product = productService.queryByProductid(userid);
+	public ModelAndView query() {
+		int productid = 1;
+		Product product = productService.queryByProductid(productid);
 			System.out.println("product----"+product.getProductname());
-		request.setAttribute("product", product);
-	//	rp.sendRedirect("/noobweb/home/introduction.html");
-		return "/home/introduction.jsp";
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("product",product);
+			mav.setViewName("/home/introduction.jsp");
+			//mav.setViewName("/comment/query");
+			return mav;
 	}
+
 }

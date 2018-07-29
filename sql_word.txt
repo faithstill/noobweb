@@ -99,3 +99,8 @@ wz(7/27):
 	Alter table product add side_picture_5 varchar(100);  //增加5个副图地址
 
 	Alter table product add type varchar(20);//添加商品类型
+
+zhy(7/29  default  utf-8)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin;

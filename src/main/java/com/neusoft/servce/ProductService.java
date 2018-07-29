@@ -30,19 +30,10 @@ import com.neusoft.domain.ProductExample.Criteria;
  * @author jshand
  *
  */
+	
+public interface ProductService {
 
-
-	@Controller
-	public class ProductService {
-		@Autowired
-		ProductMapper productMapper;
-		public  Product queryByProductid(int num){
-			ProductExample produc = new ProductExample();
-			//Criteria cr = produc.createCriteria();
-			//cr.andProductidEqualTo(num);
-		//	cr.andProductidEqualTo(1);
-			Product product = productMapper.selectByPrimaryKey(num); 
-	//		System.out.println(product.size());
-			return product;
-		}
-	}
+	public  Product queryByProductid(int num);
+		
+		
+}
