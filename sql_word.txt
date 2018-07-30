@@ -117,3 +117,30 @@ wz(7/28):
 
 wz(7/29):
 	 Alter table product add brand varchar(30);
+
+zhy£¨7/29   order-content£©
+CREATE TABLE `noobweb`.`order_content` (
+  `orderid` INT NOT NULL,
+  
+`productid` INT NOT NULL,
+  
+`amount` INT NULL DEFAULT 1,
+ 
+ INDEX `order-content_idx` (`orderid` ASC),
+  
+INDEX `product-content_idx` (`productid` ASC),
+ 
+ CONSTRAINT `order-content`
+    FOREIGN KEY (`orderid`)
+    REFERENCES `noobweb`.`order` (`orderid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+
+  CONSTRAINT `product-content`
+    FOREIGN KEY (`productid`)
+    REFERENCES `noobweb`.`product` (`productid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin;

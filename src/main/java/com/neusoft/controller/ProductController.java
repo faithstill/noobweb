@@ -32,7 +32,7 @@ public class ProductController {
 	public ModelAndView queryall() {
 		ModelAndView mav = new ModelAndView();
 		List<Product> productlist = productService.queryall();
-		mav.addObject("productlist",productlist);
+		mav.addObject("productlist_all",productlist);
 		mav.setViewName("/test.jsp");
 
 		return mav;
@@ -70,10 +70,10 @@ public class ProductController {
 		//System.out.println(productname.equals("特仑苏"));
 		List<Product> productlist = productService.queryByName(productname);
 		mav.addObject("productlist_byname",productlist);
-		for(Product product:productlist)
-		{
-			System.out.println(product);
-		}
+//		for(Product product:productlist)
+//		{
+//			System.out.println(product);
+//		}
 		mav.setViewName("/test.jsp");
 		
 		return mav;
