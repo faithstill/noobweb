@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							<div class="per-border"></div>
 							
-						<c:forEach items="${addresslist }" var = "address"  varStatus="addresscount" >
+						<c:forEach items="${addresslist}" var = "address"  varStatus="addresscount" >
 							<li class="user-addresslist">
 								<div class="address-left">
 									<div class="user DefaultAddr">
@@ -113,13 +113,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<div class="clear"></div>
 
 								<div class="new-addr-btn">
-									<a href="#">设为默认</a>
+<!-- 									<a href="#">设为默认</a> -->
+<!-- 									<span class="new-addr-bar">|</span> -->
+<!-- 									<A HREF="#">编辑</A> -->
+									
+									
+							<div class="tc-btn am-btn ">
+							<a href="address/update_queryById?addressid=${addresscount.current.getAddressid()}" onclick="delClick(this);">编辑</a>
+							</div>
+									
 									<span class="new-addr-bar">|</span>
-									<a href="#">编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);"  onclick="delClick(this);">删除</a>
+									<div class="tc-btn am-btn ">
+									<a href="address/deleteById?addressid=${addresscount.current.getAddressid()}"  onclick="delClick(this);">删除</a><br>
+									</div>
 								</div>
-
 							</li>
 						</c:forEach>	
 							
@@ -461,7 +468,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<div class="am-u-md-12">
 					<form class="am-form am-form-horizontal" method="post" action="address/add">
-
+				<div class="am-form-group theme-poptit">
+							<div class="am-u-sm-9 am-u-sm-push-3">
+								<div class="am-btn am-btn-danger close">X</div>
+							</div>
+						</div>
 				<table>
 				<input type="hidden" name="userid" value="1" >
 					<tr>
@@ -491,16 +502,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit">
-				</td>
-
-			</tr>
-		</table>
+			
+			
+						</table>
 					</form>
 				</div>
 
 			</div>
-
-			<div class="clear"></div>
+			
+			
 	</body>
 
 </html>
