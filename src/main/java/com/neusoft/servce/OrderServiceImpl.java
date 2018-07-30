@@ -71,6 +71,27 @@ public class OrderServiceImpl implements OrderService{
 		Orders order = orderMapper.selectByPrimaryKey(orderid);
 			
 		order.setPayTime(new Date());
+		order.setTradeStatus("paid");
+		int suc = orderMapper.updateByPrimaryKey(order);
+		return suc > 0;
+	}
+	
+	public boolean order_delivery(int orderid)
+	{
+		Orders order = orderMapper.selectByPrimaryKey(orderid);
+		
+		order.setDeliveryTime(new Date());
+		order.setTradeStatus("delivered");
+		int suc = orderMapper.updateByPrimaryKey(order);
+		return suc > 0;
+	}
+	
+	public boolean order_finish(int orderid)
+	{
+		Orders order = orderMapper.selectByPrimaryKey(orderid);
+		
+		order.setDeliveryTime(new Date());
+		order.setTradeStatus("finished");
 		int suc = orderMapper.updateByPrimaryKey(order);
 		return suc > 0;
 	}

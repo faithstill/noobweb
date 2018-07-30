@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.neusoft.domain.OrderContent;
+import com.neusoft.domain.User;
 import com.neusoft.servce.OrderContentService;
+import com.neusoft.servce.OrderService;
+import com.neusoft.servce.ProductService;
+import com.neusoft.servce.UserService;
 
 
 @Controller
@@ -16,6 +20,7 @@ import com.neusoft.servce.OrderContentService;
 public class OrderContentController {
 	@Autowired
 	OrderContentService ordercontentService;
+
 	
 	@RequestMapping("/queryByOrder")
 	public ModelAndView queryByOrder(int orderid) {
@@ -26,8 +31,6 @@ public class OrderContentController {
 
 		return mav;
 	}
-	
-
 	
 	@RequestMapping("/add")
 	public ModelAndView orderContent_add(OrderContent orderContent){
@@ -42,10 +45,7 @@ public class OrderContentController {
 		ModelAndView mav = new ModelAndView();
 		
 		return mav;
-		
 	}
 
-	
-	
 	
 }

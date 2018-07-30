@@ -142,3 +142,15 @@ INDEX `product-content_idx` (`productid` ASC),
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
+
+zhy(7/29 orders)
+ALTER TABLE `noobweb`.`orders` 
+ADD COLUMN `addressid` INT NOT NULL AFTER `userid`,
+ADD COLUMN `amount` DOUBLE NULL DEFAULT 0 AFTER `addressid`,
+ADD INDEX `address-order_idx` (`addressid` ASC);
+ALTER TABLE `noobweb`.`orders` 
+ADD CONSTRAINT `address-order`
+  FOREIGN KEY (`addressid`)
+  REFERENCES `noobweb`.`address` (`addressid`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

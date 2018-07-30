@@ -48,19 +48,19 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/add")
-	public ModelAndView order_add(Orders order){
+	public ModelAndView order_add(int userid){
 //		System.out.println("id:"+order.getUserid());
 //		System.out.println("name:"+order.getName());
 //		System.out.println("phone:"+order.getPhone());
 //		System.out.println("province:"+order.getProvince());
 //		System.out.println("city:"+order.getCity());
 //		System.out.println("detail:"+order.getDetailedorder());
-		
+		Orders order = new Orders();
+		order.setUserid(userid);
 		orderService.order_add(order);
 		ModelAndView mav = new ModelAndView();
-		//mav.setViewName("/order/query"); 
+		//mav.setViewName("/orderContent/add"); 
 		return mav;
-		
 	}
 		
 	@RequestMapping("/deleteById")
@@ -101,5 +101,24 @@ public class OrderController {
 		//mav.setViewName("/order/query");
 		return mav;
 	}
+	
+	@RequestMapping("/delivery")
+	public ModelAndView order_delivery(int orderid)
+	{
+		ModelAndView mav = new ModelAndView();
+		boolean suc= orderService.order_delivery(orderid);
+		//mav.setViewName("/delivery");
+		return mav;
+	}
+	
+	@RequestMapping("/finish")
+	public ModelAndView order_finish(int orderid)
+	{
+		ModelAndView mav = new ModelAndView();
+		boolean suc= orderService.order_finish(orderid);
+		//mav.setViewName("/order/query");
+		return mav;
+	}
+	
 	
 }
