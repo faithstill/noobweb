@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -115,7 +114,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<ul class="category-list" id="js_climit_li">
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/cake.png"></i><a class="ml-22" title="点心">点心/蛋糕</a></h3>
+													
+													<h3 class="category-name b-category-name"><i><img src="images/cake.png"></i><a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("点心","UTF-8")%>" class="ml-22" title="点心">点心/蛋糕</a></h3>
+											
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -123,30 +124,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">蛋糕</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="蒸蛋糕"/><dd>
-																			<dd><input type="submit" name="producttpye" value="脱水蛋糕"/></dd>
-																			<dd><input type="submit" name="producttpye" value="瑞士卷"/></dd>
-																			<dd><input type="submit" name="producttpye" value="软面包"/></dd>
-																			<dd><input type="submit" name="producttpye" value="马卡龙"/></dd>
-																			<dd><input type="submit" name="producttpye" value="千层饼"/></dd>
-																			<dd><input type="submit" name="producttpye" value="甜甜圈"/></dd>
-																			<dd><input type="submit" name="producttpye" value="蒸三明治"/></dd>
-																			<dd><input type="submit" name="producttpye" value="铜锣烧"/></dd>
+																	<!-- <form method="post" action=""> -->
+																	
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("蛋糕","UTF-8")%>">
+																	<dt><span title="蛋糕" >蛋糕</span></dt>
+																	</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="蛋糕" />
+																			<dd><input type="submit" name="brand" value="丸京"/><dd>
+																			<dd><input type="submit" name="brand" value="泓一"/></dd>
+																			<dd><input type="submit" name="brand" value="三只松鼠"/></dd>
+																			<dd><input type="submit" name="brand" value="达利园"/></dd>
+																			<dd><input type="submit" name="brand" value="百草味"/></dd>
+																			<dd><input type="submit" name="brand" value="良品铺子"/></dd>
+																			<dd><input type="submit" name="brand" value="香当当"/></dd>
 																		</form>
 																	</dl>
 																	
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("点心","UTF-8")%>">
 																		<dt><span title="蛋糕">点心</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="西式蛋糕"/><dd>
-																			<dd><input type="submit" name="producttpye" value="夹心蛋糕"/></dd>
-																			<dd><input type="submit" name="producttpye" value="蛋糕"/></dd>
-																			<dd><input type="submit" name="producttpye" value="酥饼"/></dd>
-																			<dd><input type="submit" name="producttpye" value="麻薯"/></dd>
-																			<dd><input type="submit" name="producttpye" value="提拉米苏"/></dd>
-																			<dd><input type="submit" name="producttpye" value="软面包"/></dd>
+																	</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="点心" />
+																			<dd><input type="submit" name="brand" value="西式蛋糕"/><dd>
+																			<dd><input type="submit" name="brand" value="夹心蛋糕"/></dd>
+																			<dd><input type="submit" name="brand" value="蛋糕"/></dd>
+																			<dd><input type="submit" name="brand" value="酥饼"/></dd>
+																			<dd><input type="submit" name="brand" value="麻薯"/></dd>
+																			<dd><input type="submit" name="brand" value="提拉米苏"/></dd>
+																			<dd><input type="submit" name="brand" value="软面包"/></dd>
 																		</form>
 																	</dl>
 																</div>
@@ -158,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</li>
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/cookies.png"></i><a class="ml-22" title="饼干、膨化">饼干/膨化</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="images/cookies.png"></i><a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("饼干","UTF-8")%>" class="ml-22" title="饼干、膨化">饼干/膨化</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -166,26 +173,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("饼干","UTF-8")%>">
 																		<dt><span title="饼干">饼干</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="夹心饼干"/><dd>
-																			<dd><input type="submit" name="producttpye" value="威化饼干"/></dd>
-																			<dd><input type="submit" name="producttpye" value="发酵饼干"/></dd>
-																			<dd><input type="submit" name="producttpye" value="饼干巧克力"/></dd>
-																			<dd><input type="submit" name="producttpye" value="传统糕点"/></dd>
-																			<dd><input type="submit" name="producttpye" value="苏打饼干"/></dd>
-																			<dd><input type="submit" name="producttpye" value="韧性饼干"/></dd>
+																	</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="饼干" />
+																			<dd><input type="submit" name="brand" value="友谊牌"/><dd>
+																			<dd><input type="submit" name="brand" value="丽芝士"/></dd>
+																			<dd><input type="submit" name="brand" value="不二家"/></dd>
+																			<dd><input type="submit" name="brand" value="迪乐斯"/></dd>
+																			<dd><input type="submit" name="brand" value="嘉士利"/></dd>
+																			<dd><input type="submit" name="brand" value="edo"/></dd>
+																			
 																		</form>
 																	</dl>
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("薯片","UTF-8")%>">
 																		<dt><span title="薯片">薯片</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="番茄味"/><dd>
-																			<dd><input type="submit" name="producttpye" value="原味"/></dd>
-																			<dd><input type="submit" name="producttpye" value="烧烤味"/></dd>
-																			<dd><input type="submit" name="producttpye" value="香辣味"/></dd>
-																			<dd><input type="submit" name="producttpye" value="麻辣味"/></dd>
-																			<dd><input type="submit" name="producttpye" value="葱香味"/></dd>
+																		</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="薯片" />
+																			<dd><input type="submit" name="brand" value="番茄味"/><dd>
+																			<dd><input type="submit" name="brand" value="原味"/></dd>
+																			<dd><input type="submit" name="brand" value="烧烤味"/></dd>
+																			<dd><input type="submit" name="brand" value="香辣味"/></dd>
+																			<dd><input type="submit" name="brand" value="麻辣味"/></dd>
+																			<dd><input type="submit" name="brand" value="葱香味"/></dd>
 																		</form>
 																	</dl>
 																
@@ -198,7 +211,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</li>
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/meat.png"></i><a class="ml-22" title="熟食、肉类">熟食/肉类</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="images/meat.png"></i><a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("肉类","UTF-8")%>" class="ml-22" title="熟食、肉类">熟食/肉类</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -206,25 +219,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("猪肉脯","UTF-8")%>">
 																		<dt><span title="猪肉脯">猪肉脯</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="晋江肉铺"/><dd>
-																			<dd><input type="submit" name="producttpye" value="黄胜记"/></dd>
-																			<dd><input type="submit" name="producttpye" value="厦门黄金香"/></dd>
-																			<dd><input type="submit" name="producttpye" value="荣昌猪"/></dd>
-																			<dd><input type="submit" name="producttpye" value="穆阳烤肉"/></dd>
-																			<dd><input type="submit" name="producttpye" value="广西猪肉条"/></dd>
+																	</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="猪肉铺" />
+																			<dd><input type="submit" name="brand" value="晋江肉铺"/><dd>
+																			<dd><input type="submit" name="brand" value="黄胜记"/></dd>
+																			<dd><input type="submit" name="brand" value="厦门黄金香"/></dd>
+																			<dd><input type="submit" name="brand" value="荣昌猪"/></dd>
+																			<dd><input type="submit" name="brand" value="穆阳烤肉"/></dd>
+																			<dd><input type="submit" name="brand" value="广西猪肉条"/></dd>
 																		</form>
 																	</dl>
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("牛肉丝","UTF-8")%>">
 																		<dt><span title="牛肉丝">牛肉丝</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="老川东"/><dd>
-																			<dd><input type="submit" name="producttpye" value="牛浪汉"/></dd>
-																			<dd><input type="submit" name="producttpye" value="三只松鼠"/></dd>
-																			<dd><input type="submit" name="producttpye" value="好牛"/></dd>
-																			<dd><input type="submit" name="producttpye" value="良品铺子"/></dd>
-																			<dd><input type="submit" name="producttpye" value="棒棒娃"/></dd>
+																	</a>	
+																		<form method="post" action="search/bytypeandbrand">
+																		<input type="hidden" name="type" value="牛肉丝" />
+																			<dd><input type="submit" name="brand" value="老川东"/><dd>
+																			<dd><input type="submit" name="brand" value="牛浪汉"/></dd>
+																			<dd><input type="submit" name="brand" value="三只松鼠"/></dd>
+																			<dd><input type="submit" name="brand" value="好牛"/></dd>
+																			<dd><input type="submit" name="brand" value="良品铺子"/></dd>
+																			<dd><input type="submit" name="brand" value="棒棒娃"/></dd>
 																		</form>
 																	</dl>
 																</div>
@@ -236,7 +255,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</li>
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/bamboo.png"></i><a class="ml-22" title="素食、卤味">素食/卤味</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="images/bamboo.png"></i><a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("素食","UTF-8")%>" class="ml-22" title="素食、卤味">素食/卤味</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -244,22 +263,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
-																		<dt><span title="豆干">豆干</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="劲仔"/><dd>
-																			<dd><input type="submit" name="producttpye" value="好巴食"/></dd>
-																			<dd><input type="submit" name="producttpye" value="卫龙"/></dd>
-																			<dd><input type="submit" name="producttpye" value="张飞"/></dd>
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("豆干","UTF-8")%>">
+																	<dt><span title="豆干">豆干</span></dt>
+																	</a>
+								
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="豆干" />
+																			<dd><input type="submit" name="brand" value="劲仔"/><dd>
+																			<dd><input type="submit" name="brand" value="好巴食"/></dd>
+																			<dd><input type="submit" name="brand" value="卫龙"/></dd>
+																			<dd><input type="submit" name="brand" value="张飞"/></dd>
 														
 																		</form>
 																	</dl>
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("干笋","UTF-8")%>">
 																		<dt><span title="干笋">干笋</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="惊雷"/><dd>
-																			<dd><input type="submit" name="producttpye" value="良品铺子"/></dd>
-																			<dd><input type="submit" name="producttpye" value="来伊份"/></dd>
-																			<dd><input type="submit" name="producttpye" value="珍竹香"/></dd>
+																		</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="干笋" />
+																			<dd><input type="submit" name="brand" value="惊雷"/><dd>
+																			<dd><input type="submit" name="brand" value="良品铺子"/></dd>
+																			<dd><input type="submit" name="brand" value="来伊份"/></dd>
+																			<dd><input type="submit" name="brand" value="珍竹香"/></dd>
 														
 																		</form>
 																	</dl>
@@ -273,7 +299,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</li>
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/candy.png"></i><a class="ml-22" title="糖果、蜜饯">糖果/蜜饯</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="images/candy.png"></i><a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("糖果","UTF-8")%>" class="ml-22" title="糖果、蜜饯">糖果/蜜饯</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -281,12 +307,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("糖果","UTF-8")%>">
 																		<dt><span title="糖果">糖果</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="阿尔卑斯"/><dd>
-																			<dd><input type="submit" name="producttpye" value="不二家"/></dd>
-																			<dd><input type="submit" name="producttpye" value="宏源"/></dd>
-																			<dd><input type="submit" name="producttpye" value="大白兔"/></dd>
+																	</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="糖果" />
+																			<dd><input type="submit" name="brand" value="阿尔卑斯"/><dd>
+																			<dd><input type="submit" name="brand" value="不二家"/></dd>
+																			<dd><input type="submit" name="brand" value="宏源"/></dd>
+																			<dd><input type="submit" name="brand" value="大白兔"/></dd>
 														
 																		</form>
 																	</dl>
@@ -300,7 +329,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</li>
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/fish.png"></i><a class="ml-22" title="海味、河鲜">海味/河鲜</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="images/fish.png"></i><a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("海味","UTF-8")%>" class="ml-22" title="海味、河鲜">海味/河鲜</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -308,32 +337,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("海带丝","UTF-8")%>">
 																		<dt><span title="海带丝">海带丝</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="口水娃"/><dd>
-																			<dd><input type="submit" name="producttpye" value="老生鲜"/></dd>
-																			<dd><input type="submit" name="producttpye" value="海婷"/></dd>
-																			<dd><input type="submit" name="producttpye" value="川南"/></dd>
+																	</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="海带丝" />
+																			<dd><input type="submit" name="brand" value="口水娃"/><dd>
+																			<dd><input type="submit" name="brand" value="老生鲜"/></dd>
+																			<dd><input type="submit" name="brand" value="海婷"/></dd>
+																			<dd><input type="submit" name="brand" value="川南"/></dd>
 														
 																		</form>
 																	</dl>
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("小鱼干","UTF-8")%>">
 																		<dt><span title="小鱼干">小鱼干</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="口水娃"/><dd>
-																			<dd><input type="submit" name="producttpye" value="劲仔"/></dd>
-																			<dd><input type="submit" name="producttpye" value="老鱼庄"/></dd>
-																			<dd><input type="submit" name="producttpye" value="路斯"/></dd>
+																		</a>
+																		<form method="post" action="search/bytypeandbrand">
+																			<input type="hidden" name="type" value="小鱼干" />
+																			<dd><input type="submit" name="brand" value="口水娃"/><dd>
+																			<dd><input type="submit" name="brand" value="劲仔"/></dd>
+																			<dd><input type="submit" name="brand" value="老鱼庄"/></dd>
+																			<dd><input type="submit" name="brand" value="路斯"/></dd>
 														
 																		</form>
 																	</dl>
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("鱿鱼丝","UTF-8")%>">
 																		<dt><span title="鱿鱼丝">鱿鱼丝</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="海边人"/><dd>
-																			<dd><input type="submit" name="producttpye" value="三只松鼠"/></dd>
-																			<dd><input type="submit" name="producttpye" value="兄弟海湾"/></dd>
-																			<dd><input type="submit" name="producttpye" value="万顺昌"/></dd>
+																		</a>
+																		<form method="post" action="search/bytypeandbrand">
+																		<input type="hidden" name="type" value="鱿鱼丝" />
+																			<dd><input type="submit" name="brand" value="海边人"/><dd>
+																			<dd><input type="submit" name="brand" value="三只松鼠"/></dd>
+																			<dd><input type="submit" name="brand" value="兄弟海湾"/></dd>
+																			<dd><input type="submit" name="brand" value="万顺昌"/></dd>
 														
 																		</form>
 																	</dl>
@@ -346,7 +384,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</li>
 											<li class="appliance js_toggle relative">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="images/fish.png"></i><a class="ml-22" title="海味、河鲜">水果</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="images/fish.png"></i><a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("水果","UTF-8")%>" class="ml-22" title="海味、河鲜">水果</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -354,25 +392,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
+																	<a href="search/bytype?search_type=<%=java.net.URLEncoder.encode("鱿鱼丝","UTF-8")%>">
+																	
 																		<dt><span title="苹果"></span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="易果生鲜"/><dd>
-																			<dd><input type="submit" name="producttpye" value="王小二"/></dd>
-																			<dd><input type="submit" name="producttpye" value="烟台苹果"/></dd>
-																			<dd><input type="submit" name="producttpye" value="大河沙"/></dd>
+																	</a>
+																		<form method="post" action="search/bytypeandbrand">
+																		<input type="hidden" name="type" value="苹果" />
+																			<dd><input type="submit" name="brand" value="易果生鲜"/><dd>
+																			<dd><input type="submit" name="brand" value="王小二"/></dd>
+																			<dd><input type="submit" name="brand" value="烟台苹果"/></dd>
+																			<dd><input type="submit" name="brand" value="大河沙"/></dd>
 														
 																		</form>
 																	</dl>
 																	<dl class="dl-sort">
 																		<dt><span title="小鱼干">火龙果</span></dt>
-																		<form method="post" action="product/queryByType">
-																			<dd><input type="submit" name="producttpye" value="易果生鲜"/><dd>
-																			<dd><input type="submit" name="producttpye" value="果娃果业"/></dd>
-																			<dd><input type="submit" name="producttpye" value="果然优鲜"/></dd>
-								
+																		<form method="post" action="search/bytypeandbrand">
+																		<input type="hidden" name="type" value="火龙果" />
+																			<dd><input type="submit" name="brand" value="易果生鲜"/><dd>
+																			<dd><input type="submit" name="brand" value="果娃果业"/></dd>
+																			<dd><input type="submit" name="brand" value="果然优鲜"/></dd>
 																		</form>
 																	</dl>
-						
 																</div>
 															</div>
 														</div>
@@ -456,75 +497,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="shopTitle ">
 							<h4>活动</h4>
 							<h3>每期活动 优惠享不停 </h3>
-				
 						</div>
-					
 					  <div class="am-g am-g-fixed ">
+					  <c:forEach items = "${productlist_discount}" var="product" varStatus="productcount">
+						
 						<div class="am-u-sm-3 ">
 							<div class="icon-sale one "></div>
-								<h4>秒杀</h4>							
+								<h4>特惠</h4>							
 							<div class="activityMain ">
-								<a href=""
-								<img src="images/activity1.jpg "></img>
+								<a href="search/">
+								<img src="images/${product.mainPicture}"></img>
+								</a>
 							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>														
-						</div>
-						
-						<div class="am-u-sm-3 ">
-						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
-							<div class="activityMain ">
-								<img src="images/activity2.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>								
-							</div>							
-						</div>						
-						
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale three "></div>
-							<h4>团购</h4>
-							<div class="activityMain ">
-								<img src="images/activity3.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>							
-						</div>						
-
-						<div class="am-u-sm-3 last ">
-							<div class="icon-sale "></div>
-							<h4>超值</h4>
-							<div class="activityMain ">
-								<img src="images/activity.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
+							<div class="sub-title">
+										仅售：¥ ${product.price}
+							</div>	
+							<div class="title ">
+										${product.productname}
 							</div>													
 						</div>
-
+					</c:forEach>
 					  </div>
                    </div>
 					<div class="clear "></div>
 
 					<!--甜点-->
-					
 					<div class="am-container ">
 						<div class="shopTitle ">
-							<h4>甜品</h4>
-							<h3>每一道甜品都有一个故事</h3>
+							<h4>新品</h4>
+							<h3>每一道新品都有一个故事</h3>
 							<div class="today-brands ">
-								<a href="# ">桂花糕</a>
-								<a href="# ">奶皮酥</a>
-								<a href="# ">栗子糕 </a>
-								<a href="# ">马卡龙</a>
-								<a href="# ">铜锣烧</a>
-								<a href="# ">豌豆黄</a>
+							<form method="post" action="product/queryByType">
+									<input type="submit" name="brand" value="桂花糕"/>
+						     		<input type="submit" name="brand" value="奶皮酥"/>
+						        	<input type="submit" name="brand" value="栗子糕"/>
+					                <input type="submit" name="brand" value="马卡龙"/>
+					                <input type="submit" name="brand" value="铜锣烧"/>
+							</form>
 							</div>
 							<span class="more ">
-                    <a class="more-link " href="# ">更多美味</a>
+                    <a class="more-link " href="product/queryall">更多美味</a>
                         </span>
 						</div>
 					</div>
@@ -532,97 +544,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="am-g am-g-fixed floodOne ">
 						<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
 							<a href="# ">
-								<div class="outer-con ">
-									<div class="title ">
+								<div class="outer-con">
+									<div class="title">
 										零食大礼包开抢啦
 									</div>					
 									<div class="sub-title ">
 										当小鱼儿恋上软豆腐
 									</div>
 								</div>
-                                  <img src="images/act1.png " />								
+                                  <img src="images/${product_main.mainPicture}" />								
 							</a>
 						</div>
+						
 						<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
-							<div class="text-two">
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>									
-									<div class="sub-title ">
-										仅售：¥13.8
-									</div>
-									
-								</div>
-								<a href="# "><img src="images/act2.png " /></a>
-							</div>
-							<div class="text-two last">
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>
-									<div class="sub-title ">
-										仅售：¥13.8
-									</div>
-									
-								</div>
-								<a href="# "><img src="images/act2.png " /></a>
-						    </div>
-						</div>
-		             <div class="am-u-sm-12 am-u-md-4 ">
+					<c:forEach items = "${productlist_new}" var="product" varStatus="productcount">
 						<div class="am-u-sm-3 am-u-md-6 text-three">
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									${product.productname}
 								</div>
-								
 								<div class="sub-title ">
-									尝鲜价：¥4.8
+									${ product.price}
 								</div>
 							</div>
-							<a href="# "><img src="images/act3.png " /></a>
+							<a href="# "><img src="images/${product.mainPicture} " /></a>
 						</div>
-
-						<div class="am-u-sm-3 am-u-md-6 text-three">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								
-								<div class="sub-title ">
-									尝鲜价：¥4.8
-								</div>
-							</div>
-							<a href="# "><img src="images/act3.png " /></a>
+						</c:forEach>
 						</div>
-
-						<div class="am-u-sm-3 am-u-md-6 text-three">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								
-								<div class="sub-title ">
-									尝鲜价：¥4.8
-								</div>
-							</div>
-							<a href="# "><img src="images/act3.png " /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-6 text-three last ">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								
-								<div class="sub-title ">
-									尝鲜价：¥4.8
-								</div>
-							</div>
-							<a href="# "><img src="images/act3.png " /></a>
-						</div>
-					</div>
-
 					</div>
                  <div class="clear "></div>
 

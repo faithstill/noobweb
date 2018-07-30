@@ -2,6 +2,7 @@ package com.neusoft.controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neusoft.domain.Address;
 import com.neusoft.domain.Product;
 import com.neusoft.domain.Comment;
 import com.neusoft.domain.Product;
@@ -22,6 +24,7 @@ import com.neusoft.servce.ProductService;
 @Controller
 @RequestMapping("/product") 
 public class ProductController {
+	
 	@Autowired
 	ProductService productService;
 	
@@ -37,14 +40,29 @@ public class ProductController {
 	
 	@RequestMapping("/queryByType")
 	public ModelAndView queryByType(String producttype) {
+		
+		System.out.println(producttype);System.out.println("error");
 		ModelAndView mav = new ModelAndView();
 		//System.out.println(producttype.equals("牛奶"));
 		List<Product> productlist = productService.queryByType(producttype);
+		System.out.println(producttype);
 		mav.addObject("productlist_bytype",productlist);
 		mav.setViewName("/test.jsp");
 
 		return mav;
 	}
+	
+
+	@RequestMapping("/queryByProducttypeandbrand")
+	public ModelAndView queryByProducttypeandbrand(String type,String brand) {
+		List<Product> productlist = productService.queryBuTypeAndBrand(type, brand);
+			//System.out.println("product----"+product.getProductname());
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("productlist_type_brand",productlist);
+		//	mav.setViewName("/home/introduction.jsp");
+			return mav;
+	}
+	
 	
 	@RequestMapping("/queryByName")
 	public ModelAndView queryByNmae(String productname) {
@@ -62,8 +80,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/queryByProductid")
-	public ModelAndView queryByProductid() {
-		int productid = 1;
+	public ModelAndView queryByProductid(int productid) {
+		
 		Product product = productService.queryByProductid(productid);
 			System.out.println("product----"+product.getProductname());
 			ModelAndView mav = new ModelAndView();
@@ -118,5 +136,4 @@ public class ProductController {
 		mav.setViewName("/product/query");
 		return mav;
 	}
-
 }

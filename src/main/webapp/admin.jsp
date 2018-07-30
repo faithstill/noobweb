@@ -134,7 +134,7 @@ request.setAttribute("path", basePath);
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-				    <li><a data-href="user_list" data-title="角色管理" >账号管理</a></li>
+				    <li><a data-href="user_list" data-title="账号管理" >账号管理</a></li>
 			</ul>
 		</dd>
 	</dl>

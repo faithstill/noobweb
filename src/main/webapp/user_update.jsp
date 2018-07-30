@@ -37,11 +37,12 @@ request.setAttribute("path", basePath);
 </head>
 <body>
 <article class="page-container">
-	<form action="insert_user" method="post" class="form form-horizontal">
+	<form action="update" method="post" class="form form-horizontal">
+	<input type="text" class="input-text" value="${show.userid}" placeholder="" name="userid" hidden>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" name="username">
+				<input type="text" class="input-text" value="${show.username}" placeholder="" name="username">
 			</div>
 		</div>
 		
@@ -49,13 +50,13 @@ request.setAttribute("path", basePath);
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="password" class="input-text" name="password">
+				<input type="password" class="input-text" value="${show.password}" name="password">
 			</div>
 		</div>
 <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>金额：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder=""  name="money">
+				<input type="text" class="input-text" value="${show.money}" placeholder=""  name="money">
 			</div>
 		</div>
 		<div class="row cl">

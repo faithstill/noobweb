@@ -68,8 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  data-message="密码输入不一致" data-easytip="class:easy-red;">
                  </div>	
                  
-              
-				
+
+         		
 							  <input style="width:15px;height:15px;"  name="check" id="checkbox" margin-top:5px;" value="1" type="checkbox" data-message="请勾选同意协议" data-easytip="position:left;class:easy-red;"><a style="color:black;font-size:13px;">点击表示您同意商城《服务协议》</a>
 							 
 										<div class="am-cf">
@@ -175,5 +175,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            // console.log("完成");
         };
     });
+    
+    
+    function ajax_demo1()
+    {
+    	
+    	var code=document.getElementById("code").value
+    
+    	$.ajax({
+			url:'code_true.do?',
+			type:'get',
+			dataType:'text',
+			data:'code='+code,
+			success:function(data){
+				data = JSON.parse(data);
+				if(data.result==false){
+					debugger;
+					$("#re_click").click();
+					$("#code").trigger("easyform-ajax", false);
+				}else{
+					debugger;
+					$("#code").trigger("easyform-ajax", true);
+				}
+			}
+      
+    });
+
+    }
 </script>
+<script type="text/javascript"> 
+    function changeImg() { 
+        var imgSrc = $("#imgObj"); 
+        var src = imgSrc.attr("src"); 
+        imgSrc.attr("src", chgUrl(src)); 
+    } 
+    //时间戳     
+    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳     
+    function chgUrl(url) { 
+        var timestamp = (new Date()).valueOf(); 
+        url = url.substring(0, 17); 
+        if ((url.indexOf("&") >= 0)) { 
+            url = url + "×tamp=" + timestamp; 
+        } else { 
+            url = url + "?timestamp=" + timestamp; 
+        } 
+        return url; 
+    } 
+</script> 
 </html>

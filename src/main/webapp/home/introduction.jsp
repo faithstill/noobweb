@@ -420,7 +420,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 										<!-- 评论内容 -->
 									<div class="tc-btn am-btn ">
-									<a href="comment/deleteById?commentid=${commentcount.current.getcommentid()}"  onclick="delClick(this);">删除</a><br>
+									<a href="comment/deleteById?commentid=${commentcount.current.getcommentid()}&productid=${product.productid}"  onclick="delClick(this);">删除</a><br>
 									</div>
 								</li>
 						</c:forEach>
