@@ -298,7 +298,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" href="/noobweb/user/add"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
@@ -522,7 +522,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 						</div>
 						<div id="shopCart" class="item">
-							<a href="#">
+							<a href="http://localhost:8080/noobweb/user/show" >
 								<span class="message"></span>
 							</a>
 							<p>
