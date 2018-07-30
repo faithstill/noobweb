@@ -24,6 +24,7 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+<<<<<<< HEAD
 	/*登陆*/
 	@RequestMapping(value = "/user_login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpSession session, User user) {
@@ -37,6 +38,20 @@ public class LoginController {
 				mav.setViewName("/home/pay.jsp");	//支付界面
 			}
 		}else {							//用户名或密码不正确，还停留在登陆界面，并输出错误提示
+=======
+	@RequestMapping(value = "/user_login", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest request, HttpSession session, User user) {
+		ModelAndView mav = new ModelAndView();
+		User u = userService.loginValidate(user);
+		if (u != null) {
+			if (user.getFlag() == 0) {
+				session.setAttribute("admin",u.getUsername());
+				mav.setViewName("/admin.jsp");
+			} else {
+				mav.setViewName("/home/pay.jsp");
+			}
+		}else {
+>>>>>>> 5392c9a4e2fb61027681b658f336663271ce8a91
 			mav.setViewName("/login.jsp");
 			mav.addObject("status", "用户名或密码错误");
 		}
@@ -44,6 +59,7 @@ public class LoginController {
 
 	}
 
+<<<<<<< HEAD
 	
 	/*注册*/
 	@RequestMapping(value = "/user_register", method = RequestMethod.POST)
@@ -51,13 +67,23 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		userService.insertUser(user);		//insertUser函数可以将用户信息插入数据库当中
 		mav.setViewName("/home/pay.jsp");	//然后跳转到支付界面
+=======
+	@RequestMapping(value = "/user_register", method = RequestMethod.POST)
+	public ModelAndView register(HttpServletRequest request, HttpSession session, User user) {
+		ModelAndView mav = new ModelAndView();
+		userService.insertUser(user);
+		mav.setViewName("/home/pay.jsp");
+>>>>>>> 5392c9a4e2fb61027681b658f336663271ce8a91
 		return mav;
 		
 		
 	}
 	
+<<<<<<< HEAD
 	
 	/**/
+=======
+>>>>>>> 5392c9a4e2fb61027681b658f336663271ce8a91
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView admin(HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();

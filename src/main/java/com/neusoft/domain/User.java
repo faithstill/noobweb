@@ -147,7 +147,6 @@ public class User {
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -173,6 +172,6 @@ public class User {
     public void setCode(String code) { 
         this.code = code; 
     }     
-    
+  
 }
 

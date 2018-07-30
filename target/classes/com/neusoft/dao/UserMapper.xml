@@ -31,7 +31,11 @@
 		`user` u
 		where 1=1
 		<if test="username !=null and username !=''">
+<<<<<<< HEAD
           AND u.username LIKE concat('%', concat(#{username,jdbcType=VARCHAR}, '%'))
+=======
+        AND u.username =#{username}
+>>>>>>> 5392c9a4e2fb61027681b658f336663271ce8a91
         </if>
         <if test="userid !=null and userid !=''">
         AND u.userid =#{userid}
@@ -46,12 +50,16 @@
 	
 	<delete id="deleteUser" parameterType="com.neusoft.domain.User" >
     delete from user
-    where userid = #{userid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   
   <update id="updateUser" parameterType="com.neusoft.domain.User">
   update user set user.username=#{username},user.password=#{password},user.money=#{money}
+<<<<<<< HEAD
   where userid=#{userid}
+=======
+  where user.id=#{id}
+>>>>>>> 5392c9a4e2fb61027681b658f336663271ce8a91
   </update>
 
 	<sql id="Example_Where_Clause">

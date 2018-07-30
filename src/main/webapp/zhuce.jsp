@@ -68,11 +68,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  data-message="密码输入不一致" data-easytip="class:easy-red;">
                  </div>	
                  
-                     <input style="width: 120px;float:left" id="code" name="code" type="text" class="kuang_txt yanzm" placeholder="验证码" data-easyform="char-chinese;ajax:ajax_demo1()" data-message="请输入验证码" data-easytip="class:easy-red;"data-message-ajax="验证码输入有误！">
-               
-                	 <img style="float:left;margin-left: 20px;" id="imgObj" alt="验证码" src="code.do" /><a style="float:left;margin-left:5px;margin-top: 10px;color: blue " id="re_click" href="#" onclick="changeImg()">看不清?</a>
-				
-							 <!--  <input style="width:15px;height:15px;"  name="check" id="checkbox" margin-top:5px;" value="1" type="checkbox" data-message="请勾选同意协议" data-easytip="position:left;class:easy-red;"><a style="color:black;font-size:13px;">点击表示您同意商城《服务协议》</a> -->
+
+         		
+							  <input style="width:15px;height:15px;"  name="check" id="checkbox" margin-top:5px;" value="1" type="checkbox" data-message="请勾选同意协议" data-easytip="position:left;class:easy-red;"><a style="color:black;font-size:13px;">点击表示您同意商城《服务协议》</a>
 							 
 										<div class="am-cf">
 											<input type="submit"  name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
