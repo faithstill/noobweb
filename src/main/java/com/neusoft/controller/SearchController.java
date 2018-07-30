@@ -50,8 +50,8 @@ public class SearchController {
 	}
 	
 	@RequestMapping("/byname")
-	public ModelAndView Searchbyname(String name){
-		List<Product> productlist = productService.queryByName(name);
+	public ModelAndView Searchbyname(String key){
+		List<Product> productlist = productService.queryByName(key);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("productlist",productlist);
 		mav.setViewName("/home/search.jsp");

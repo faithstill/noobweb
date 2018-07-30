@@ -62,8 +62,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
-						<form>
-							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+						<form method="post" action="search/byname">
+							<input id="searchInput" name="key" type="text" placeholder="搜索" autocomplete="off">
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
 					</div>
@@ -500,14 +500,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					  <div class="am-g am-g-fixed ">
 					  <c:forEach items = "${productlist_discount}" var="product" varStatus="productcount">
-						
+						<a href="introduction/showbyid?porductid=${product.productid}">
 						<div class="am-u-sm-3 ">
 							<div class="icon-sale one "></div>
 								<h4>特惠</h4>							
 							<div class="activityMain ">
-								<a href="search/">
+				
 								<img src="images/${product.mainPicture}"></img>
-								</a>
+	
 							</div>
 							<div class="sub-title">
 										仅售：¥ ${product.price}
@@ -516,6 +516,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										${product.productname}
 							</div>													
 						</div>
+						</a>
 					</c:forEach>
 					  </div>
                    </div>
@@ -543,7 +544,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					<div class="am-g am-g-fixed floodOne ">
 						<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
-							<a href="# ">
+							<a href="introduction/showbyid?porductid=${product_main.productid}">
 								<div class="outer-con">
 									<div class="title">
 										零食大礼包开抢啦
@@ -567,7 +568,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									${ product.price}
 								</div>
 							</div>
-							<a href="# "><img src="images/${product.mainPicture} " /></a>
+							<a href="introduction/showbyid?porductid=${product.productid}"><img src="images/${product.mainPicture} " /></a>
 						</div>
 						</c:forEach>
 						</div>
