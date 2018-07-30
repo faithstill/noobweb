@@ -5,6 +5,10 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 request.setAttribute("path", basePath);  
 %>
+<<<<<<< HEAD
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+=======
+>>>>>>> 5392c9a4e2fb61027681b658f336663271ce8a91
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,6 +26,9 @@ request.setAttribute("path", basePath);
 <link rel="stylesheet" type="text/css" href="${path}resources/lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="${path}resources/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="${path}resources/static/h-ui.admin/css/style.css" />
+<link href="${basePath}css/layer.css" rel="stylesheet" type="text/css">
+		<script src="${basePath}AmazeUI-2.4.2/assets/js/jquery-2.1.0.min.js"></script>
+		<script src="${basePath}js/layer.js"></script>
 <!--[if IE 6]>
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -31,14 +38,13 @@ request.setAttribute("path", basePath);
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="text-c"> 日期范围：
-		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话、邮箱" id="" name="">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+	<div class="text-c">
+	   <form id="reg-form" method="get" action="${basePath}user_list" >	
+		<input type="text" class="input-text" style="width:250px" placeholder="输入用户名称、电话、邮箱"  name="username">
+		<button type="submit" class="btn btn-success radius"><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		</form>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20">  <a href="user_add.jsp"  class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span> <span class="r">共有数据：<strong>${length}</strong> 条</span> </div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
@@ -46,28 +52,26 @@ request.setAttribute("path", basePath);
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">ID</th>
 				<th width="100">用户名</th>
-				<th width="40">性别</th>
-				<th width="90">手机</th>
-				<th width="150">邮箱</th>
-				<th width="">地址</th>
-				<th width="130">加入时间</th>
+				<th width="40">密码</th>
+	            <th width="40">身份</th>
+	            <th width="40">账户余额</th>
 				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="text-c">
-				<td><input type="checkbox" value="1" name=""></td>
-				<td>1</td>
-				<td><u style="cursor:pointer" class="text-primary" onclick="member_show('张三','member-show.html','10001','360','400')">张三</u></td>
-				<td>男</td>
-				<td>13000000000</td>
-				<td>admin@mail.com</td>
-				<td class="text-l">北京市 海淀区</td>
-				<td>2014-6-11 11:11:42</td>
+		<c:forEach items="${showUser}" var="showUser">
+			<tr class="text-c" id="${showUser.userid}">
+				<td><input type="checkbox" value="${showUser.userid}"></td>
+				<td>${showUser.userid}</td>
+				<td><u style="cursor:pointer" class="text-primary" onclick="">${showUser.username}</u></td>
+				<td>${showUser.password}</td>
+				<td class="text-l">${showUser.role}</td>
+				<td>${showUser.money}</td>
 				<td class="td-status"><span class="label label-success radius">已启用</span></td>
-				<td class="td-manage"><a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.html','10001','600','270')" href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td class="td-manage"> <a title="编辑" href="user_update?userid=${showUser.userid}"  class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>  <a title="删除" href="javascript:;" onclick="member_del('${showUser.username}',${showUser.userid})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	</div>
@@ -94,10 +98,19 @@ $(function(){
 	});
 	
 });
-/*用户-添加*/
-function member_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
+/* function member_add(){
+	//layer_show(title,url,w,h);
+	layer.open({
+		  type:2 ,
+		  title: false,
+		  shade: [0],
+		  area: ['400px', '400px'],
+		  anim: 2,
+		 // content:['show_user?id='+id,'no'], //iframe的url，no代表不显示滚动条
+		 content:['user_add.jsp'], //iframe的url，no代表不显示滚动条
+		 
+		});
+} */
 /*用户-查看*/
 function member_show(title,url,id,w,h){
 	layer_show(title,url,w,h);
@@ -151,14 +164,14 @@ function change_password(title,url,id,w,h){
 }
 /*用户-删除*/
 function member_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
+	layer.confirm('确认要删除用户“'+obj+'”吗？',function(index){
 		$.ajax({
-			type: 'POST',
-			url: '',
+			type: 'GET',
+			url: 'user_del?userid='+id,
 			dataType: 'json',
 			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
+				$("#"+id+"").remove();
+				layer.msg('已删除!',{icon:1,time:2000});
 			},
 			error:function(data) {
 				console.log(data.msg);

@@ -31,7 +31,7 @@
 		`user` u
 		where 1=1
 		<if test="username !=null and username !=''">
-        AND u.username =#{username}
+          AND u.username LIKE concat('%', concat(#{username,jdbcType=VARCHAR}, '%'))
         </if>
         <if test="userid !=null and userid !=''">
         AND u.userid =#{userid}
@@ -51,7 +51,7 @@
   
   <update id="updateUser" parameterType="com.neusoft.domain.User">
   update user set user.username=#{username},user.password=#{password},user.money=#{money}
-  where user.id=#{id}
+  where userid=#{userid}
   </update>
 
 	<sql id="Example_Where_Clause">
