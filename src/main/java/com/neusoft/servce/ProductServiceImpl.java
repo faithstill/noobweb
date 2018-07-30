@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService{
 		ProductExample proexm = new ProductExample();
 		Criteria cr = proexm.createCriteria();
 		//cr.andProductnameEqualTo(productname)
-		cr.andProductnameLike(productname);
+		//cr.andProductnameLike(productname);
 		cr.andProductnameLike("%"+productname+"%");
 //		cr.andProductnameLike("productname%");
 		List<Product>  products =  productMapper.selectByExample(proexm);

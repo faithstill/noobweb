@@ -69,9 +69,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="submit"  value="搜索">
 		</form>
 
-		<c:forEach items="${productlist_byname}" var = "product"  varStatus="productcount" >
+		<c:forEach items="${orderlist_ByUser}" var = "order"  varStatus="ordercount" >
 		
-		${product}
+		${order}
 		
 		</c:forEach>
     
