@@ -43,5 +43,6 @@ public interface ProductService {
 	public boolean product_add(Product product);
 	public boolean product_update(Product product);
 	public Product product_queryById(int productid);
+	public List queryBuTypeAndBrand(String producttype ,String productbrand);
 
 }

@@ -28,9 +28,21 @@ public class ProductServiceImpl implements ProductService{
 	
 	public List queryByType(String producttype)
 	{
+		System.out.println(producttype);
 		ProductExample proexm = new ProductExample();
 		Criteria cr = proexm.createCriteria();
 		cr.andTypeEqualTo(producttype);
+		List<Product>  products =  productMapper.selectByExample(proexm);
+		System.out.println(products.size());
+		return  products;
+	}
+	
+	public List queryBuTypeAndBrand(String producttype ,String productbrand){
+		
+		ProductExample proexm = new ProductExample();
+		Criteria cr = proexm.createCriteria();
+		cr.andTypeEqualTo(producttype);
+		cr.andBrandEqualTo(productbrand);
 		List<Product>  products =  productMapper.selectByExample(proexm);
 		return  products;
 	}

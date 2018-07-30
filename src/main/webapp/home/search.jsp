@@ -1,22 +1,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
 	<head>
+		<base href="<%=basePath%>">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<title>搜索页面</title>
 
-		<link href="../AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-		<link href="../AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+		<link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+		<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 
-		<link href="../basic/css/demo.css" rel="stylesheet" type="text/css" />
+		<link href="basic/css/demo.css" rel="stylesheet" type="text/css" />
 
-		<link href="../css/seastyle.css" rel="stylesheet" type="text/css" />
+		<link href="css/seastyle.css" rel="stylesheet" type="text/css" />
 
-		<script type="text/javascript" src="../basic/js/jquery-1.7.min.js"></script>
-		<script type="text/javascript" src="../js/script.js"></script>
+		<script type="text/javascript" src="basic/js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 	</head>
 
 	<body>
@@ -49,9 +53,9 @@
 			<!--悬浮搜索框-->
 
 			<div class="nav white">
-				<div class="logo"><img src="../images/logo.png" /></div>
+				<div class="logo"><img src="images/logo.png" /></div>
 				<div class="logoBig">
-					<li><img src="../images/logobig.png" /></li>
+					<li><img src="images/logobig.png" /></li>
 				</div>
 
 				<div class="search-bar pr">
@@ -89,10 +93,10 @@
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">														
 							<div class="searchAbout">
-								<span class="font-pale">相关搜索：</span>
+								<!-- <span class="font-pale">相关搜索：</span>
 								<a title="坚果" href="#">坚果</a>
 								<a title="瓜子" href="#">瓜子</a>
-								<a title="鸡腿" href="#">豆干</a>
+								<a title="鸡腿" href="#">豆干</a> -->
 
 							</div>
 							<ul class="select">
@@ -121,39 +125,24 @@
 									<li class="big"><a title="评价" href="#">评价为主</a></li>
 								</div>
 								<div class="clear"></div>
-
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-
+						<c:forEach items = "${productlist}" var="product" varStatus="productcount">
 									<li>
+									<a href="introduction/showbyid?porductid=${product.productid}">
 										<div class="i-pic limit">
-											<img src="../images/imgsearch1.jpg" />											
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
+											<img src="images/${product.mainPicture}" />	
+											<p class="title fl">${product.productname}</p>
+											<p class="price fl">										
+												<b>¥</b> 
+												<strong>${product.price}</strong>
 											</p>
 											<p class="number fl">
 												销量<span>1110</span>
 											</p>
 										</div>
+										</a>
 									</li>
-									
-									
-									
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="../images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
+									</c:forEach>
 								</ul>
 							</div>
 
@@ -202,7 +191,7 @@
 			<li><a href="home2.html"><i class="am-icon-home "></i>首页</a></li>
 			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
 			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
-			<li><a href="../person/index.html"><i class="am-icon-user"></i>我的</a></li>					
+			<li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>					
 		</div>
 
 		<!--菜单 -->
@@ -215,7 +204,7 @@
 						</a>
 						<div class="ibar_login_box status_login">
 							<div class="avatar_box">
-								<p class="avatar_imgbox"><img src="../images/no-img_mid_.jpg" /></p>
+								<p class="avatar_imgbox"><img src="images/no-img_mid_.jpg" /></p>
 								<ul class="user_info">
 									<li>用户名：sl1903</li>
 									<li>级&nbsp;别：普通会员</li>
@@ -260,7 +249,7 @@
 
 					<div id="brand" class="item">
 						<a href="#">
-							<span class="wdsc"><img src="../images/wdsc.png" /></span>
+							<span class="wdsc"><img src="images/wdsc.png" /></span>
 						</a>
 						<div class="mp_tooltip">
 							我的收藏
@@ -270,7 +259,7 @@
 
 					<div id="broadcast" class="item">
 						<a href="#">
-							<span class="chongzhi"><img src="../images/chongzhi.png" /></span>
+							<span class="chongzhi"><img src="images/chongzhi.png" /></span>
 						</a>
 						<div class="mp_tooltip">
 							我要充值
@@ -286,7 +275,7 @@
 						<!--二维码 -->
 						<li class="qtitem">
 							<a href="#none"><span class="mpbtn_qrcode"></span></a>
-							<div class="mp_qrcode" style="display:none;"><img src="../images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
+							<div class="mp_qrcode" style="display:none;"><img src="images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
 						</li>
 						<li class="qtitem">
 							<a href="#top" class="return_top"><span class="top"></span></a>
@@ -367,7 +356,7 @@
 		<script>
 			window.jQuery || document.write('<script src="basic/js/jquery-1.9.min.js"><\/script>');
 		</script>
-		<script type="text/javascript" src="../basic/js/quick_links.js"></script>
+		<script type="text/javascript" src="basic/js/quick_links.js"></script>
 
 <div class="theme-popover-mask"></div>
 	</body>

@@ -63,7 +63,7 @@ public class Comment {
      *
      * @mbg.generated Sat Jul 28 19:33:53 CST 2018
      */
-    public Integer getCommentId() {
+    public Integer getcommentid() {
         return commentId;
     }
 
@@ -75,7 +75,7 @@ public class Comment {
      *
      * @mbg.generated Sat Jul 28 19:33:53 CST 2018
      */
-    public void setCommentId(Integer commentId) {
+    public void setCommentid(Integer commentId) {
         this.commentId = commentId;
     }
 

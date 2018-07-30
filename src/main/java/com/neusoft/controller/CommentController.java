@@ -34,7 +34,6 @@ public class CommentController {
 		return mav;
 	}
 	
-	
 	@RequestMapping("/add")
 	public ModelAndView Comment_add(String comment_write,int product_id){
 		int userid=1;
@@ -53,16 +52,17 @@ public class CommentController {
 		t_Comment.setUsername(username);
 		commentService.add_comment(t_Comment);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/product/querybyid"); 
+		mav.setViewName("/introduction/showbyid?porductid="+product_id); 
 		return mav;
 	}
 	
 	@RequestMapping("/deleteById")
-	public ModelAndView comment_deleteById(int commentid)
+	public ModelAndView comment_deleteById(int commentid,int productid)
 	{
+		//System.out.println(productid);
 		commentService.del_commentbyid(commentid);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/product/querybyid"); 
+		mav.setViewName("/introduction/showbyid?porductid="+productid); 
 		return mav;
 	}
 	
