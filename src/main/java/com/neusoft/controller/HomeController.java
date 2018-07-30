@@ -12,7 +12,6 @@ import com.neusoft.domain.Product;
 import com.neusoft.servce.ProductService;
 
 @Controller
-@RequestMapping("/home")
 public class HomeController {
 	
 	@Autowired

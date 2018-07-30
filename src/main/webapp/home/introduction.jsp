@@ -36,14 +36,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
+						<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+						<a href="zhuce.jsp" target="_top">免费注册</a>
 					</div>
 				</div>
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+					<div class="menu-hd"><a href="home" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
 					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -65,10 +65,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="search-bar pr">
 					<a name="index_none_header_sysc" href="#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-					</form>
+					<form method="post" action="search/byname">
+							<input id="searchInput" name="key" type="text" placeholder="搜索" autocomplete="off">
+							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+						</form>
 				</div>
 			</div>
 
@@ -81,11 +81,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
+							<li class="index"><a href="home">首页</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("三只松鼠","UTF-8")%>">三只松鼠</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("百草味","UTF-8")%>">百草味</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("卫龙","UTF-8")%>">卫龙</a></li>
+                                <li class="qc last"><a href="href=search/bytype?search_brand=<%=java.net.URLEncoder.encode("良品铺子","UTF-8")%>">良品铺子</a></li>
 							</ul>
 						    <div class="nav-extra">
 						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
@@ -391,6 +391,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<ul class="am-comments-list am-comments-list-flip">
 							<c:forEach items = "${commentlist}" var="comment" varStatus="commentcount">
 								<li class="am-comment">
+								
 									<!-- 评论容器 -->
 									<a href="">
 										<img class="am-comment-avatar" src="images/hwbn40x40.jpg" />
@@ -423,9 +424,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<a href="comment/deleteById?commentid=${commentcount.current.getcommentid()}&productid=${product.productid}"  onclick="delClick(this);">删除</a><br>
 									</div>
 								</li>
-						</c:forEach>
+								
+						</c:forEach >
 										
 									</ul>
+						<div class="clear"></div>
 						<div class="clear"></div>
 						<div class="am-comment-bd">
 							<form action="comment/add" method="POST">
@@ -441,14 +444,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 									<!--分页 -->
 									<ul class="am-pagination am-pagination-right">
-										<li class="am-disabled"><a href="#">&laquo;</a></li>
-										<li class="am-active"><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li><a href="#">&raquo;</a></li>
+										<li class="am-disabled"><a href="introduction/showbyid?porductid=${product.productid}&Commentpage=1">&laquo;</a></li>
+										<li ><a href="introduction/showbyid?porductid=${product.productid}&Commentpage=1">1</a></li>
+										<li><a href="introduction/showbyid?porductid=${product.productid}&Commentpage=2">2</a></li>
+										<li><a href="introduction/showbyid?porductid=${product.productid}&Commentpage=3">3</a></li>
+										<li><a href="introduction/showbyid?porductid=${product.productid}&Commentpage=4">4</a></li>
+										<li><a href="introduction/showbyid?porductid=${product.productid}&Commentpage=5">5</a></li>
+										<li><a href="introduction/showbyid?porductid=${product.productid}&Commentpage=5">&raquo;</a></li>
 									</ul>
+									<h4>当前为 第 ${Commentpage} 页</h4>
 									<div class="clear"></div>
 
 									<div class="tb-reviewsft">
@@ -459,6 +463,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="clear"></div>
 
 								</div>
+
 
 							</div>
 

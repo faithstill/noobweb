@@ -31,7 +31,28 @@ public class SearchController {
 		ModelAndView mav = new ModelAndView();
 		//System.out.println(producttype.equals("牛奶"));
 		List<Product> productlist = productService.queryByType(Search_type);
+		String by="bytype";
 		mav.addObject("productlist",productlist);
+		mav.addObject("by",by);
+		mav.addObject("key1",search_type);
+		mav.addObject("num",productlist.size());
+		mav.setViewName("/home/search.jsp");
+		return mav;
+		}
+	
+	@RequestMapping("/bybrand")
+	public ModelAndView Searchbybrand(HttpServletRequest request,HttpServletResponse rp) throws IOException{
+		String search_brand=request.getParameter("search_brand");
+		String Search_brand=new String(search_brand.getBytes("ISO-8859-1"),"UTF-8");
+		System.out.println(Search_brand);
+		
+		ModelAndView mav = new ModelAndView();
+		//System.out.println(producttype.equals("牛奶"));
+		String by="bybrand";
+		List<Product> productlist = productService.queryByBrand(Search_brand);
+		mav.addObject("productlist",productlist);
+		mav.addObject("by",by);
+		mav.addObject("key",Search_brand);
 		mav.setViewName("/home/search.jsp");
 		return mav;
 		}
@@ -42,8 +63,11 @@ public class SearchController {
 		System.out.println(brand);
 		List<Product> productlist = productService.queryBuTypeAndBrand(type, brand);
 		//System.out.println("product----"+product.getProductname());
+		String by="bybrandandtype";
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("productlist",productlist);
+		mav.addObject("key1",type);
+		mav.addObject("key2",brand);
 		System.out.println(productlist.size());
 		mav.setViewName("/home/search.jsp");
 		return mav;

@@ -38,6 +38,7 @@ public interface ProductService {
 	public List queryall();
 	public List queryByType(String producttype);
 	public List queryByName(String productname);
+	public List queryByBrand(String productbrand);
 	public Product queryByProductid(int productid);
 	public boolean product_deleteById(int productid);
 	public boolean product_add(Product product);
