@@ -249,7 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-											<form class="theme-signin" name="loginform" action="" method="post">
+											<form class="theme-signin" name="loginform" action="home" method="post">
 
 												<div class="theme-signin-left">
 
@@ -262,9 +262,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 															<span id="Stock" class="tb-hidden">库存<span class="stock"> ${product.remain}</span>件</span>
 														</dd>
 
-													</div>
-													<div class="clear"></div>
 												</div>
+												<div class="clear"></div>
+												</div>
+												<div>
+												<input type="hidden" name="buyoradd" value="buy" />
+												<input id="ai-topsearch" class="clearfix tb-btn tb-btn-buy theme-login" keyname="buy" value="立即购买" index="1" type="submit">
+												</div>
+												<input type="hidden" name="buyoradd" value="add"/>
+												<input id="ai-topsearch" class="clearfix tb-btn tb-btn-basket theme-login" value="加入购物车" index="1" type="submit">
 											</form>
 										</div>
 									</div>
