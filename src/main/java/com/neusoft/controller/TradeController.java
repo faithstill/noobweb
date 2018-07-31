@@ -39,6 +39,7 @@ public class TradeController {
 		ModelAndView mav = new ModelAndView();
 		Orders order = orderService.order_queryById(orderid);
 		User user = userService.queryById(order.getUserid());
+		if("unpaid".equals(order.getTradeStatus())){
 		if(user.getMoney()<order.getAmount())
 		{
 			System.out.println("payfail-----moneynotenough");
@@ -51,6 +52,31 @@ public class TradeController {
 			orderService.order_pay(orderid);
 			mav.addObject("orderid", orderid);
 			mav.setViewName("/paysuccess.jsp");
+		}
+		}
+		else{
+			mav.setViewName("/alreadypaid.jsp");
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/refund")
+	public ModelAndView refund(int orderid)
+	{
+		ModelAndView mav = new ModelAndView();
+		Orders order = orderService.order_queryById(orderid);
+		User user = userService.queryById(order.getUserid());
+		if("redelivered".equals(order.getTradeStatus())){
+		
+			user.setMoney(user.getMoney()+order.getAmount());
+			userService.updateUser(user);
+			orderService.order_pay(orderid);
+			mav.addObject("orderid", orderid);
+			mav.setViewName("/refundsuccess.jsp");
+		
+		}
+		else{
+			mav.setViewName("/alreadypaid.jsp");
 		}
 		return mav;
 	}

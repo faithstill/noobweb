@@ -44,11 +44,14 @@ public class OrderServiceImpl implements OrderService{
 	
 	
 	
-	public boolean order_add(Orders order)
+	public int order_add(Orders order)
 	{
 		int suc = orderMapper.insertSelective(order);
+		
+		order.getOrderid();
+		
 		System.out.println("orderinsertsuc----"+suc);
-		return suc>0;
+		return order.getOrderid();
 	}
 	
 	public boolean order_deleteById(int orderid)
@@ -92,6 +95,25 @@ public class OrderServiceImpl implements OrderService{
 		
 		order.setDeliveryTime(new Date());
 		order.setTradeStatus("finished");
+		int suc = orderMapper.updateByPrimaryKey(order);
+		return suc > 0;
+	}
+	
+	public boolean order_redelivery(int orderid)
+	{
+		Orders order = orderMapper.selectByPrimaryKey(orderid);
+		
+		order.setDeliveryTime(new Date());
+		order.setTradeStatus("redelivered");
+		int suc = orderMapper.updateByPrimaryKey(order);
+		return suc > 0;
+	}
+	public boolean order_refund(int orderid)
+	{
+		Orders order = orderMapper.selectByPrimaryKey(orderid);
+		
+		order.setDeliveryTime(new Date());
+		order.setTradeStatus("refunded");
 		int suc = orderMapper.updateByPrimaryKey(order);
 		return suc > 0;
 	}

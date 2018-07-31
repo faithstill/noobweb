@@ -6,6 +6,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -21,11 +22,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+			var data = {};
+			key = 'addressid';
+			value = 21;
+			data[key] = value;
+			
+			$(function(){
+			
+				$('.selectaddress').click(function(){
+				
+					var  btn = this;
+					var index = $('.selectaddress').index(btn);
+					
+					//alert('点击的是第'+index+'个按钮');
+				
+					var aid = $('.aid:eq('+index+')');
+				
+					//alert(aid.val());
+					//return false;
+					
+					
+					var id = aid.val();  
+					//var name = $("#name").val();
+					$.ajax('address/queryAddress',{
+						type:'post',
+						data:{"addressid":id},
+						dataType:'json',
+						success:function(address){
+							 //alert(address.name);
+ 							 //$("p").append(address.name);
+							 $("p").text(address.name);
+						
+						}
+					});
+				})
+			})
+			
+	
+	
+	</script>
   </head>
   
   <body>
-    
+    	 
+    	 <form action="">
+    	 	<input type="text" value="21" name="aid" class="aid"> 
+    	 	<input type="button" class="selectaddress"  value="选择1"/>
+    	 </form>
+    	 
+    	 
+    	 
+    	  <form action="">
+    	 	<input type="text" value="22" name="aid" class="aid"> 
+    	 	<input type="button" class="selectaddress"  value="选择2"/>
+    	 </form>
+    	 
+    	 
+    	 
+    	  <form action="">
+    	 	<input type="text" value="27" name="aid" class="aid"> 
+    	 	<input type="button" class="selectaddress"  value="选择3"/>
+    	 </form>
+    	
+    	 <p></p>
+
 <!-- 	<form  method="post" action="address/add"> -->
 <!-- 		<table> -->
 <!-- 		<input type="hidden" name="userid" value="1" > -->
@@ -61,19 +124,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 			</tr> -->
 <!-- 		</table> -->
 <!-- 	</form> -->
-		<form method="post" action="product/queryByName">
+<!-- 		<form method="post" action="product/queryByName"> -->
 <!-- 				<input type="submit" name="producttype" value="牛奶"> -->
 <!-- 				<input type="submit" name="producttype" value="零食"> -->
 				
-				<input type="text" name="productname">
-				<input type="submit"  value="搜索">
-		</form>
+<!-- 				<input type="text" name="productname"> -->
+<!-- 				<input type="submit"  value="搜索"> -->
+<!-- 		</form> -->
 
-		<c:forEach items="${orderlist_ByUser}" var = "order"  varStatus="ordercount" >
+<!-- 		<c:forEach items="${orderlist_ByUser}" var = "order"  varStatus="ordercount" > -->
 		
-		${order}
+<!-- 		${order} -->
 		
-		</c:forEach>
+<!-- 		</c:forEach> -->
     
   </body>
 </html>

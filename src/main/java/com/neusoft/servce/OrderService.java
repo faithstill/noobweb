@@ -10,7 +10,7 @@ public interface OrderService {
 	public Orders order_queryById(int orderid);
 	
 	public List query();
-	public boolean order_add(Orders order);
+	public int order_add(Orders order);
 	public boolean order_deleteById(int orderid);
 	
 	public boolean order_update(Orders order);
@@ -18,4 +18,6 @@ public interface OrderService {
 	public boolean order_pay(int orderid);
 	public boolean order_delivery(int orderid);
 	public boolean order_finish(int orderid);
+	public boolean order_redelivery(int orderid);
+	public boolean order_refund(int orderid);
 }

@@ -57,9 +57,10 @@ public class OrderController {
 //		System.out.println("detail:"+order.getDetailedorder());
 		Orders order = new Orders();
 		order.setUserid(userid);
-		orderService.order_add(order);
+		int orderid = orderService.order_add(order);
 		ModelAndView mav = new ModelAndView();
-		//mav.setViewName("/orderContent/add"); 
+		mav.addObject("orderid",orderid);
+		mav.setViewName("/orderContent/add"); 
 		return mav;
 	}
 		
@@ -120,5 +121,21 @@ public class OrderController {
 		return mav;
 	}
 	
+	@RequestMapping("/redelivery")
+	public ModelAndView order_redelivery(int orderid)
+	{
+		ModelAndView mav = new ModelAndView();
+		boolean suc= orderService.order_redelivery(orderid);
+		//mav.setViewName("/order/query");
+		return mav;
+	}
 	
+	@RequestMapping("/refund")
+	public ModelAndView order_refund(int orderid)
+	{
+		ModelAndView mav = new ModelAndView();
+		boolean suc= orderService.order_refund(orderid);
+		//mav.setViewName("/order/query");
+		return mav;
+	}
 }

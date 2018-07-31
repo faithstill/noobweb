@@ -35,7 +35,8 @@ public class AddressController {
 //			i++;
 //		}
 		mav.addObject("addresslist",addresslist);
-		mav.setViewName("/home/pay.jsp");
+		//mav.setViewName("/home/pay.jsp");
+		mav.setViewName("/person/address.jsp");
 		//mav.setViewName("/test.jsp");
 		return mav;
 	}
@@ -58,6 +59,18 @@ public class AddressController {
 		return mav;
 		
 	}
+	
+	@RequestMapping("/queryAddress")
+	@ResponseBody 
+	public Address queryAddress(int addressid)
+	{
+		System.out.println("qweqwe");
+		System.out.println("adr-que----------"+addressid);
+		Address address =  addressService.address_queryById(addressid);
+		System.out.println("query---"+address.getName());
+		return address;
+	}
+	
 		
 	@RequestMapping("/deleteById")
 	public ModelAndView address_deleteById(int addressid)
