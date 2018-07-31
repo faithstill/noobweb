@@ -36,16 +36,28 @@ public class SearchController {
 	}
 	
 	@RequestMapping("/bytype")
-	public ModelAndView Searchbytype(HttpServletRequest request,HttpServletResponse rp,HttpSession session) throws IOException{
+	public ModelAndView Searchbytype(HttpServletRequest request,HttpServletResponse rp,HttpSession session,
+			String orderpattern) throws IOException{
 		
 		init(session);
 		String search_type=request.getParameter("search_type");
 		String Search_type=new String(search_type.getBytes("ISO-8859-1"),"UTF-8");
+		String orderpattern1=request.getParameter("orderpattern");
 		System.out.println(Search_type);
-		List<Product> productlist = productService.queryByType(Search_type);
+		List<Product> productlist= null;
+		if(orderpattern1 != null){
+			if ("byprice".equals(orderpattern)){
+			productlist=productService.orderprice(productService.queryByType(Search_type));
+			}
+			else{
+					productlist=productService.orderprice(productService.queryByType(Search_type));
+			}
+		}
+		else {
+				productlist = productService.queryByType(Search_type);
+		}
 		String by="bytype";
 		mav.addObject("productlist",productlist);
-		
 		mav.addObject("by",by);
 		mav.addObject("key1",search_type);
 		mav.addObject("num",productlist.size());
