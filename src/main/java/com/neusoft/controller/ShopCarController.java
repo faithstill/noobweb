@@ -3,6 +3,7 @@ package com.neusoft.controller;
 import com.neusoft.domain.Address;
 import com.neusoft.domain.Shoppingcar;
 import com.neusoft.servce.ShopCarService;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -11,17 +12,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 @Controller
-@RequestMapping({"/user"})
+@RequestMapping({"/shopping"})
 public class ShopCarController {
 
 	  @Autowired
 	  ShopCarService shopCarService;
 
+	  
 	  @RequestMapping({"/enter"})
 	  public void query(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException
@@ -29,15 +32,18 @@ public class ShopCarController {
 	    request.getRequestDispatcher("/home/introduction.jsp").forward(request, response);
 	  }
 
+	  
 	  @RequestMapping({"/add"})
-	  public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	  public void addCart(HttpServletRequest request, HttpServletResponse response,String text_box) throws ServletException, IOException
 	  {
+		System.out.println(text_box);
 	    HttpSession session = request.getSession();
-	    session.setAttribute("userid", 2);
+	    //session.setAttribute("userid", 2);
 	    request.setAttribute("productid", 1);
 	    request.setAttribute("amount", 10);
-	    shopCarService.addcart1(request, response);
+	    shopCarService.addcart1(request, response,session);
 	  }
+	  
 	  @RequestMapping({"/show"})
 	  public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session = request.getSession();

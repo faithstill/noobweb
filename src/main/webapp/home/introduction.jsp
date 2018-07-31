@@ -36,8 +36,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="login.jsp" target="_top" class="h">亲，请登录</a>
-						<a href="zhuce.jsp" target="_top">免费注册</a>
+						<c:if test="${loginflag=='1'}">
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						</c:if>
+						<c:if test="${loginflag=='0'}">
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						</c:if>
 					</div>
 				</div>
 			</ul>
@@ -252,29 +257,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														<div class="cart-title number">数量</div>
 														<dd>
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
+															<input id="text_box" name="productnum" type="text" value="1" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
 															<span id="Stock" class="tb-hidden">库存<span class="stock"> ${product.remain}</span>件</span>
 														</dd>
 
 													</div>
 													<div class="clear"></div>
-
-													<div class="btn-op">
-														<div class="btn am-btn am-btn-warning">确认</div>
-														<div class="btn close am-btn am-btn-warning">取消</div>
-													</div>
 												</div>
-												<div class="theme-signin-right">
-													<div class="img-info">
-														<img src="images/songzi.jpg" />
-													</div>
-													<div class="text-info">
-														<span class="J_Price price-now">${product.price}</span>
-														<span id="Stock" class="tb-hidden">库存<span class="stock">${product.remain}</span>件</span>
-													</div>
-												</div>
-
 											</form>
 										</div>
 									</div>
@@ -286,19 +276,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 
 						<div class="pay">
-							<div class="pay-opt">
-							<a href="home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
-							<a><span class="am-icon-heart am-icon-fw">收藏</span></a>
-							
-							</div>
+
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
+
 									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
 								</div>
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="/noobweb/user/add"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" href="shopping/add"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
@@ -522,7 +509,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 						</div>
 						<div id="shopCart" class="item">
-							<a href="http://localhost:8080/noobweb/user/show" >
+							<a href="shopping/show" >
 								<span class="message"></span>
 							</a>
 							<p>

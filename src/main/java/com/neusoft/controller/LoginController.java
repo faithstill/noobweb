@@ -28,20 +28,24 @@ public class LoginController {
 	@RequestMapping(value = "/user_login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpSession session, User user) {
 		ModelAndView mav = new ModelAndView();
+
 		User u = userService.loginValidate(user);		//loginValidate函数只用到了user中的username和password
+		System.out.println("userid-----:"+user.getUserid());
+		System.out.println(u.getFlag());
 		if (u != null) {				//用户名和密码均正确，判断用户类型
-			if (user.getFlag() == 0) {	//flag==0，代表管理员
+			if (u.getFlag() == 0) {	//flag==0，代表管理员
 				session.setAttribute("admin",u.getUsername());
 				mav.setViewName("/admin.jsp");		//后台界面
-			} else {					//flag==1，代表非管理员，即客户
-				mav.setViewName("/home/pay.jsp");	//支付界面
+			} else {				//flag==1，代表非管理员，即客户
+				session.setAttribute("userid",u.getUserid());
+				session.setAttribute("username",u.getUsername());
+				mav.setViewName("/home");	//支付界面
 			}
 		}else {							//用户名或密码不正确，还停留在登陆界面，并输出错误提示
 			mav.setViewName("/login.jsp");
 			mav.addObject("status", "用户名或密码错误");
 		}
 		return mav;
-
 	}
 
 	
@@ -50,7 +54,7 @@ public class LoginController {
 	public ModelAndView register(HttpServletRequest request, HttpSession session, User user) {
 		ModelAndView mav = new ModelAndView();
 		userService.insertUser(user);		//insertUser函数可以将用户信息插入数据库当中
-		mav.setViewName("/home/pay.jsp");	//然后跳转到支付界面
+		mav.setViewName("/home");	//然后跳转到支付界面
 		return mav;
 		
 		
@@ -63,7 +67,6 @@ public class LoginController {
 		mav.addObject("date", new Date());
 		Runtime.getRuntime().availableProcessors();
 		mav.setViewName("/main.jsp");
-		
 		return mav;
 	
 	}

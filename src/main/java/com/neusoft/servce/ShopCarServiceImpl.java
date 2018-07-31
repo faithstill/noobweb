@@ -78,14 +78,15 @@ public class ShopCarServiceImpl  implements ShopCarService{
 	    return null;
 	  }
 
-	  public void addcart1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	  public void addcart1(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException
 	  { 
 	    try {
-	      int userid = (Integer)request.getSession().getAttribute("userid");
-	      int productid = (Integer)request.getAttribute("productid");
-	      int amount = (Integer)request.getAttribute("amount");
+	      int userid = (Integer)session.getAttribute("userid");
+	      int productid = (Integer)session.getAttribute("productid");
+	      int amount = (Integer)session.getAttribute("amount");
 	      List<Shoppingcar>cartList = init(request, response);
 	      int tag = 0;
+	      if(cartList !=null){
 	      for (Shoppingcar list : cartList)
 	      {
 	        System.out.println(list);
@@ -103,6 +104,7 @@ public class ShopCarServiceImpl  implements ShopCarService{
 	          tag++;
 	        }
 	      }
+	     }
 	      if (tag == 0)
 	      {
 	        Shoppingcar shopcar = new Shoppingcar();
@@ -195,4 +197,6 @@ public class ShopCarServiceImpl  implements ShopCarService{
 	        }
 		return null;
 	}
+
+
 	}

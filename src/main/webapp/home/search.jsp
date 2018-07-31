@@ -30,9 +30,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="login.jsp" target="_top" class="h">亲，请登录</a>
-						<a href="zhuce.jsp" target="_top">免费注册</a>
-					</div>
+						<c:if test="${loginflag=='1'}">
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						</c:if>
+						<c:if test="${loginflag=='0'}">
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						</c:if>
+						</div>
 				</div>
 			</ul>
 			<ul class="message-r">
@@ -97,10 +102,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							<ul class="select">
 								<p class="title font-normal">
-								<c:if test="${by}=bytpye">
+								<c:if test="${by=='bytype'}">
 								<span class="total fl">搜索到<strong class="num">${num}</strong>件</span>
 								<span class="fl">${key1}</span>
-								</c:if>
+								</c:if> 
+								<c:if test="${by=='bybrand'}">
+								<span class="total fl">品牌:<strong class="num">${key1}</strong>共:&nbsp; ${num} &nbsp;件</span>
+								</c:if> 
+								<c:if test="${by=='bybrandandtype'}">
+								<span class="total fl">品牌:<strong class="num">${key1}</strong>下，共有  $&nbsp;{key2}  &nbsp;${num} &nbsp;件</span>
+								</c:if> 
+								 
+								<c:if test="${by=='byname'}">
+								<span class="total fl">关键字:<strong class="num">${key1}</strong>&nbsp;下，共有 &nbsp;${num} &nbsp;件</span>
+								</c:if> 
 								</p>
 								<div class="clear"></div>
 								<li class="select-result">

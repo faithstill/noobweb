@@ -3,6 +3,8 @@ package com.neusoft.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,13 @@ public class HomeController {
 	ProductService productService;
 	
 	@RequestMapping("/home")
-	public ModelAndView homeController(){
-		
+	public ModelAndView homeController(HttpSession session){
+		int loginflag=0;//0为没登录，1为已经登录
+		Object username = session.getAttribute("username");
+		if(username!=null){
+			loginflag=1;
+		}
+		System.out.println("session"+loginflag);
 		int productid1 = 1;
 		int productid2 = 2;
 		int productid3 = 3;
@@ -35,6 +42,8 @@ public class HomeController {
 		}
 		//List<Address> addresslist = addressService.queryByUser(userid);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginflag", loginflag);
+		mav.addObject("username",username);
 		mav.addObject("productlist_discount",productlist);
 		mav.addObject("productlist_new",productlist);
 		mav.addObject("product_main",product1);

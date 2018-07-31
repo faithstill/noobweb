@@ -32,8 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
+						<c:if test="${loginflag=='1'}">
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						</c:if>
+						<c:if test="${loginflag=='0'}">
 							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
 							<a href="zhuce.jsp" target="_top">免费注册</a>
+						</c:if>
 						</div>
 					</div>
 				</ul>

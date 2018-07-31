@@ -1,8 +1,10 @@
 package com.neusoft.controller;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +26,13 @@ public class IntroductionController {
   ProductService productService;
 	
   	@RequestMapping("/showbyid")
-	public ModelAndView showbyid(HttpServletRequest request,HttpServletResponse rp)
+	public ModelAndView showbyid(HttpServletRequest request,HttpServletResponse rp,HttpSession session)
 	{
+  		int loginflag=0;//0为没登录，1为已经登录
+		Object username = session.getAttribute("username");
+		if(username!=null){
+			loginflag=1;	
+	}
   		int ComentlistLen=2;
   		String product_id =request.getParameter("porductid");
   		String  Commentpage=request.getParameter("Commentpage");
@@ -41,6 +48,9 @@ public class IntroductionController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("product",product);
+		mav.addObject("loginflag",loginflag);
+		mav.addObject("username",username);
+		
 		if (commentlist!=null&&commentlist.size()>Commentpage1*ComentlistLen) {     
 		for(int i =(Commentpage1-1)*ComentlistLen;i<Commentpage1*ComentlistLen;i++){
 				commentlist_div.add(commentlist.get(i));
