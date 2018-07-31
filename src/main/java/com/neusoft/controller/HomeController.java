@@ -20,9 +20,7 @@ public class HomeController {
 	ProductService productService;
 	
 	@RequestMapping("/home")
-	public ModelAndView homeController(HttpSession session,String productnum,String keyname){
-		System.out.println(keyname);
-		System.out.println(productnum);
+	public ModelAndView homeController(HttpSession session){
 		int loginflag=0;//0为没登录，1为已经登录
 		Object username = session.getAttribute("username");
 		if(username!=null){

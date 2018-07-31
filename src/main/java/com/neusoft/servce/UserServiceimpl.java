@@ -46,5 +46,4 @@ public class UserServiceimpl implements UserService{
 		User user = userMapper.selectByPrimaryKey(userid);
 		return user;
 	}
-
 }

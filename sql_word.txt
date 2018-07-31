@@ -1,3 +1,4 @@
+
 base:
 CREATE TABLE `noobweb`.`user` (
   `userid` INT NOT NULL AUTO_INCREMENT,
@@ -156,3 +157,7 @@ ADD CONSTRAINT `address-order`
   REFERENCES `noobweb`.`address` (`addressid`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+
+wz£¨7/37 product£©
+	Alter table product add likenum FLOAT;

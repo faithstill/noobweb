@@ -1,5 +1,7 @@
 package com.neusoft.servce;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,4 +107,73 @@ public class ProductServiceImpl implements ProductService{
 		System.out.println(products.size());
 		return  products;
 	}
-}
+
+	@Override
+	public List orderprice(List<Product> products) {
+		if (products.size()==0){
+			return products;
+		}
+		else{	
+			   Collections.sort(products, new Comparator<Product>(){	   
+			@Override
+			public int compare(Product p1, Product p2) {
+				if(p1.getPrice() > p2.getPrice()){
+			        return 1;
+			      }
+			   if(p1.getPrice() == p2.getPrice()){
+			      return 0;
+			     }
+			    return -1;
+			  }
+			   });  
+		 System.out.println("排序后的结果："+products); 
+			}
+			return products;
+		}
+
+	@Override
+	public List ordersales(List<Product> products) {
+		if (products.size()==0){
+			return products;
+		}
+		else{	
+			   Collections.sort(products, new Comparator<Product>(){	   
+			@Override
+			public int compare(Product p1, Product p2) {
+				if(p1.getSales() > p2.getSales()){
+			        return 1;
+			      }
+			   if(p1.getSales() == p2.getSales()){
+			      return 0;
+			     }
+			    return -1;
+			  }
+			   });  
+		 System.out.println("排序后的结果："+products); 
+			}
+			return products;
+		}
+
+	@Override
+	public List orderlikenum(List<Product> products) {
+		if (products.size()==0){
+			return products;
+		}
+		else{	
+			   Collections.sort(products, new Comparator<Product>(){	   
+			@Override
+			public int compare(Product p1, Product p2) {
+				if(p1.getLikenum() > p2.getLikenum()){
+			        return 1;
+			      }
+			   if(p1.getLikenum() == p2.getLikenum()){
+			      return 0;
+			     }
+			    return -1;
+			  }
+			   });  
+		 System.out.println("排序后的结果："+products); 
+			}
+			return products;
+		}
+	}

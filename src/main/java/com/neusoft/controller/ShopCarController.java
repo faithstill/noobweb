@@ -18,12 +18,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 @Controller
-@RequestMapping({"/shopping"})
+@RequestMapping("/shopping")
 public class ShopCarController {
 
 	  @Autowired
 	  ShopCarService shopCarService;
 
+	  
+	  @RequestMapping("/where")
+	  public void where(String buyoradd,String productnum,String productid)
+			  {
+		//  System.out.println("get-----"+buyoradd);
+		//  System.out.println("buy".equals(buyoradd));
+		 // System.out.println(productnum);
+		  //System.out.println(productid);
+		  	//ModelAndView mav = new ModelAndView();
+			//mav.addObject("productnum", productnum);
+			//mav.addObject("productid",productid);
+			
+			if("buy".equals(buyoradd)){
+				//mav.setViewName("/home");
+				//add(productnum);
+			//	System.out.println("tobuy");
+			}
+			else if ("cart".equals(buyoradd)){
+			//	mav.setViewName("/home");
+				//System.out.println("tocart");
+			}
+			else{
+			//	mav.setViewName("/home");
+				//System.out.println("tohome");
+			}
+			//return mav;
+			 }
 	  
 	  @RequestMapping({"/enter"})
 	  public void query(HttpServletRequest request, HttpServletResponse response)
