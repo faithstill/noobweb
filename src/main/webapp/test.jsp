@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
 	
 	<script type="text/javascript">
+	
 			var data = {};
 			key = 'addressid';
 			value = 21;
@@ -88,7 +89,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 </form>
     	
     	 <p></p>
-
+			<div class="text-c">
+	   <form id="reg-form" method="post" action="product/queryByName" >	
+		<input type="text" class="input-text" style="width:250px" placeholder="输入商品名称"  name="productname">
+		<button type="submit" class="btn btn-success radius"><i class="Hui-iconfont">&#xe665;</i> 搜商品</button>
+		</form>
+	</div>
 <!-- 	<form  method="post" action="address/add"> -->
 <!-- 		<table> -->
 <!-- 		<input type="hidden" name="userid" value="1" > -->

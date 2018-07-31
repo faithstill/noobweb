@@ -57,7 +57,6 @@ public class AddressController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/address/query"); 
 		return mav;
-		
 	}
 	
 	@RequestMapping("/queryAddress")

@@ -1,13 +1,17 @@
 package com.neusoft.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neusoft.domain.OrderContent;
 import com.neusoft.domain.Orders;
+import com.neusoft.servce.OrderContentService;
 import com.neusoft.servce.OrderService;
 
 
@@ -16,6 +20,8 @@ import com.neusoft.servce.OrderService;
 public class OrderController {
 	@Autowired
 	OrderService orderService;
+	@Autowired
+	OrderContentService orderContentService;
 	
 	@RequestMapping("/queryByUser")
 	public ModelAndView queryByUser(int userid) {
@@ -31,9 +37,18 @@ public class OrderController {
 	public ModelAndView query() {
 		ModelAndView mav = new ModelAndView();
 		List<Orders> orderlist = orderService.query();
+		//List<Map> order_ordercontent = new ArrayList(); 
+		for(Orders order:orderlist)
+		{
+			//int size = orderContentService.queryNumByOrder(order.getOrderid());
+			List<OrderContent> ordercontent = orderContentService.queryByOrder(order.getOrderid());
+			int o_productid = ordercontent.get(0).getProductid();
+			
+		}
+		
 		mav.addObject("orderlist",orderlist);
 		mav.setViewName("/test.jsp");
-
+		
 		return mav;
 	}
 	
@@ -48,17 +63,20 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/add")
-	public ModelAndView order_add(int userid){
-//		System.out.println("id:"+order.getUserid());
+	public ModelAndView order_add(int userid,int addressid){
+		//System.out.println("id:"+addressid);
 //		System.out.println("name:"+order.getName());
 //		System.out.println("phone:"+order.getPhone());
 //		System.out.println("province:"+order.getProvince());
 //		System.out.println("city:"+order.getCity());
 //		System.out.println("detail:"+order.getDetailedorder());
 		Orders order = new Orders();
+		
 		order.setUserid(userid);
+		order.setAddressid(addressid);
 		int orderid = orderService.order_add(order);
 		ModelAndView mav = new ModelAndView();
+		System.out.println(orderid);
 		mav.addObject("orderid",orderid);
 		mav.setViewName("/orderContent/add"); 
 		return mav;

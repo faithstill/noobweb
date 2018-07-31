@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.neusoft.domain.Address;
@@ -31,10 +32,12 @@ public class ProductController {
 	@RequestMapping("/queryall")
 	public ModelAndView queryall() {
 		ModelAndView mav = new ModelAndView();
+		//System.out.println("qurall");
 		List<Product> productlist = productService.queryall();
-		mav.addObject("productlist_all",productlist);
-		mav.setViewName("/test.jsp");
-
+		
+		mav.addObject("productlist",productlist);
+		mav.addObject("length", productlist.size());
+		mav.setViewName("/admin/products.jsp");
 		return mav;
 	}
 	
@@ -67,14 +70,15 @@ public class ProductController {
 	@RequestMapping("/queryByName")
 	public ModelAndView queryByNmae(String productname) {
 		ModelAndView mav = new ModelAndView();
-		//System.out.println(productname.equals("特仑苏"));
+		System.out.println("quer-name----"+productname);
 		List<Product> productlist = productService.queryByName(productname);
-		mav.addObject("productlist_byname",productlist);
-//		for(Product product:productlist)
-//		{
-//			System.out.println(product);
-//		}
-		mav.setViewName("/test.jsp");
+		for(Product product:productlist)
+		{
+			System.out.println(product.getProductid());
+		}
+		mav.addObject("productlist",productlist);
+		mav.addObject("length", productlist.size());
+		mav.setViewName("/admin/products.jsp");
 		
 		return mav;
 	}
@@ -102,7 +106,7 @@ public class ProductController {
 		
 		productService.product_add(product);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/product/query"); 
+		mav.setViewName("/admin/updatesuccess.jsp");
 		return mav;
 		
 	}
@@ -110,11 +114,20 @@ public class ProductController {
 	@RequestMapping("/deleteById")
 	public ModelAndView product_deleteById(int productid)
 	{
+		System.out.println("del----"+productid);
 		productService.product_deleteById(productid);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/product/query"); 
 		return mav;
 		
+	}
+	@RequestMapping("/delete")
+	@ResponseBody
+	public boolean product_delete(int productid)
+	{
+		System.out.println("del---"+productid);
+		productService.product_deleteById(productid);
+		return true;
 	}
 	
 	@RequestMapping("/update_queryById")
@@ -124,7 +137,7 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView();
 		Product product =  productService.product_queryById(productid);
 		mav.addObject("update_product",product);
-		mav.setViewName("/home/productupdate.jsp"); 
+		mav.setViewName("/admin/productupdate.jsp"); 
 		return mav;
 	}
 	
@@ -133,7 +146,7 @@ public class ProductController {
 	{
 		productService.product_update(product);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/product/query");
+		mav.setViewName("/admin/updatesuccess.jsp");
 		return mav;
 	}
 }

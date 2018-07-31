@@ -46,7 +46,7 @@
 	
 	<delete id="deleteUser" parameterType="com.neusoft.domain.User" >
     delete from user
-    where id = #{id,jdbcType=INTEGER}
+    where userid = #{id,jdbcType=INTEGER}
   </delete>
   
   <update id="updateUser" parameterType="com.neusoft.domain.User">

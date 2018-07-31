@@ -176,6 +176,7 @@ function member_del(obj,id){
 		});		
 	});
 }
+}
 </script> 
 </body>
 </html>

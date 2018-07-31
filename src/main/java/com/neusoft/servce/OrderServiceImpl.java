@@ -47,10 +47,10 @@ public class OrderServiceImpl implements OrderService{
 	public int order_add(Orders order)
 	{
 		int suc = orderMapper.insertSelective(order);
+		//System.out.println(order.getOrderid());
+		//order.getOrderid();
 		
-		order.getOrderid();
-		
-		System.out.println("orderinsertsuc----"+suc);
+		//System.out.println("orderinsertsuc----"+suc);
 		return order.getOrderid();
 	}
 	
@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService{
 	{
 		Orders order = orderMapper.selectByPrimaryKey(orderid);
 		
-		order.setDeliveryTime(new Date());
+		order.setFinishTime(new Date());
 		order.setTradeStatus("finished");
 		int suc = orderMapper.updateByPrimaryKey(order);
 		return suc > 0;
@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService{
 	{
 		Orders order = orderMapper.selectByPrimaryKey(orderid);
 		
-		order.setDeliveryTime(new Date());
+		order.setRedeliveryTime(new Date());
 		order.setTradeStatus("redelivered");
 		int suc = orderMapper.updateByPrimaryKey(order);
 		return suc > 0;
@@ -112,8 +112,17 @@ public class OrderServiceImpl implements OrderService{
 	{
 		Orders order = orderMapper.selectByPrimaryKey(orderid);
 		
-		order.setDeliveryTime(new Date());
+		order.setRefundTime(new Date());
 		order.setTradeStatus("refunded");
+		int suc = orderMapper.updateByPrimaryKey(order);
+		return suc > 0;
+	}
+	
+	public boolean order_cancel(int orderid)
+	{
+		Orders order = orderMapper.selectByPrimaryKey(orderid);
+		order.setCancelTime(new Date());
+		order.setTradeStatus("canceled");
 		int suc = orderMapper.updateByPrimaryKey(order);
 		return suc > 0;
 	}

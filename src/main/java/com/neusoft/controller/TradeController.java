@@ -70,13 +70,13 @@ public class TradeController {
 		
 			user.setMoney(user.getMoney()+order.getAmount());
 			userService.updateUser(user);
-			orderService.order_pay(orderid);
+			orderService.order_refund(orderid);
 			mav.addObject("orderid", orderid);
 			mav.setViewName("/refundsuccess.jsp");
 		
 		}
 		else{
-			mav.setViewName("/alreadypaid.jsp");
+			mav.setViewName("/refundfailed.jsp");
 		}
 		return mav;
 	}
