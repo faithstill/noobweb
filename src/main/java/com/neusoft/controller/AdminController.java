@@ -33,7 +33,6 @@ public class AdminController {
 	public ModelAndView getUserList(HttpServletRequest request, HttpSession session, User user) {
 		ModelAndView mav = new ModelAndView();
 		List<User> u = userService.getUserList(user);
-
 		for(User user1 :u) {
 			if(user1.getFlag()==0) {
 				user1.setRole("管理员");
@@ -43,12 +42,10 @@ public class AdminController {
 		}
 		mav.addObject("showUser", u);
 		mav.addObject("length", u.size());
-
 		mav.setViewName("/user.jsp");
 		return mav;
 
 	}
-
 	@RequestMapping(value = "/user_del", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Boolean> deleteUser(HttpServletRequest request, HttpSession session, User user) {

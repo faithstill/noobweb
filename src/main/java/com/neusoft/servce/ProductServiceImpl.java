@@ -94,4 +94,15 @@ public class ProductServiceImpl implements ProductService{
 		System.out.println(suc);
 		return suc>0;
 	}
+
+	@Override
+	public List queryByBrand(String productbrand) {
+		//System.out.println(producttype);
+		ProductExample proexm = new ProductExample();
+		Criteria cr = proexm.createCriteria();
+		cr.andBrandEqualTo(productbrand);
+		List<Product>  products = productMapper.selectByExample(proexm);
+		System.out.println(products.size());
+		return  products;
+	}
 }
