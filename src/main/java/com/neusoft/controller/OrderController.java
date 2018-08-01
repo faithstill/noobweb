@@ -212,6 +212,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/add")
+
 	public ModelAndView order_add(HttpServletRequest request,HttpSession session,int addressid,double total_price){
 		//System.out.println("aaaaaaaaaaaaaaadresss------------"+addressid);
 		// addressid1 =Integer.parseInt(request.getParameter("addressid"));
@@ -219,6 +220,7 @@ public class OrderController {
 		//int userid = Integer.parseInt(jtable.getValueAt(xx,xx).toString();
 		//int userid = 1;
 		Integer userid=(Integer) session.getAttribute("userid");
+
 
 		List<littleorder> llist= new ArrayList();
 		llist= (List<littleorder>)session.getAttribute("lorderlist");

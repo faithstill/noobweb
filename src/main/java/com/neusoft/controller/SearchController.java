@@ -46,14 +46,13 @@ public class SearchController {
 		String search_type=request.getParameter("search_type");
 		String Search_type=new String(search_type.getBytes("ISO-8859-1"),"UTF-8");
 		String orderpattern1=request.getParameter("orderpattern");
-		System.out.println(Search_type);
 		List<Product> productlist= null;
 		if(orderpattern1 != null){
 			if ("byprice".equals(orderpattern)){
 			productlist=productService.orderprice(productService.queryByType(Search_type));
 			}
 			else{
-					productlist=productService.orderprice(productService.queryByType(Search_type));
+				productlist=productService.orderprice(productService.queryByType(Search_type));
 			}
 		}
 		else {
@@ -77,7 +76,6 @@ public class SearchController {
 		}
 		String search_brand=request.getParameter("search_brand");
 		String Search_brand=new String(search_brand.getBytes("ISO-8859-1"),"UTF-8");
-		System.out.println(Search_brand);
 		
 		ModelAndView mav = new ModelAndView();
 		//System.out.println(producttype.equals("牛奶"));
@@ -144,19 +142,17 @@ public class SearchController {
 	public  ModelAndView getlist(HttpSession session,HttpServletRequest request,HttpServletResponse rp){
 		init(session);
 		String howtogo=request.getParameter("howtoorder");
-		System.out.println(howtogo);
-		System.out.println("sales".equals(howtogo));
 		List<Product> plist =(List<Product>)session.getAttribute("plist");
 		session.removeAttribute("plist");
 		if(plist==null){
 			mav.setViewName("/home");
 		}
 		else{
-		System.out.println(plist.size());
 		ModelAndView mav = new ModelAndView();
 		if(howtogo != null){
 			if ("price".equals(howtogo)){
 				plist=productService.orderprice(plist);
+				System.out.println("price");
 			}
 			else if ("sales".equals(howtogo)){
 				
@@ -167,7 +163,7 @@ public class SearchController {
 				plist = plist;
 		}
 		mav.addObject("productlist",plist);
-		mav.setViewName("/home/search.jsp");
+		mav.setViewName("home/search.jsp");
 		}
 		return mav;
 	}
