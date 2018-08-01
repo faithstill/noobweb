@@ -37,30 +37,25 @@ public class ShopCarController {
 
 	  
 	  @RequestMapping("/where")
-	  public void where(String buyoradd,String productnum,String productid)
-			  {
-		//  System.out.println("get-----"+buyoradd);
-		//  System.out.println("buy".equals(buyoradd));
-		 // System.out.println(productnum);
-		  //System.out.println(productid);
-		  	//ModelAndView mav = new ModelAndView();
-			//mav.addObject("productnum", productnum);
-			//mav.addObject("productid",productid);
-			
+	  public ModelAndView where(String buyoradd,String productnum,String productid,HttpServletRequest request,
+			  HttpSession session){
+		  System.out.println("productlid-----"+productid);
+		  System.out.println("productnum----"+productnum);
+		  session.setAttribute("productid", productid);
+		  session.setAttribute("productnum",productnum);
+		  String id=(String) session.getAttribute("username");
+		  System.out.println("id-----"+id);
+		  	ModelAndView mav = new ModelAndView();
 			if("buy".equals(buyoradd)){
-				//mav.setViewName("/home");
-				//add(productnum);
-			//	System.out.println("tobuy");
+				mav.setViewName("");
 			}
 			else if ("cart".equals(buyoradd)){
-			//	mav.setViewName("/home");
-				//System.out.println("tocart");
+				mav.setViewName("/shopping/add");
 			}
 			else{
-			//	mav.setViewName("/home");
-				//System.out.println("tohome");
+				mav.setViewName("/home");
 			}
-			//return mav;
+			return mav;
 			 }
 	  
 	  @RequestMapping({"/enter"})
@@ -72,13 +67,25 @@ public class ShopCarController {
 
 	  
 	  @RequestMapping({"/add"})
-	  public void addCart(HttpServletRequest request, HttpServletResponse response,String text_box) throws ServletException, IOException
+	  public void addCart(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException
 	  {
-		System.out.println(text_box);
-	    HttpSession session = request.getSession();
-	    session.setAttribute("userid", 1);
-	    request.setAttribute("productid", 2);
-	    request.setAttribute("amount", 10);
+	    int userid;
+	    String productid;
+	    String amount;
+	    if(session.getAttribute("userid")!=null){
+	    	userid=(Integer) session.getAttribute("userid");
+	    	session.setAttribute("userid", userid);
+	    	System.out.println("productlid-----"+userid);
+	    }
+	    if(session.getAttribute("productid")!=null){
+	    	 productid=(String) session.getAttribute("productid");
+	    	  request.setAttribute("productid", productid);
+	    }
+	    if(session.getAttribute("productnum")!=null){
+	    	 amount=(String) session.getAttribute("productnum");
+	    	 request.setAttribute("amount", amount);
+	 		System.out.println("productnum----"+amount);
+	    }
 	    shopCarService.addcart1(request, response,session);
 	  }
 	  

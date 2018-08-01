@@ -34,8 +34,7 @@ public class SearchController {
 		mav.addObject("loginflag",loginflag);
 		mav.addObject("username",username);
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@RequestMapping("/bytype")
 	public ModelAndView Searchbytype(HttpServletRequest request,HttpServletResponse rp,HttpSession session,
 			String orderpattern) throws IOException{
@@ -70,7 +69,6 @@ public class SearchController {
 		return mav;
 		}
 	
-	@SuppressWarnings("deprecation")
 	@RequestMapping("/bybrand")
 	public ModelAndView Searchbybrand(HttpServletRequest request,HttpServletResponse rp,HttpSession session) throws IOException{
 		init(session);

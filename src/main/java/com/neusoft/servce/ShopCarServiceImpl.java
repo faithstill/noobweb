@@ -9,16 +9,19 @@ import com.neusoft.domain.Shoppingcar;
 import com.neusoft.domain.ShoppingcarExample;
 import com.neusoft.domain.ShoppingcarExample.Criteria;
 import com.neusoft.domain.User;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -117,7 +120,7 @@ public class ShopCarServiceImpl implements ShopCarService {
 			cr.andProductidEqualTo(productId);
 			cr.andUseridEqualTo(userid);
 			shopcarmapper.deleteByExample(example);
-			request.getRequestDispatcher("/user/show").forward(request,
+			request.getRequestDispatcher("/shopping/show").forward(request,
 					response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -172,9 +175,17 @@ public class ShopCarServiceImpl implements ShopCarService {
 			HttpServletResponse paramHttpServletResponse, HttpSession session)
 			throws ServletException, IOException {
 		try {
-			int userid = (Integer) paramHttpServletRequest.getSession().getAttribute("userid");
-			int productid = (Integer) paramHttpServletRequest.getAttribute("productid");
-			int amount = (Integer) paramHttpServletRequest.getAttribute("amount");
+			System.out.println("userid-----"+session.getAttribute("userid"));
+			System.out.println("product-----"+session.getAttribute("productid"));
+			System.out.println("amount-----"+session.getAttribute("productnum"));
+			if (session.getAttribute("userid")!=null && session.getAttribute("productid")!=null && 
+				session.getAttribute("productnum")!=null){
+				int userid;
+				int productid;
+				int amount;
+				userid = (Integer) session.getAttribute("userid");
+				productid =  Integer.parseInt((String) session.getAttribute("productid"));
+				amount = Integer.parseInt((String) session.getAttribute("productnum"));
 			List<Shoppingcar> cartList = init(paramHttpServletRequest, paramHttpServletResponse);
 			int tag = 0;
 			for (Shoppingcar list : cartList) {
@@ -200,7 +211,12 @@ public class ShopCarServiceImpl implements ShopCarService {
 			}
 			paramHttpServletRequest.getRequestDispatcher("/home/succ_addcart.jsp").forward(
 					paramHttpServletRequest, paramHttpServletResponse);
-		} catch (Exception e) {
+		}
+			else{
+				paramHttpServletRequest.getRequestDispatcher("/home").forward(
+						paramHttpServletRequest, paramHttpServletResponse);
+			}
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
