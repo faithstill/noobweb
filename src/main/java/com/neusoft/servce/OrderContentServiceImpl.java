@@ -23,6 +23,16 @@ public class OrderContentServiceImpl implements OrderContentService{
 		return OrderContents;
 	}
 	
+	public int queryNumByOrder(int orderid){
+		OrderContentExample ordcexm = new OrderContentExample();
+		Criteria cr = ordcexm.createCriteria();
+		cr.andOrderidEqualTo(orderid);
+		List<OrderContent> OrderContents = orderContentMapper.selectByExample(ordcexm);
+		int size = OrderContents.size();
+		return size;
+	}
+	
+	
 	public boolean ordercontent_add(OrderContent orderContent)
 	{
 		int suc = orderContentMapper.insertSelective(orderContent);

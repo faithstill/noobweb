@@ -16,21 +16,7 @@ import com.neusoft.domain.Product;
 import com.neusoft.domain.ProductExample;
 import com.neusoft.domain.ProductExample.Criteria;
 
-/**
- * <p><b>Project:</b>  		《ssm-0726》</p>
- * <p><b>Title:</b>   		UserService</p>
- * <p><b>Description:</b> 	Description  </p>
- * <p><b>Company:</b>		www.neusoft.com.cn </p>
- * <p><b>Site:</b>			http://314649444.iteye.com/  </p>
- * 
- * @date 2018-7-26   下午2:03:19
- * @author 东软，张金山
- */
-/**
- * 用户操作的 业务的抽象
- * @author jshand
- *
- */
+
 	
 public interface ProductService {
 	
@@ -38,11 +24,15 @@ public interface ProductService {
 	public List queryall();
 	public List queryByType(String producttype);
 	public List queryByName(String productname);
+	public List queryByBrand(String productbrand);
 	public Product queryByProductid(int productid);
 	public boolean product_deleteById(int productid);
 	public boolean product_add(Product product);
 	public boolean product_update(Product product);
 	public Product product_queryById(int productid);
 	public List queryBuTypeAndBrand(String producttype ,String productbrand);
+	public List orderprice(List<Product> products);
+	public List ordersales(List<Product> products);
+	public List orderlikenum(List<Product> products);
 
 }

@@ -23,7 +23,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link href="css/jsstyle.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="js/address.js"></script>
-
+		
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+		<script type="text/javascript">
+			var data = {};
+			key = 'addressid';
+			value = 21;
+			data[key] = value;
+			
+			$(function(){
+			
+				$('.selectaddress').click(function(){
+				
+					var  btn = this;
+					var index = $('.selectaddress').index(btn);
+					
+					//alert('点击的是第'+index+'个按钮');
+				
+					var aid = $('.aid:eq('+index+')');
+				
+					//alert(aid.val());
+					//return false;
+					
+					
+					var id = aid.val();  
+					//var name = $("#name").val();
+					$.ajax('address/queryAddress',{
+						type:'post',
+						data:{"addressid":id},
+						dataType:'json',
+						success:function(address){
+							 //alert(address.name);
+ 							 //$("p").append(address.name);
+							 $("name").text(address.name);
+							  $("province").text(address.province);
+							   $("city").text(address.city);
+							    $("phone").text(address.phone);
+						}
+					});
+				})
+			})
+			
+	
+	
+	</script>
 	</head>
 
 	<body>
@@ -116,8 +160,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 									<a href="#">设为默认</a> -->
 <!-- 									<span class="new-addr-bar">|</span> -->
 <!-- 									<A HREF="#">编辑</A> -->
-									
-									
+								<div class="tc-btn am-btn ">	
+								 <form action="" >
+    	 						<input type="hidden" value="${addresscount.current.getAddressid()}" name="aid" class="aid"> 
+    	 						<input type="button"  class="selectaddress"  value="选择"/>
+    	 						</form>
+    	 						</div>
+    	 						<span class="new-addr-bar">|</span>
 							<div class="tc-btn am-btn ">
 							<a href="address/update_queryById?addressid=${addresscount.current.getAddressid()}" onclick="delClick(this);">编辑</a>
 							</div>
@@ -404,18 +453,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<p class="buy-footer-address">
 												<span class="buy-line-title buy-line-title-type">寄送至：</span>
 												<span class="buy--address-detail">
-								   <span class="province">湖北</span>省
-												<span class="city">武汉</span>市
-												<span class="dist">洪山</span>区
-												<span class="street">雄楚大道666号(中南财经政法大学)</span>
+								   <span class="province"><province></province></span>省
+												<span class="city"><city></city></span>市
+												
+												<span class="street"><detail></detail></span>
 												</span>
 												</span>
 											</p>
 											<p class="buy-footer-address">
-												<span class="buy-line-title">收货人：</span>
+												<span class="buy-line-title">收货人:</span>
 												<span class="buy-address-detail">   
-                                         <span class="buy-user">艾迪 </span>
-												<span class="buy-phone">15871145629</span>
+                                         <span class="buy-user"><name></name> </span><br>
+                                         <span class="buy-line-title">电话:</span>
+												<span class="buy-phone"><phone></phone></span>
 												</span>
 											</p>
 										</div>

@@ -8,6 +8,7 @@ import com.neusoft.domain.Product;
 import com.neusoft.domain.Shoppingcar;
 import com.neusoft.domain.ShoppingcarExample;
 import com.neusoft.servce.ShopCarService;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,13 +20,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 @Controller
-@RequestMapping({"/user"})
+@RequestMapping("/shopping")
 public class ShopCarController {
 	 
 	  @Autowired
@@ -33,6 +35,34 @@ public class ShopCarController {
 	  @Autowired
 	  ProductMapper productmapper;	 
 
+	  
+	  @RequestMapping("/where")
+	  public void where(String buyoradd,String productnum,String productid)
+			  {
+		//  System.out.println("get-----"+buyoradd);
+		//  System.out.println("buy".equals(buyoradd));
+		 // System.out.println(productnum);
+		  //System.out.println(productid);
+		  	//ModelAndView mav = new ModelAndView();
+			//mav.addObject("productnum", productnum);
+			//mav.addObject("productid",productid);
+			
+			if("buy".equals(buyoradd)){
+				//mav.setViewName("/home");
+				//add(productnum);
+			//	System.out.println("tobuy");
+			}
+			else if ("cart".equals(buyoradd)){
+			//	mav.setViewName("/home");
+				//System.out.println("tocart");
+			}
+			else{
+			//	mav.setViewName("/home");
+				//System.out.println("tohome");
+			}
+			//return mav;
+			 }
+	  
 	  @RequestMapping({"/enter"})
 	  public void query(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException
@@ -40,15 +70,18 @@ public class ShopCarController {
 	    request.getRequestDispatcher("/home/introduction.jsp").forward(request, response);
 	  }
 
+	  
 	  @RequestMapping({"/add"})
-	  public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	  public void addCart(HttpServletRequest request, HttpServletResponse response,String text_box) throws ServletException, IOException
 	  {
+		System.out.println(text_box);
 	    HttpSession session = request.getSession();
 	    session.setAttribute("userid", 1);
 	    request.setAttribute("productid", 2);
 	    request.setAttribute("amount", 10);
-	    shopCarService.addcart1(request, response);
+	    shopCarService.addcart1(request, response,session);
 	  }
+	  
 	  @RequestMapping({"/show"})
 	  public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session = request.getSession();

@@ -138,6 +138,22 @@ request.setAttribute("path", basePath);
 			</ul>
 		</dd>
 	</dl>
+		<dl id="menu-admin">
+			<dt> <i class="Hui-iconfont">&#xe62d;</i> 商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+				    <li><a data-href="product/queryall" data-title="商品管理" >查看商品</a></li>
+			</ul>
+		</dd>
+	</dl>
+	<dl id="menu-admin">
+			<dt> <i class="Hui-iconfont">&#xe62d;</i> 订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+				    <li><a data-href="order/queryall" data-title="订单管理" >查看订单</a></li>
+			</ul>
+		</dd>
+	</dl>
 		<!-- <dl id="menu-tongji">
 			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>

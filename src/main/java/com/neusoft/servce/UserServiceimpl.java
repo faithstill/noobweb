@@ -41,6 +41,9 @@ public class UserServiceimpl implements UserService{
 		return userMapper.loginValidate(user);
 	}
 	
-	
-
+	public User queryById(int userid)
+	{
+		User user = userMapper.selectByPrimaryKey(userid);
+		return user;
+	}
 }

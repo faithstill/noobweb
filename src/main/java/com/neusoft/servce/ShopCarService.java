@@ -5,10 +5,11 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.neusoft.domain.Shoppingcar;
 public interface ShopCarService {
-	public abstract void addcart1(HttpServletRequest paramHttpServletRequest, HttpServletResponse paramHttpServletResponse)
+	public abstract void addcart1(HttpServletRequest paramHttpServletRequest, HttpServletResponse paramHttpServletResponse,HttpSession session)
 		    throws ServletException, IOException;
 
 		  public abstract void showCart(HttpServletRequest paramHttpServletRequest, HttpServletResponse paramHttpServletResponse)

@@ -71,42 +71,6 @@ public class ShopCarServiceImpl implements ShopCarService {
 		return null;
 	}
 
-	public void addcart1(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		try {
-			int userid = (Integer) request.getSession().getAttribute("userid");
-			int productid = (Integer) request.getAttribute("productid");
-			int amount = (Integer) request.getAttribute("amount");
-			List<Shoppingcar> cartList = init(request, response);
-			int tag = 0;
-			for (Shoppingcar list : cartList) {
-				System.out.println(list);
-				if (list.getProductid() == productid) {
-					int quantity = list.getAmount();
-					amount += quantity;
-					list.setAmount(amount);
-
-					ShoppingcarExample example = new ShoppingcarExample();
-					ShoppingcarExample.Criteria cr = example.createCriteria();
-					cr.andProductidEqualTo(productid);
-					cr.andUseridEqualTo(userid);
-					shopcarmapper.updateByExample(list, example);
-					tag++;
-				}
-			}
-			if (tag == 0) {
-				Shoppingcar shopcar = new Shoppingcar();
-				shopcar.setUserid(userid);
-				shopcar.setProductid(productid);
-				shopcar.setAmount(amount);
-				shopcarmapper.insert(shopcar);
-			}
-			request.getRequestDispatcher("/home/succ_addcart.jsp").forward(
-					request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void showCart(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -201,6 +165,44 @@ public class ShopCarServiceImpl implements ShopCarService {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	@Override
+	public void addcart1(HttpServletRequest paramHttpServletRequest,
+			HttpServletResponse paramHttpServletResponse, HttpSession session)
+			throws ServletException, IOException {
+		try {
+			int userid = (Integer) paramHttpServletRequest.getSession().getAttribute("userid");
+			int productid = (Integer) paramHttpServletRequest.getAttribute("productid");
+			int amount = (Integer) paramHttpServletRequest.getAttribute("amount");
+			List<Shoppingcar> cartList = init(paramHttpServletRequest, paramHttpServletResponse);
+			int tag = 0;
+			for (Shoppingcar list : cartList) {
+				System.out.println(list);
+				if (list.getProductid() == productid) {
+					int quantity = list.getAmount();
+					amount += quantity;
+					list.setAmount(amount);
+					ShoppingcarExample example = new ShoppingcarExample();
+					ShoppingcarExample.Criteria cr = example.createCriteria();
+					cr.andProductidEqualTo(productid);
+					cr.andUseridEqualTo(userid);
+					shopcarmapper.updateByExample(list, example);
+					tag++;
+				}
+			}
+			if (tag == 0) {
+				Shoppingcar shopcar = new Shoppingcar();
+				shopcar.setUserid(userid);
+				shopcar.setProductid(productid);
+				shopcar.setAmount(amount);
+				shopcarmapper.insert(shopcar);
+			}
+			paramHttpServletRequest.getRequestDispatcher("/home/succ_addcart.jsp").forward(
+					paramHttpServletRequest, paramHttpServletResponse);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -32,14 +32,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
-							<a href="#" target="_top" class="h">亲，请登录</a>
-							<a href="#" target="_top">免费注册</a>
+						
+						<c:choose> 
+					     <c:when test="${loginflag=='1'}">    <!--如果 --> 
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						 </c:when>      
+						<c:when test="${loginflag=='0'}">    <!--如果 --> 
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:when>      
+					   	<c:otherwise>  <!--否则 -->    
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:otherwise> 
+						</c:choose>
+												
+						
+						<%-- <c:if test="${loginflag=='1'}">
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						</c:if>
+						<c:if test="${loginflag=='0'}">
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						</c:if> --%>
 						</div>
 					</div>
 				</ul>
 				<ul class="message-r">
 					<div class="topMessage home">
-						<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+						<div class="menu-hd"><a href="/home" target="_top" class="h">商城首页</a></div>
 					</div>
 					<div class="topMessage my-shangcheng">
 						<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -93,14 +114,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
+								<li class="index"><a href="home">首页</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("三只松鼠","UTF-8")%>">三只松鼠</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("百草味","UTF-8")%>">百草味</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("卫龙","UTF-8")%>">卫龙</a></li>
+                                <li class="qc last"><a href="href=search/bytype?search_brand=<%=java.net.URLEncoder.encode("良品铺子","UTF-8")%>">良品铺子</a></li>
 							</ul>
 						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的购物车
 						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
 						    </div>
 						</div>
@@ -147,13 +168,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 																	</a>
 																		<form method="post" action="search/bytypeandbrand">
 																			<input type="hidden" name="type" value="点心" />
-																			<dd><input type="submit" name="brand" value="西式蛋糕"/><dd>
-																			<dd><input type="submit" name="brand" value="夹心蛋糕"/></dd>
-																			<dd><input type="submit" name="brand" value="蛋糕"/></dd>
-																			<dd><input type="submit" name="brand" value="酥饼"/></dd>
-																			<dd><input type="submit" name="brand" value="麻薯"/></dd>
-																			<dd><input type="submit" name="brand" value="提拉米苏"/></dd>
-																			<dd><input type="submit" name="brand" value="软面包"/></dd>
+																			<dd><input type="submit" name="brand" value="皇族"/><dd>
+																			<dd><input type="submit" name="brand" value="迪乐司"/></dd>
+																			<dd><input type="submit" name="brand" value="丸京"/></dd>
+																			<dd><input type="submit" name="brand" value="统一"/></dd>
+																			<dd><input type="submit" name="brand" value="友谊牌"/></dd>
+																			
 																		</form>
 																	</dl>
 																</div>
@@ -505,7 +525,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="icon-sale one "></div>
 								<h4>特惠</h4>							
 							<div class="activityMain ">
-				
 								<img src="images/${product.mainPicture}"></img>
 	
 							</div>

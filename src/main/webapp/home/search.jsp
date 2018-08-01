@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.neusoft.domain.Product" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,6 +23,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<script type="text/javascript" src="basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript">
+		
+			$(function(){
+				//当页面加载完成，执行此function
+				//找到两个按钮，添加click点击事件
+				$(".btnType").click(function(){
+					var btnTypeValue = $(this).attr("btnType");
+					//此function 是当 点击按钮的时候触发
+					//1 根据按钮上的 btnType的值，改变  input  hidden类型的 value
+					$("#buyType").val(btnTypeValue);
+					//2 提交表单
+					//2.1 找到表单， 执行submit提交动作
+					$("#go").submit();
+				})
+				
+			})
+		</script>
 	</head>
 
 	<body>
@@ -30,14 +49,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
-					</div>
+						<c:if test="${loginflag=='1'}">
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						</c:if>
+						<c:if test="${loginflag=='0'}">
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						</c:if>
+						</div>
 				</div>
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+					<div class="menu-hd"><a href="/home" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
 					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -60,10 +84,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<div class="search-bar pr">
 					<a name="index_none_header_sysc" href="#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn"  value="搜索" index="1" type="submit">
-					</form>
+					<form method="post" action="search/byname">
+							<input id="searchInput" name="key" type="text" placeholder="搜索" autocomplete="off">
+							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+						</form>
 				</div>
 			</div>
 
@@ -75,14 +99,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
+								<li class="index"><a href="home">首页</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("三只松鼠","UTF-8")%>">三只松鼠</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("百草味","UTF-8")%>">百草味</a></li>
+                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("卫龙","UTF-8")%>">卫龙</a></li>
+                                <li class="qc last"><a href="href=search/bytype?search_brand=<%=java.net.URLEncoder.encode("良品铺子","UTF-8")%>">良品铺子</a></li>
 							</ul>
 						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的购物车
 						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
 						    </div>
 						</div>
@@ -93,16 +117,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">														
 							<div class="searchAbout">
-								<!-- <span class="font-pale">相关搜索：</span>
-								<a title="坚果" href="#">坚果</a>
-								<a title="瓜子" href="#">瓜子</a>
-								<a title="鸡腿" href="#">豆干</a> -->
-
+								
 							</div>
 							<ul class="select">
 								<p class="title font-normal">
-									<span class="fl">松子</span>
-									<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>
+								<c:if test="${by=='bytype'}">
+								<span class="total fl">搜索到<strong class="num">${num}</strong>件</span>
+								<span class="fl">${key1}</span>
+								</c:if> 
+								<c:if test="${by=='bybrand'}">
+								<span class="total fl">品牌:<strong class="num">${key1}</strong>共:&nbsp; ${num} &nbsp;件</span>
+								</c:if> 
+								<c:if test="${by=='bybrandandtype'}">
+								<span class="total fl">品牌:<strong class="num">${key1}</strong>下，共有  $&nbsp;{key2}  &nbsp;${num} &nbsp;件</span>
+								</c:if> 
+								 
+								<c:if test="${by=='byname'}">
+								<span class="total fl">关键字:<strong class="num">${key1}</strong>&nbsp;下，共有 &nbsp;${num} &nbsp;件</span>
+								</c:if> 
 								</p>
 								<div class="clear"></div>
 								<li class="select-result">
@@ -118,12 +150,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clear"></div>
                         </div>
 							<div class="search-content">
+							<form action="search/getlist" id="go">
+								<input type="hidden" id="buyType" name="howtoorder" value="price" />
+								<%-- <input type="hidden" name="list" value="${productlist}"> --%>
 								<div class="sort">
-									<li class="first"><a title="综合">综合排序</a></li>
-									<li><a title="销量">销量排序</a></li>
-									<li><a title="价格">价格优先</a></li>
-									<li class="big"><a title="评价" href="#">评价为主</a></li>
+								    <li class="first"><button type="button" class="btnType"   btnType="Comprehensive" >综合排序</button></li>
+								<!-- 	<li class="first"><a title="综合">综合排序</a></li> -->
+									<li><button type="button" class="btnType"   btnType="sales" >销量排序</button></li>
+									<li><button type="button" class="btnType"   btnType="price" >价格优先</button></li>
+									<li class="big"><button type="button" class="btnType"   btnType="comment" >评论为主</button></li>
+									<!-- <li><a title="销量">销量排序</a></li>
+									<li><a title="价格">价格优先</a></li> -->
+									<!-- <li class="big"><a title="评价" href="#">评价为主</a></li> -->
 								</div>
+								</form>
 								<div class="clear"></div>
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
 						<c:forEach items = "${productlist}" var="product" varStatus="productcount">
