@@ -213,6 +213,7 @@ public class OrderController {
 	
 	@RequestMapping("/add")
 	public ModelAndView order_add(HttpServletRequest request,HttpSession session,String addressid){
+		
 		int addressid1 =Integer.parseInt(request.getParameter("addressid"));
 		int userid = (Integer) session.getAttribute("userid");
 		int total_price=(Integer) session.getAttribute("pricefinal");
