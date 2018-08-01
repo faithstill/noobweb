@@ -502,7 +502,7 @@ a {
 						</div>
 						<div class="bd-commodityInfo">
 							<div class="info-pic">
-								<img src="images/${i.mainPicture}" />
+								<img src="images/${i.mainPicture}" width="70" height="70" />
 							</div>
 							<div class="info-text">
 								<a href="#">${i.productname}</a>
@@ -513,7 +513,7 @@ a {
 
 						</div>
 						<div class="bd-unitPrice">
-							<del>${i.remain}</del>
+							<del>${i.beforeP}</del>
 							<b>${i.price}</b>
 						</div>
 						<div class="bd-number">
@@ -557,9 +557,9 @@ a {
 			<div class="ft-del">
 				<input type="submit" id="dodeletesubmit" value="删除">
 			</div>
-			
+
 			<div class="ft-del">
-				<input type="submit" id="dodeletesubmit" value="移入收藏夹">
+				<input type="submit" id="coll_submit" value="移入收藏夹">
 			</div>
 
 			<div class="ft-selectedGoods">
