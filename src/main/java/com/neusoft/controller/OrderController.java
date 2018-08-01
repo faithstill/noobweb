@@ -109,7 +109,8 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/queryByUserid")
-	public ModelAndView queryByUserid(int userid) {
+	public ModelAndView queryByUserid(HttpSession session) {
+		Integer userid=(Integer) session.getAttribute("userid");
 		ModelAndView mav = new ModelAndView();
 		List<Orders> orderlist = orderService.queryByUser(userid);
 		List<Product> order_firstproduct = new ArrayList(); 
@@ -247,6 +248,7 @@ public class OrderController {
 		
 		order.setUserid(userid);
 		order.setAddressid(addressid);
+		order.setAmount(total_price);
 		int orderid = orderService.order_add(order);
 		ModelAndView mav = new ModelAndView();
 		//System.out.println(orderid);
