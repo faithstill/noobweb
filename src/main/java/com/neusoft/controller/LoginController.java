@@ -41,8 +41,8 @@ public class LoginController {
 				session.setAttribute("username",u.getUsername());
 				mav.setViewName("/home");	//支付界面
 			}
-		}else {							//用户名或密码不正确，还停留在登陆界面，并输出错误提示
-
+		}else {
+			//用户名或密码不正确，还停留在登陆界面，并输出错误提示
 			mav.setViewName("/login.jsp");
 			mav.addObject("status", "用户名或密码错误");
 		}
