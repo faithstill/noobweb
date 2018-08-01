@@ -130,6 +130,12 @@ public class ShopCarController {
 
 		 return result;
 	}
+	  @RequestMapping("/showcollection")
+	 public void  showcollect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{	
+		 shopCarService.showcollect(request, response);
+		 
+	}
 	  
 	  //查询到该用户的购物车信息
 	  @RequestMapping("/query")
@@ -183,3 +189,6 @@ public class ShopCarController {
 		}
 
 }
+
+
+

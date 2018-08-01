@@ -28,6 +28,9 @@ public interface ShopCarService {
 
 		public abstract void collectSomeCart(HttpServletRequest request,
 				HttpServletResponse response);
+
+		public abstract void showcollect(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException;
 		
 		
 		

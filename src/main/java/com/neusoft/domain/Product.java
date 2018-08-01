@@ -528,4 +528,6 @@ public class Product {
     public void setLikenum(Float likenum) {
         this.likenum = likenum;
     }
+
+
 }

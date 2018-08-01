@@ -421,7 +421,7 @@ a {
 		<ul class="message-r">
 			<div class="topMessage home">
 				<div class="menu-hd">
-					<a href="home/home.jsp" target="_top" class="h">商城首页</a>
+					<a href="/noobweb/home/home.jsp" target="_top" class="h">商城首页</a>
 				</div>
 			</div>
 			<div class="topMessage my-shangcheng">
@@ -439,7 +439,7 @@ a {
 			</div>
 			<div class="topMessage favorite">
 				<div class="menu-hd">
-					<a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span>
+					<a href="/noobweb/shopping/showcollection" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span>
 					</a>
 				</div>
 		</ul>
