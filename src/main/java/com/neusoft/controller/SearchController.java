@@ -35,11 +35,15 @@ public class SearchController {
 		mav.addObject("username",username);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping("/bytype")
 	public ModelAndView Searchbytype(HttpServletRequest request,HttpServletResponse rp,HttpSession session,
 			String orderpattern) throws IOException{
 		
 		init(session);
+		if (session.getAttribute("plist")!=null){
+			session.removeAttribute("plist");
+		}
 		String search_type=request.getParameter("search_type");
 		String Search_type=new String(search_type.getBytes("ISO-8859-1"),"UTF-8");
 		String orderpattern1=request.getParameter("orderpattern");
@@ -66,9 +70,13 @@ public class SearchController {
 		return mav;
 		}
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping("/bybrand")
 	public ModelAndView Searchbybrand(HttpServletRequest request,HttpServletResponse rp,HttpSession session) throws IOException{
 		init(session);
+		if (session.getAttribute("plist")!=null){
+			session.removeAttribute("plist");
+		}
 		String search_brand=request.getParameter("search_brand");
 		String Search_brand=new String(search_brand.getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println(Search_brand);
@@ -81,6 +89,7 @@ public class SearchController {
 		mav.addObject("num",productlist.size());
 		mav.addObject("by",by);
 		mav.addObject("key1",Search_brand);
+		session.setAttribute("plist",productlist);
 		mav.setViewName("/home/search.jsp");
 		return mav;
 		}
@@ -90,12 +99,17 @@ public class SearchController {
 		init(session);
 		List<Product> productlist = productService.queryBuTypeAndBrand(type, brand);
 		//System.out.println("product----"+product.getProductname());
+		if (session.getAttribute("plist")!=null){
+			session.removeAttribute("plist");
+		}
 		String by="bybrandandtype";
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("productlist",productlist);
 		mav.addObject("num",productlist.size());
 		mav.addObject("key1",type);
 		mav.addObject("key2",brand);
+		mav.addObject("by", by);
+		session.setAttribute("plist",productlist);
 		mav.setViewName("/home/search.jsp");
 		return mav;
 	}
@@ -104,12 +118,16 @@ public class SearchController {
 	public ModelAndView Searchbyname(String key,HttpSession session){
 		init(session);
 		List<Product> productlist = productService.queryByName(key);
+		if (session.getAttribute("plist")!=null){
+			session.removeAttribute("plist");
+		}
 		ModelAndView mav = new ModelAndView();
 		String by="byname";
 		mav.addObject("num",productlist.size());
 		mav.addObject("key1", key);
 		mav.addObject("productlist",productlist);
 		mav.addObject("by",by);
+		session.setAttribute("plist",productlist);
 		mav.setViewName("/home/search.jsp");
 		return mav;
 	}
@@ -129,9 +147,13 @@ public class SearchController {
 		init(session);
 		String howtogo=request.getParameter("howtoorder");
 		System.out.println(howtogo);
-		System.out.println("price".equals(howtogo));
+		System.out.println("sales".equals(howtogo));
 		List<Product> plist =(List<Product>)session.getAttribute("plist");
 		session.removeAttribute("plist");
+		if(plist==null){
+			mav.setViewName("/home");
+		}
+		else{
 		System.out.println(plist.size());
 		ModelAndView mav = new ModelAndView();
 		if(howtogo != null){
@@ -139,6 +161,7 @@ public class SearchController {
 				plist=productService.orderprice(plist);
 			}
 			else if ("sales".equals(howtogo)){
+				
 				plist=productService.ordersales(plist);
 			}
 		}
@@ -147,6 +170,7 @@ public class SearchController {
 		}
 		mav.addObject("productlist",plist);
 		mav.setViewName("/home/search.jsp");
+		}
 		return mav;
 	}
 }
