@@ -34,11 +34,20 @@ public class ShopCarController {
 	  ShopCarService shopCarService;
 	  @Autowired
 	  ProductMapper productmapper;	 
-
+	  
+	  public void init(HttpSession session){
+			int loginflag=0;//0为没登录，1为已经登录
+			Object username = session.getAttribute("username");
+			if(username!=null){
+				loginflag=1;	
+		}
+	  }
+	  
 	  
 	  @RequestMapping("/where")
 	  public ModelAndView where(String buyoradd,String productnum,String productid,HttpServletRequest request,
 			  HttpSession session){
+		  init(session);
 		  System.out.println("productlid-----"+productid);
 		  System.out.println("productnum----"+productnum);
 		  session.setAttribute("productid", productid);
@@ -69,6 +78,7 @@ public class ShopCarController {
 	  @RequestMapping({"/add"})
 	  public void addCart(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException
 	  {
+		init(session);
 	    int userid;
 	    String productid;
 	    String amount;
@@ -90,14 +100,14 @@ public class ShopCarController {
 	  }
 	  
 	  @RequestMapping({"/show"})
-	  public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    HttpSession session = request.getSession();
-	    session.setAttribute("userid", 1);
-	    shopCarService.showCart(request, response);
+	  public void showCart(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException {
+		  init(session);
+		  shopCarService.showCart(request, response);
 	  }
 	  @RequestMapping({"/delete"})//一条一条删
-	  public void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	  public void deleteCart(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException {
 		  ModelAndView mav = new ModelAndView();
+		  init(session);
 		  shopCarService.deleteCart(request, response);
 		 
 	  }
@@ -120,8 +130,9 @@ public class ShopCarController {
 	  @RequestMapping("/collection")
 	  @ResponseBody 
 	  //根据商品id删除
-	 public Map  collectSomeCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	 public Map  collectSomeCart(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException 
 	{	
+		  init(session);
 		  Map result = new HashMap();
 		  result.put("success", false);
 		 shopCarService.collectSomeCart(request, response);
