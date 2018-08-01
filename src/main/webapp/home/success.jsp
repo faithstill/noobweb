@@ -27,8 +27,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <ul class="message-l">
     <div class="topMessage">
      <div class="menu-hd">
-       <a href="#" target="_top" class="h">亲，请登录</a>
-       <a href="#" target="_top">免费注册</a>
+       <c:choose> 
+					     <c:when test="${loginflag=='1'}">    <!--如果 --> 
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						 </c:when>      
+						<c:when test="${loginflag=='0'}">    <!--如果 --> 
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:when>      
+					   	<c:otherwise>  <!--否则 -->    
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:otherwise> 
+						</c:choose>
      </div></div>
   </ul>
   <ul class="message-r">
@@ -49,9 +60,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <div class="search-bar pr">
         <a name="index_none_header_sysc" href="#"></a>       
-        <form>
-        <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-        <input id="ai-topsearch" class="submit" value="搜索" index="1" type="submit"></form>
+        <form method="post" action="search/byname">
+							<input id="searchInput" name="key" type="text" placeholder="搜索" autocomplete="off">
+							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+		</form>
     </div>     
 </div>
 

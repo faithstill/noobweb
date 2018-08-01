@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>搜索页面</title>
+		<title>我的收藏夹</title>
 
 		<link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="/noobweb/home/home.jsp" target="_top" class="h">商城首页</a></div>
+					<div class="menu-hd"><a href="/home/home.jsp"  target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
 					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -70,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 				</div>
 				<div class="topMessage favorite">
-					<div class="menu-hd"><a href="/noobweb/shopping/showcollection" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 			</ul>
 			</div>
 
@@ -96,15 +96,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <div class="search">
 			<div class="search-list">
 			<div class="nav-table">
-					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="long-title"><span class="all-goods">收藏夹</span></div>
 					   <div class="nav-cont">
-							<ul>
-								<li class="index"><a href="home">首页</a></li>
-                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("三只松鼠","UTF-8")%>">三只松鼠</a></li>
-                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("百草味","UTF-8")%>">百草味</a></li>
-                                <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("卫龙","UTF-8")%>">卫龙</a></li>
-                                <li class="qc last"><a href="href=search/bytype?search_brand=<%=java.net.URLEncoder.encode("良品铺子","UTF-8")%>">良品铺子</a></li>
-							</ul>
+						    <div class="nav-extra">
+						    	
+						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+						    </div>
 						</div>
 			</div>
 			
@@ -115,67 +112,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="searchAbout">
 								
 							</div>
-							<ul class="select">
-								<p class="title font-normal">
-								<c:if test="${by=='bytype'}">
-								<span class="total fl">搜索到<strong class="num">${num}</strong>件</span>
-								</c:if> 
-								<c:if test="${by=='bybrand'}">
-								<span class="total fl">品牌:<strong class="num">${key1}</strong>共:&nbsp; ${num} &nbsp;件</span>
-								</c:if> 
-								<c:if test="${by=='bybrandandtype'}">
-								<span class="total fl">品牌:<strong class="num">${key1}</strong>下，共有&nbsp;  ${key2}  &nbsp;${num} &nbsp;件</span>
-								</c:if> 
-								 
-								<c:if test="${by=='byname'}">
-								<span class="total fl">关键字:<strong class="num">${key1}</strong>&nbsp;下，共有 &nbsp;${num} &nbsp;件</span>
-								</c:if> 
-								</p>
-								<div class="clear"></div>
-								<li class="select-result">
-									<dl>
-										<dt>已选</dt>
-										<dd class="select-no"></dd>
-										<p class="eliminateCriteria">清除</p>
-									</dl>
-								</li>
-								<div class="clear"></div>
-								
-							</ul>
+							
 							<div class="clear"></div>
                         </div>
 							<div class="search-content">
 							<form action="search/getlist" id="go">
 								<input type="hidden" id="buyType" name="howtoorder" value="price" />
 								<%-- <input type="hidden" name="list" value="${productlist}"> --%>
-								<div class="sort">
-								    <li class="first"><button type="button" class="btnType"   btnType="Comprehensive" >综合排序</button></li>
-								<!-- 	<li class="first"><a title="综合">综合排序</a></li> -->
-									<li><button type="button" class="btnType"   btnType="sales" >销量排序</button></li>
-									<li><button type="button" class="btnType"   btnType="price" >价格优先</button></li>
-									<li class="big"><button type="button" class="btnType"   btnType="comment" >评论为主</button></li>
-								</div>
+								
 								</form>
 								<div class="clear"></div>
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-						<c:forEach items = "${productlist}" var="product" varStatus="productcount">
-									<li>
-									<a href="introduction/showbyid?porductid=${product.productid}">
-										<div class="i-pic limit">
-											<img src="images/${product.mainPicture}" />	
-											<p class="title fl">${product.productname}</p>
-											<p class="price fl">										
-												<b>¥</b> 
-												<strong>${product.price}</strong>
-											</p>
-											<p class="number fl">
-												<span>${product.brand}</span>&nbsp;
-												销量<span>${product.sales}</span>
-											</p>
-										</div>
-										</a>
-									</li>
-									</c:forEach>
+						<c:forEach items = "${collectionproductList}" var="product" varStatus="productcount">
+
+<li>
+<%-- <a href="introduction/showbyid?porductid=${product.productid}"> --%>
+	<div class="i-pic limit">
+		<img src="images/${product.mainPicture}" />	
+		<p class="title fl">${product.productname}</p>
+		<p class="price fl">										
+			<b>¥</b> 
+			<strong>${product.price}</strong>
+		</p>
+		<p class="number fl">
+			<span>${product.brand}</span>&nbsp;
+			销量<span>${product.sales}</span>
+		</p>
+	</div>
+	</a>
+</li>
+</c:forEach>
+						
 								</ul>
 							</div>
 
