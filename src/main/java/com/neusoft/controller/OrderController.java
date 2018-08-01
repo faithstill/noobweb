@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.neusoft.domain.Address;
 import com.neusoft.domain.OrderContent;
 import com.neusoft.domain.Orders;
+import com.neusoft.domain.Product;
 import com.neusoft.domain.User;
 import com.neusoft.servce.AddressService;
 import com.neusoft.servce.OrderContentService;
@@ -97,6 +98,45 @@ public class OrderController {
 		mav.addObject("orderlist",orderlist);
 		mav.addObject("order_firstproduct",order_firstproduct);
 		mav.setViewName("/admin/orders.jsp");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/queryByUserid")
+	public ModelAndView queryByUserid(int userid) {
+		ModelAndView mav = new ModelAndView();
+		List<Orders> orderlist = orderService.queryByUser(userid);
+		List<Product> order_firstproduct = new ArrayList(); 
+		List addresslist = new ArrayList();
+		List contentnumlist = new ArrayList();
+		for(Orders order:orderlist)
+		{
+			//int size = orderContentService.queryNumByOrder(order.getOrderid());
+			List<OrderContent> ordercontentlist = orderContentService.queryByOrder(order.getOrderid());
+			int num = ordercontentlist.size();
+			contentnumlist.add(num);
+//			for(OrderContent ordercontent:ordercontentlist)
+//			{
+//				System.out.println(ordercontent.getOrderid());
+//			}
+			int o_productid;
+			if(ordercontentlist.size()>0)
+			{
+				o_productid = ordercontentlist.get(0).getProductid();
+				Product productname = productService.queryByProductid(o_productid);
+				order_firstproduct.add(productname);
+			}
+			
+			Address address = addressService.address_queryById(order.getAddressid());
+			addresslist.add(address);
+		}
+	
+			//System.out.println(contentnumlist);
+		mav.addObject("contentnumlist",contentnumlist);
+		mav.addObject("addresslist",addresslist);
+		mav.addObject("orderlist",orderlist);
+		mav.addObject("order_firstproduct",order_firstproduct);
+		mav.setViewName("/person/order.jsp");
 		
 		return mav;
 	}
@@ -180,8 +220,11 @@ public class OrderController {
 		int orderid = orderService.order_add(order);
 		ModelAndView mav = new ModelAndView();
 		System.out.println(orderid);
+		
+		
 		mav.addObject("orderid",orderid);
-		mav.setViewName("/orderContent/add"); 
+		
+		
 		return mav;
 	}
 		
@@ -253,6 +296,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_finish(orderid);
 		//mav.setViewName("/order/query");
+		mav.setViewName("/success.jsp");
 		return mav;
 	}
 	
@@ -262,6 +306,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_redelivery(orderid);
 		//mav.setViewName("/order/query");
+		mav.setViewName("/success.jsp");
 		return mav;
 	}
 	
@@ -276,6 +321,15 @@ public class OrderController {
 			mav.setViewName("/success.jsp");
 		}
 
+		return mav;
+	}
+	
+	@RequestMapping("/cancel")
+	public ModelAndView order_cancel(int orderid)
+	{
+		ModelAndView mav = new ModelAndView();
+		boolean suc= orderService.order_cancel(orderid);
+		mav.setViewName("/success.jsp");
 		return mav;
 	}
 }

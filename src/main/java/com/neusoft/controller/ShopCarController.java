@@ -1,5 +1,6 @@
 package com.neusoft.controller;
 
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import com.neusoft.dao.ProductMapper;
 import com.neusoft.dao.ShoppingcarMapper;
 import com.neusoft.domain.Address;
@@ -92,7 +93,7 @@ public class ShopCarController {
 	  @RequestMapping({"/show"})
 	  public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session = request.getSession();
-	    session.setAttribute("userid", 1);
+	   // session.setAttribute("userid", 1);
 	    shopCarService.showCart(request, response);
 	  }
 	  @RequestMapping({"/delete"})//一条一条删
@@ -117,20 +118,7 @@ public class ShopCarController {
 		 return result;
 	}
 	  
-	  @RequestMapping("/collection")
-	  @ResponseBody 
-	  //根据商品id删除
-	 public Map  collectSomeCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{	
-		  Map result = new HashMap();
-		  result.put("success", false);
-		 shopCarService.collectSomeCart(request, response);
-		 
-		 
-		  result.put("success", true);
-
-		 return result;
-	}
+	
 	  
 	  //查询到该用户的购物车信息
 	  @RequestMapping("/query")
@@ -143,12 +131,19 @@ public class ShopCarController {
 			return mav;
 		}
 	  @RequestMapping("/jiesuan")
-		  @ResponseBody 
-	  public void pay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-		{	  
+	  public ModelAndView pay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	  {	  
 		  /* 
 		   * 结算接口，被结算产品的产品id和总价，可以利用此实现订单生成.
 		   */
+		  String price = request.getParameter("t_price");
+		  String arr[]= request.getParameterValues("checked");//这时接收到的就是一个数组了
+		  for(int i=0;i<arr.length;i++){
+			  System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
+			  System.out.println("aaaaaaaaaaaaa-"+arr[i]);
+		  }
+		  
+		  ModelAndView mav = new ModelAndView(); 
 		  if(request.getParameterValues("checkID[]")!=null)
 		  {
 			  if(request.getParameterValues("count[]")!=null)
@@ -159,28 +154,38 @@ public class ShopCarController {
 			  {
 				  System.out.println("没得到");
 			  }
-			  			  
-			/* List<Shoppingcar>cartList = shopCarService.init(request, response);//先调用init获取购物车信息
+						  
+			 List<Shoppingcar>cartList = shopCarService.init(request, response);//先调用init获取购物车信息
 			 String checkID[]  = request.getParameterValues("checkID[]");//获取勾选的商品行
 			 String totalprice = request.getParameter("totalprice"); //总价
+			 List<Product> cartproductList = new ArrayList();
 			 for(int i =0 ;i <checkID.length;i++)
 			  {			
 				 int Productid = cartList.get(Integer.parseInt( checkID[i])).getProductid();//获取待删除的产品id
-			      List cartproductList = new ArrayList();
+			      
 			      if (cartList != null)
-			        {
-			      for (Shoppingcar list : cartList)
-		          {
-		            Product p = productmapper.selectByPrimaryKey(Productid);//获取到产品信息
-		            cartproductList.add(p);		            
-		          }
-			        }
-			  }			
+			      {
+			    	  for (Shoppingcar list : cartList)
+			    	  {
+			    		  Product p = productmapper.selectByPrimaryKey(Productid);//获取到产品信息
+			    		  cartproductList.add(p);		            
+			    	  }
+			      }			
 			    shopCarService.deleteSomeCart(request, response);//点击结算时同时删除购物车内容，该操作一定要在订单提交后操作！！！！
-*/		  }
-		  else
+			  }
+			 for(Product p : cartproductList)
+			 {
+				 System.out.println("aaaaaaaaaaaproductid---------------------"+p.getProductid());
+			 }
+			 mav.addObject("cartproductList",cartproductList);
+			 mav.setViewName("address/payquery");
+
+		  }
+		  else{
 			  System.out.println("fffff");
-		 
-		}
+			  mav.setViewName("fail.jsp");
+		  }		
+		  return mav;
+	  }
 
 }

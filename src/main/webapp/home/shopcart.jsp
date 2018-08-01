@@ -490,6 +490,7 @@ a {
 		<div class="t-bd">
 
 			<ul>
+			<form action="shopping/jiesuan">
 				<c:forEach items="${cartproductList}" var="i" varStatus="is">
 					<%
 						int a=(Integer) request.getAttribute("a");
@@ -522,7 +523,7 @@ a {
 								value="${cartList.get(a).getAmount()}" /> <a href="javascript:;"
 								class="plus">+</a>
 						</div> <%
- 	double b =cartList1.get(a).getAmount()*cartproductList1.get(a).getPrice();
+ 								double b =cartList1.get(a).getAmount()*cartproductList1.get(a).getPrice();
  %>
 						<div class="bd-amount">
 							<b><%=b%></b>
@@ -568,9 +569,13 @@ a {
 			<div class="ft-totalPrice">
 				<span>合计（不含运费）：</span><b>￥0.00</b>
 
-				<form action="">
-					<input style="color:black" type="submit" id="dosubmit" value="结算">
-				</form>
+				
+<!-- 					<input type="hidden"  name="checkID[]"  /> -->
+					<input type="hidden" name="t_price" value="<%=%>"/>
+					${totalprice}totalprice
+					
+					<input style="color:black" type="submit" value="结算">
+		</form>
 
 			</div>
 		</div>
@@ -707,7 +712,7 @@ a {
 						total += parseFloat(price);
 					}
 				}
-
+				
 				return total.toFixed(2);
 
 			},
@@ -783,7 +788,8 @@ a {
 					"totalprice" : price
 				},
 				dataType : 'json',
-				success : function(address) {
+				success : function(data) {
+					
 				}
 			});
 		})
