@@ -793,11 +793,35 @@ a {
 			$("input[name='checked']:checked").each(function(i) {//把所有被选中的复选框的值存入数组
 				checkID[i] = $(this).val();
 			});
-
+			
+			
 			//alert('ready to delete ....');
 
 
 			$.ajax('shopping/deletesome', {
+				type : 'post',
+				data : {
+					"checkID" : checkID,
+				},
+				dataType : 'json',
+				success : function(data) {
+					if(data.success){
+						//alert('delete success ...')
+						window.location.href = window.location.href;
+					}
+				}
+			});
+		})
+		//执行移入收藏夹
+		$('#coll_submit').click(function() {
+			var checkID = [];//定义一个空数组 
+			$("input[name='checked']:checked").each(function(i) {//把所有被选中的复选框的值存入数组
+				checkID[i] = $(this).val();
+			});
+			//alert('ready to delete ....');
+
+
+			$.ajax('shopping/collection', {
 				type : 'post',
 				data : {
 					"checkID" : checkID,

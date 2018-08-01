@@ -1,8 +1,11 @@
 package com.neusoft.servce;
 
+import com.neusoft.dao.MycollectionMapper;
 import com.neusoft.dao.ProductMapper;
 import com.neusoft.dao.ShoppingcarMapper;
 import com.neusoft.dao.UserMapper;
+import com.neusoft.domain.Mycollection;
+import com.neusoft.domain.MycollectionExample;
 import com.neusoft.domain.Product;
 import com.neusoft.domain.ProductExample;
 import com.neusoft.domain.Shoppingcar;
@@ -34,6 +37,9 @@ public class ShopCarServiceImpl implements ShopCarService {
 
 	@Autowired
 	ShoppingcarMapper shopcarmapper;
+	
+	@Autowired
+	MycollectionMapper collectionmapper;
 
 	public List init(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -215,6 +221,34 @@ public class ShopCarServiceImpl implements ShopCarService {
 						paramHttpServletRequest, paramHttpServletResponse);
 			}
 		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	@Override
+	public void collectSomeCart(HttpServletRequest request,HttpServletResponse response) {		
+		try {
+			if (request.getParameterValues("checkID[]") != null) {
+				List<Shoppingcar> cartList = init(request, response);
+				int userid = (Integer) request.getSession().getAttribute("userid");
+				String checkID[] = request.getParameterValues("checkID[]");
+				for (int i = 0; i < checkID.length; i++) {
+					int Productid = cartList.get(Integer.parseInt(checkID[i])).getProductid();// 获取待删除的产品id
+					//将所选的商品移入收藏夹					
+					Mycollection mycollection = new Mycollection();
+					mycollection.setUserid(userid);
+					mycollection.setProductid(Productid);					
+					collectionmapper.insert(mycollection);
+					//从购物车列表里删除所选商品
+					deleteSomeCart(request, response);					
+				}
+				
+			}
+		}
+
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		

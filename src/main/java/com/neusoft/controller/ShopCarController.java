@@ -116,6 +116,21 @@ public class ShopCarController {
 		 return result;
 	}
 	  
+	  @RequestMapping("/collection")
+	  @ResponseBody 
+	  //根据商品id删除
+	 public Map  collectSomeCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{	
+		  Map result = new HashMap();
+		  result.put("success", false);
+		 shopCarService.collectSomeCart(request, response);
+		 
+		 
+		  result.put("success", true);
+
+		 return result;
+	}
+	  
 	  //查询到该用户的购物车信息
 	  @RequestMapping("/query")
 		public ModelAndView query(){
