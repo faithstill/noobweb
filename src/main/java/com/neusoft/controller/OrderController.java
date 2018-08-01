@@ -1,18 +1,32 @@
 package com.neusoft.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neusoft.domain.Address;
 import com.neusoft.domain.OrderContent;
 import com.neusoft.domain.Orders;
+import com.neusoft.domain.User;
+import com.neusoft.servce.AddressService;
 import com.neusoft.servce.OrderContentService;
 import com.neusoft.servce.OrderService;
+import com.neusoft.servce.ProductService;
+import com.neusoft.servce.UserService;
 
 
 @Controller
@@ -22,6 +36,12 @@ public class OrderController {
 	OrderService orderService;
 	@Autowired
 	OrderContentService orderContentService;
+	@Autowired
+	ProductService productService;
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping("/queryByUser")
 	public ModelAndView queryByUser(int userid) {
@@ -33,33 +53,116 @@ public class OrderController {
 		return mav;
 	}
 	
-	@RequestMapping("/query")
+	@RequestMapping("/queryall")
 	public ModelAndView query() {
 		ModelAndView mav = new ModelAndView();
 		List<Orders> orderlist = orderService.query();
-		//List<Map> order_ordercontent = new ArrayList(); 
+		List order_firstproduct = new ArrayList(); 
+		List addresslist = new ArrayList();
+		List userlist = new ArrayList();
+		List contentnumlist = new ArrayList();
 		for(Orders order:orderlist)
 		{
 			//int size = orderContentService.queryNumByOrder(order.getOrderid());
-			List<OrderContent> ordercontent = orderContentService.queryByOrder(order.getOrderid());
-			int o_productid = ordercontent.get(0).getProductid();
+			List<OrderContent> ordercontentlist = orderContentService.queryByOrder(order.getOrderid());
+			int num = ordercontentlist.size();
+			contentnumlist.add(num);
+//			for(OrderContent ordercontent:ordercontentlist)
+//			{
+//				System.out.println(ordercontent.getOrderid());
+//			}
+			int o_productid;
+			if(ordercontentlist.size()>0)
+			{
+				o_productid = ordercontentlist.get(0).getProductid();
+				String productname = productService.queryByProductid(o_productid).getProductname();
+				order_firstproduct.add(productname);
+			}
+			else
+			{
+				order_firstproduct.add("没选商品？？？啥玩意");
+			}
 			
+			String username = userService.queryById(order.getUserid()).getUsername();
+			userlist.add(username);		
+			Address address = addressService.address_queryById(order.getAddressid());
+			addresslist.add(address);
 		}
+	
+			//System.out.println(contentnumlist);
 		
+		mav.addObject("userlist",userlist);
+		mav.addObject("contentnumlist",contentnumlist);
+		mav.addObject("addresslist",addresslist);
 		mav.addObject("orderlist",orderlist);
-		mav.setViewName("/test.jsp");
+		mav.addObject("order_firstproduct",order_firstproduct);
+		mav.setViewName("/admin/orders.jsp");
 		
 		return mav;
+	}
+	
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder, WebRequest request) {
+//        //转换日期格式
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////        注册自定义的编辑器
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+//        
+//    }
+	
+	@RequestMapping("/queryByNameAndTime")
+	public ModelAndView queryByNameAndTime(String username,@DateTimeFormat(pattern="yyyy-MM-dd") Date begintime, @DateTimeFormat(pattern="yyyy-MM-dd") Date endtime) {
+		
+		ModelAndView mav = new ModelAndView();
+		//selectByUserandTime
+		List<Orders> orderlist = new ArrayList<Orders>();
+		orderlist = orderService.queryByNameAndTime(username,begintime,endtime);
+
+		List order_firstproduct = new ArrayList(); 
+		List addresslist = new ArrayList();
+		List userlist = new ArrayList();
+		for(Orders order:orderlist)
+		{
+			//int size = orderContentService.queryNumByOrder(order.getOrderid());
+			List<OrderContent> ordercontentlist = orderContentService.queryByOrder(order.getOrderid());
+//			for(OrderContent ordercontent:ordercontentlist)
+//			{
+//				System.out.println(ordercontent.getOrderid());
+//			}
+			int o_productid;
+			if(ordercontentlist.size()>0)
+			{
+				o_productid = ordercontentlist.get(0).getProductid();
+				String productname = productService.queryByProductid(o_productid).getProductname();
+				order_firstproduct.add(productname);
+			}
+			else
+			{
+				order_firstproduct.add("没选商品？？？啥玩意");
+			}
+			
+			String usernames = userService.queryById(order.getUserid()).getUsername();
+			userlist.add(usernames);		
+			Address address = addressService.address_queryById(order.getAddressid());
+			addresslist.add(address);
+		}
+		mav.addObject("userlist",userlist);
+		mav.addObject("addresslist",addresslist);
+		mav.addObject("orderlist",orderlist);
+		mav.addObject("order_firstproduct",order_firstproduct);
+		mav.setViewName("/admin/orders.jsp");
+			return mav;
 	}
 	
 	@RequestMapping("/queryByorderid")
 	public ModelAndView queryByorderid(int orderid) {
 		Orders order = orderService.order_queryById(orderid);
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("order",order);
-			//mav.setViewName("/home/introduction.jsp");
-			//mav.setViewName("/comment/querybyorderid");
-			return mav;
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("order",order);
+		//mav.setViewName("/home/introduction.jsp");
+		//mav.setViewName("/comment/querybyorderid");
+		return mav;
 	}
 	
 	@RequestMapping("/add")
@@ -98,8 +201,22 @@ public class OrderController {
 		//System.out.println("up-que");
 		ModelAndView mav = new ModelAndView();
 		Orders order =  orderService. order_queryById(orderid);
+		List<OrderContent> ordercontentlist = orderContentService.queryByOrder(order.getOrderid());
+		List<String> productnamelist = new ArrayList<String>();
+		for(OrderContent ordercontent :ordercontentlist){
+			
+		String productname = productService.queryByProductid(ordercontent.getProductid()).getProductname();
+		productnamelist.add(productname);
+		//System.out.println(productname);
+		}
+		String username = userService.queryById(order.getUserid()).getUsername();
+		Address address = addressService.address_queryById(order.getAddressid());
+		mav.addObject("productnamelist",productnamelist);
+		mav.addObject("address",address);
+		mav.addObject("username",username);
+		mav.addObject("ordercontentlist",ordercontentlist);
 		mav.addObject("update_order",order);
-		//mav.setViewName("/home/orderupdate.jsp"); 
+		mav.setViewName("/admin/orderupdate.jsp"); 
 		return mav;
 	}
 	
@@ -153,7 +270,12 @@ public class OrderController {
 	{
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_refund(orderid);
-		//mav.setViewName("/order/query");
+		Orders order = orderService.order_queryById(orderid);
+		if(order.getTradeStatus().equals("unpaid"))
+		{
+			mav.setViewName("/success.jsp");
+		}
+
 		return mav;
 	}
 }

@@ -252,6 +252,28 @@
       </if>
     </trim>
   </insert>
+  <select id="selectByUserandTime" resultMap="BaseResultMap">
+		select distinct
+		o.orderid, o.userid, o.addressid, o.amount,o.trade_status,o.order_time, o.pay_time, o.delivery_time, 
+    	o.finish_time, o.cancel_time, o.redelivery_time, o.refund_time
+    	from orders o,user u
+<!-- 		inner join user u on r.phone=u.phone -->
+<!-- 		inner join department d on u.department_id=d.d_id  -->
+		  <where>
+			<if test="username!=null and username!='' ">
+				and u.username = #{username}
+			</if>
+			<if test="username!=null and username!='' ">
+			and u.userid = o.userid
+			</if>
+			<if test="begintime!=null and begintime!='' and endtime!=null and endtime!= ''">
+				and o.order_time between #{begintime} and #{endtime}
+			</if>
+			
+			</where> 
+	</select>
+  
+  
   <select id="countByExample" parameterType="com.neusoft.domain.OrdersExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated

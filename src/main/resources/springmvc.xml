@@ -23,7 +23,10 @@
 	<context:property-placeholder location="classpath:jdbc.properties" />
 
 	<!-- 相当于是配置了 两个request handldermapping HandlerAdapter -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven>
+	
+	
+	</mvc:annotation-driven>
 
 	<!-- 当访问静态资源, 将请求 交给默认的 default -->
 	<mvc:default-servlet-handler />
@@ -93,9 +96,6 @@
 		<!-- 通知   使用 advice-ref="txAdvice" advice-ref="txAdvice"引用定义好的   通知 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
 	</aop:config>
-	
-	
-	
 	
 	
 	

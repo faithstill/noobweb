@@ -2,6 +2,8 @@ package com.neusoft.dao;
 
 import com.neusoft.domain.Orders;
 import com.neusoft.domain.OrdersExample;
+
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -93,4 +95,9 @@ public interface OrdersMapper {
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
     int updateByPrimaryKey(Orders record);
+    
+    
+    
+    
+    List<Orders> selectByUserandTime(@Param("username")String username,@Param("begintime")Date begintime,@Param("endtime")Date endtime);
 }
