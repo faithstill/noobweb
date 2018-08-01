@@ -126,6 +126,8 @@ public class ProductServiceImpl implements ProductService{
 			    return -1;
 			  }
 			   });  
+		for(int i=0;i<products.size();i++)
+			System.out.println(products.get(i).getPrice());
 		 System.out.println("排序后的结果："+products); 
 			}
 			return products;
@@ -157,6 +159,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List orderlikenum(List<Product> products) {
 		if (products.size()==0){
+			System.out.println("size=0");
 			return products;
 		}
 		else{	

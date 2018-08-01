@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.neusoft.domain.Product" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,6 +23,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<script type="text/javascript" src="basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript">
+		
+			$(function(){
+				//当页面加载完成，执行此function
+				//找到两个按钮，添加click点击事件
+				$(".btnType").click(function(){
+					var btnTypeValue = $(this).attr("btnType");
+					//此function 是当 点击按钮的时候触发
+					//1 根据按钮上的 btnType的值，改变  input  hidden类型的 value
+					$("#buyType").val(btnTypeValue);
+					//2 提交表单
+					//2.1 找到表单， 执行submit提交动作
+					$("#go").submit();
+				})
+				
+			})
+		</script>
 	</head>
 
 	<body>
@@ -87,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <li class="qc last"><a href="href=search/bytype?search_brand=<%=java.net.URLEncoder.encode("良品铺子","UTF-8")%>">良品铺子</a></li>
 							</ul>
 						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的购物车
 						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
 						    </div>
 						</div>
@@ -131,12 +150,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clear"></div>
                         </div>
 							<div class="search-content">
+							<form action="search/getlist" id="go">
+								<input type="hidden" id="buyType" name="howtoorder" value="price" />
+								<%-- <input type="hidden" name="list" value="${productlist}"> --%>
 								<div class="sort">
-									<li class="first"><a title="综合">综合排序</a></li>
-									<li><a title="销量">销量排序</a></li>
-									<li><a title="价格">价格优先</a></li>
-									<li class="big"><a title="评价" href="#">评价为主</a></li>
+								    <li class="first"><button type="button" class="btnType"   btnType="Comprehensive" >综合排序</button></li>
+								<!-- 	<li class="first"><a title="综合">综合排序</a></li> -->
+									<li><button type="button" class="btnType"   btnType="sales" >销量排序</button></li>
+									<li><button type="button" class="btnType"   btnType="price" >价格优先</button></li>
+									<li class="big"><button type="button" class="btnType"   btnType="comment" >评论为主</button></li>
+									<!-- <li><a title="销量">销量排序</a></li>
+									<li><a title="价格">价格优先</a></li> -->
+									<!-- <li class="big"><a title="评价" href="#">评价为主</a></li> -->
 								</div>
+								</form>
 								<div class="clear"></div>
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
 						<c:forEach items = "${productlist}" var="product" varStatus="productcount">
