@@ -75,7 +75,7 @@ public class ShopCarController {
 	    if(session.getAttribute("userid")!=null){
 	    	userid=(Integer) session.getAttribute("userid");
 	    	session.setAttribute("userid", userid);
-	    	System.out.println("productlid-----"+userid);
+	    	System.out.println("productlid--add---"+userid);
 	    }
 	    if(session.getAttribute("productid")!=null){
 	    	 productid=(String) session.getAttribute("productid");
@@ -84,7 +84,7 @@ public class ShopCarController {
 	    if(session.getAttribute("productnum")!=null){
 	    	 amount=(String) session.getAttribute("productnum");
 	    	 request.setAttribute("amount", amount);
-	 		System.out.println("productnum----"+amount);
+	 		System.out.println("productnum---add-"+amount);
 	    }
 	    shopCarService.addcart1(request, response,session);
 	  }
