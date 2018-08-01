@@ -92,7 +92,6 @@ public class ShopCarController {
 	  @RequestMapping({"/show"})
 	  public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session = request.getSession();
-	    session.setAttribute("userid", 1);
 	    shopCarService.showCart(request, response);
 	  }
 	  @RequestMapping({"/delete"})//一条一条删

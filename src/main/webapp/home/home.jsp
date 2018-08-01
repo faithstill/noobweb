@@ -656,7 +656,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					</div>
 					<div id="shopCart " class="item ">
-						<a href="# ">
+						<a href="shopping/show" >
 							<span class="message "></span>
 						</a>
 						<p>

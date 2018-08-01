@@ -41,7 +41,7 @@ public class ShopCarServiceImpl implements ShopCarService {
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('用户未登录或登录已过期，请重新登录，点确定后自动跳转到登录界面')</script>");
-				out.println("<script>window.location.href='/noobweb/home/login.html';</script>");
+				out.println("<script>window.location.href='/noobweb/login.jsp';</script>");
 				out.flush();
 				out.close();
 				System.out.println("未登录");
