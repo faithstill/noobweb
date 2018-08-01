@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>付款失败页面</title>
+<title>成功界面</title>
 <link rel="stylesheet"  type="text/css" href="AmazeUI-2.4.2/assets/css/amazeui.css"/>
 <link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
 <link href="basic/css/demo.css" rel="stylesheet" type="text/css" />
@@ -73,8 +73,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="take-delivery">
  <div class="status">
-   <h1>sorry,穷鬼你没钱了！</h1>
+   <h1>操作成功！</h1>
   </div>
+  <a href="/home" >返回首页</a>
 </div>
 
 

@@ -11,11 +11,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>付款成功页面</title>
-<link rel="stylesheet"  type="text/css" href="../AmazeUI-2.4.2/assets/css/amazeui.css"/>
-<link href="../AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
-<link href="../basic/css/demo.css" rel="stylesheet" type="text/css" />
-<link href="../css/sustyle.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../basic/js/jquery-1.7.min.js"></script>
+<link rel="stylesheet"  type="text/css" href="AmazeUI-2.4.2/assets/css/amazeui.css"/>
+<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+<link href="basic/css/demo.css" rel="stylesheet" type="text/css" />
+<link href="css/sustyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="basic/js/jquery-1.7.min.js"></script>
 
 </head>
 
@@ -27,8 +27,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <ul class="message-l">
     <div class="topMessage">
      <div class="menu-hd">
-       <a href="#" target="_top" class="h">亲，请登录</a>
-       <a href="#" target="_top">免费注册</a>
+       <c:choose> 
+					     <c:when test="${loginflag=='1'}">    <!--如果 --> 
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						 </c:when>      
+						<c:when test="${loginflag=='0'}">    <!--如果 --> 
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:when>      
+					   	<c:otherwise>  <!--否则 -->    
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:otherwise> 
+						</c:choose>
      </div></div>
   </ul>
   <ul class="message-r">
@@ -42,16 +53,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--悬浮搜索框-->
 
 <div class="nav white">
-	<div class="logo"><img src="../images/logo.png" /></div>
+	<div class="logo"><img src="images/logo.png" /></div>
     <div class="logoBig">
-      <li><img src="../images/logobig.png" /></li>
+      <li><img src="images/logobig.png" /></li>
     </div>
     
     <div class="search-bar pr">
         <a name="index_none_header_sysc" href="#"></a>       
-        <form>
-        <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-        <input id="ai-topsearch" class="submit" value="搜索" index="1" type="submit"></form>
+        <form method="post" action="search/byname">
+							<input id="searchInput" name="key" type="text" placeholder="搜索" autocomplete="off">
+							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+		</form>
     </div>     
 </div>
 
@@ -75,8 +87,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </ul>
      <div class="option">
        <span class="info">您可以</span>
-        <a href="../person/order.html" class="J_MakePoint">查看<span>已买到的宝贝</span></a>
-        <a href="../person/orderinfo.html" class="J_MakePoint">查看<span>交易详情</span></a>
+        <a href="person/order.html" class="J_MakePoint">查看<span>已买到的宝贝</span></a>
+        <a href="person/orderinfo.html" class="J_MakePoint">查看<span>交易详情</span></a>
      </div>
     </div>
   </div>
