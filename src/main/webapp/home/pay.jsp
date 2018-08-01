@@ -60,6 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  $("province").text(address.province);
 							   $("city").text(address.city);
 							    $("phone").text(address.phone);
+							    $("#getaddress").val(address.addressid);
 						}
 					});
 				})
@@ -399,7 +400,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 									<div id="holyshit269" class="submitOrder">
 										<div class="go-btn-wrap">
-											<a id="J_Go" href="order/add?address=" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+										
+										<form action="order/add">
+										  <input id="getaddress" type="hidden" name="addressid"/>
+										  <input type="hidden" name="total_price" value="${pricefinal}" />
+								
+										  <input type="submit" value="提交订单"   />
+										</form>
 										</div>
 									</div>
 									<div class="clear"></div>
@@ -443,7 +450,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<hr/>
 
 				<div class="am-u-md-12">
-					<form class="am-form am-form-horizontal" method="post" action="address/add">
+					<form class="am-form am-form-horizontal" method="post" action="address/payadd">
 				<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
 								<div class="am-btn am-btn-danger close">X</div>

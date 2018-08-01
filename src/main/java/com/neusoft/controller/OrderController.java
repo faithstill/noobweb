@@ -212,19 +212,27 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/add")
-	public ModelAndView order_add(HttpServletRequest request,HttpSession session,String addressid){
-		int addressid1 =Integer.parseInt(request.getParameter("addressid"));
-		int userid = (Integer) session.getAttribute("userid");
-		int total_price=(Integer) session.getAttribute("pricefinal");
+	public ModelAndView order_add(HttpServletRequest request,HttpSession session,int addressid,double total_price){
+		//System.out.println("aaaaaaaaaaaaaaadresss------------"+addressid);
+		// addressid1 =Integer.parseInt(request.getParameter("addressid"));
+		//int userid = Integer.parseInt((String) session.getAttribute("userid"));
+		//int userid = Integer.parseInt(jtable.getValueAt(xx,xx).toString();
+		//int userid = 1;
+		Integer userid=(Integer) session.getAttribute("userid");
+
 		List<littleorder> llist= new ArrayList();
 		llist= (List<littleorder>)session.getAttribute("lorderlist");
-		List productlist=new ArrayList();
-		List productamountlist=new ArrayList();
+		List<Integer> productlist=new ArrayList();
+		List<Integer> productamountlist=new ArrayList();
 
 		for(int i=0;i<llist.size();i++){
 			productlist.add(llist.get(i).getProductid());
+			System.out.print("id --- "+llist.get(i).getProductid());
 			productamountlist.add(llist.get(i).getNumber());
+			System.out.println("-------------amount --- "+llist.get(i).getNumber());
 		}
+		
+		
 		
 		
 		/*
@@ -236,13 +244,21 @@ public class OrderController {
 		Orders order = new Orders();
 		
 		order.setUserid(userid);
-		order.setAddressid(addressid1);
+		order.setAddressid(addressid);
 		int orderid = orderService.order_add(order);
 		ModelAndView mav = new ModelAndView();
-		System.out.println(orderid);
-		
+		//System.out.println(orderid);
+		for(int i=0;i<productlist.size();i++)
+		{
+			OrderContent orderContent = new OrderContent();
+			orderContent.setOrderid(orderid);
+			orderContent.setProductid(productlist.get(i));
+			orderContent.setAmount(productamountlist.get(i));
+			orderContentService.ordercontent_add(orderContent);
+		}
 		
 		mav.addObject("orderid",orderid);
+		mav.setViewName("/home/succ_nb.jsp");
 		
 		
 		return mav;

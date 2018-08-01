@@ -107,8 +107,11 @@ public class AddressController {
 	}
 	
 	@RequestMapping("/add")
-	public ModelAndView address_add(Address address){
+	public ModelAndView address_add(Address address,HttpSession session){
 		//Address t_address = new Address(address.getUserid(),address.getName(),address.getPhone(),address.getProvince(),address.getCity(),address.getDetailedaddress());
+		if(session.getAttribute("userid")!=null){
+			address.setUserid(Integer.parseInt((String) session.getAttribute("userid")));
+		}
 		System.out.println("id:"+address.getUserid());
 		System.out.println("name:"+address.getName());
 		System.out.println("phone:"+address.getPhone());
