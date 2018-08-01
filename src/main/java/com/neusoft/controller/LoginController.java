@@ -30,7 +30,6 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 
 		User u = userService.loginValidate(user);		//loginValidate函数只用到了user中的username和password
-		System.out.println("userid-----:"+user.getUserid());
 		System.out.println(u.getFlag());
 		if (u != null) {				//用户名和密码均正确，判断用户类型
 			if (u.getFlag() == 0) {	//flag==0，代表管理员
@@ -38,11 +37,12 @@ public class LoginController {
 				mav.setViewName("/admin.jsp");		//后台界面
 			} else {				//flag==1，代表非管理员，即客户
 				session.setAttribute("userid",u.getUserid());
+				System.out.println("userid------"+u.getUserid());
 				session.setAttribute("username",u.getUsername());
 				mav.setViewName("/home");	//支付界面
 			}
-		}else {							//用户名或密码不正确，还停留在登陆界面，并输出错误提示
-
+		}else {
+			//用户名或密码不正确，还停留在登陆界面，并输出错误提示
 			mav.setViewName("/login.jsp");
 			mav.addObject("status", "用户名或密码错误");
 		}

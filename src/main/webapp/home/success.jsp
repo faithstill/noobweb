@@ -1,13 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>付款成功页面</title>
 <link rel="stylesheet"  type="text/css" href="../AmazeUI-2.4.2/assets/css/amazeui.css"/>
 <link href="../AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
 <link href="../basic/css/demo.css" rel="stylesheet" type="text/css" />
-
 <link href="../css/sustyle.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../basic/js/jquery-1.7.min.js"></script>
 
@@ -58,11 +64,11 @@
    <h2>您已成功付款</h2>
    <div class="successInfo">
      <ul>
-       <li>付款金额<em>¥9.90</em></li>
+       <li>付款金额<em>${amount}</em></li>
        <div class="user-info">
-         <p>收货人：艾迪</p>
-         <p>联系电话：15871145629</p>
-         <p>收货地址：湖北省 武汉市 武昌区 东湖路75号众环大厦</p>
+         <p>收货人：${address.name}</p>
+         <p>联系电话：${address.phone}</p>
+         <p>收货地址：${address.province}  &nbsp;${address.city}&nbsp;${address.detailedaddress}&nbsp;</p>
        </div>
              请认真核对您的收货信息，如有错误请联系客服
                                

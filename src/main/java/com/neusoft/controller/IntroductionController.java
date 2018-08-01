@@ -33,7 +33,7 @@ public class IntroductionController {
 		if(username!=null){
 			loginflag=1;	
 	}
-  		int ComentlistLen=2;
+  		int ComentlistLen=10;
   		String product_id =request.getParameter("porductid");
   		String  Commentpage=request.getParameter("Commentpage");
   		if (Commentpage == null){
@@ -43,14 +43,14 @@ public class IntroductionController {
 		int Commentpage1=Integer.parseInt(Commentpage);
 		List<Comment> commentlist_div=new ArrayList();
 		List<Comment> commentlist = commentService.queryByProductid(id);
+		int Csize= commentlist.size();
 		Product product = productService.queryByProductid(id);
 	//	System.out.println("product----"+product.getProductname());
 		ModelAndView mav = new ModelAndView();
-		
 		mav.addObject("product",product);
 		mav.addObject("loginflag",loginflag);
 		mav.addObject("username",username);
-		
+		mav.addObject("commentlistsize",Csize);
 		if (commentlist!=null&&commentlist.size()>Commentpage1*ComentlistLen) {     
 		for(int i =(Commentpage1-1)*ComentlistLen;i<Commentpage1*ComentlistLen;i++){
 				commentlist_div.add(commentlist.get(i));
@@ -65,6 +65,10 @@ public class IntroductionController {
 			}
 		mav.addObject("commentlist",commentlist_div);
 		mav.addObject("Commentpage",Commentpage1);
+		
+		
+		
+		
 		mav.setViewName("/home/introduction.jsp");
 		return mav;
  }

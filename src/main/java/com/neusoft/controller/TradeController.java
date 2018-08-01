@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.neusoft.domain.Address;
 import com.neusoft.domain.OrderContent;
 import com.neusoft.domain.Orders;
 import com.neusoft.domain.User;
+import com.neusoft.servce.AddressService;
 import com.neusoft.servce.OrderContentService;
 import com.neusoft.servce.OrderService;
 import com.neusoft.servce.ProductService;
@@ -26,11 +28,15 @@ public class TradeController {
 	
 	@Autowired
 	ProductService productService;
+	
 	@Autowired
 	OrderService orderService;
 	
 	@Autowired
 	OrderContentService ordercontentService;
+	
+	@Autowired
+	AddressService addressService;
 
 
 	@RequestMapping("/pay")
@@ -50,8 +56,13 @@ public class TradeController {
 			user.setMoney(user.getMoney()-order.getAmount());
 			userService.updateUser(user);
 			orderService.order_pay(orderid);
-			mav.addObject("orderid", orderid);
-			mav.setViewName("/paysuccess.jsp");
+			
+			int addressid=order.getAddressid();
+			Address address=addressService.address_queryById(addressid);
+			
+			mav.addObject("address",address);
+			mav.addObject("amount",order.getAmount());
+			mav.setViewName("/home/success.jsp");
 		}
 		}
 		else{

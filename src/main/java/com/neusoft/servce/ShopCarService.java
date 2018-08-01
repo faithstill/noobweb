@@ -19,5 +19,16 @@ public interface ShopCarService {
 		    throws ServletException, IOException;
 
 		public abstract List<Shoppingcar> queryByUser(int userid);
+
+		public abstract void deleteSomeCart(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException;
+
+		public abstract List init(HttpServletRequest request,
+				HttpServletResponse response);
+
+		public abstract void collectSomeCart(HttpServletRequest request,
+				HttpServletResponse response);
+		
+		
 		
 }

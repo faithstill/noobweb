@@ -1,448 +1,843 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.neusoft.domain.*" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.neusoft.domain.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+<base href="<%=basePath%>">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>购物车页面</title>
+<title>购物车页面</title>
+<link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet"
+	type="text/css" />
+<link href="basic/css/demo.css" rel="stylesheet" type="text/css" />
+<link href="css/cartstyle.css" rel="stylesheet" type="text/css" />
+<link href="css/optstyle.css" rel="stylesheet" type="text/css" />
 
-		<link href="../AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-		<link href="../basic/css/demo.css" rel="stylesheet" type="text/css" />
-		<link href="../css/cartstyle.css" rel="stylesheet" type="text/css" />
-		<link href="../css/optstyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+<script charset="UTF-8">
+	function G(id) {
+		return document.getElementById(id);
+	};
+	function GC(t) {
+		return document.createElement(t);
+	};
+	String.prototype.trim = function() {
+		return this.replace(/(^\s*)|(\s*$)/g, '');
+	};
+	function isIE() {
+		return (document.all && window.ActiveXObject && !window.opera) ? true
+				: false;
+	}
+	var loginDivWidth = 300;
+	var pid;
+	var sign_in_flow = '<div style="background:#FF9900;">确认框</div><div>  </div><br><br>'
 
-		<script type="text/javascript" src="../js/jquery.js"></script>
-		<!-- <script type="text/javascript" src="../js/user.js"></script>  -->
-     <script >
-     function G(id){
-    return document.getElementById(id);
-};
-function GC(t){
-   return document.createElement(t);
-};
-String.prototype.trim = function(){
-          return this.replace(/(^\s*)|(\s*$)/g, '');
-};
-function isIE(){
-      return (document.all && window.ActiveXObject && !window.opera) ? true : false;
-} 
-     var loginDivWidth = 300;
-     var pid;
-var sign_in_flow = '<div style="background:#FF9900;">assure</div><div>  </div><br><br>'
-      
-       + '</div><div>do you want to delete?</div><br>'
-     /*    + '</div><div><a href="/ssm/user/delete?productid=pid">yes</a> '  */
-        +'</div><div><a href="#" onclick="searchCurriculum()">yes</a>' 
-        + '   <input type="button" value="cancel" onclick="cancelSign();"/></div><br>'
-        
-        
-        
-        function searchCurriculum(){
-        var stateObject = {};
-       var title = "";
-      var newUrl = "/noobweb/user/delete?productid="+pid;
-    history.pushState(stateObject,title,newUrl);
-    window.location.reload ( ); 
-           // window.location.href("/ssm/user/delete?productid="+pid);
-        }
-function loadSignInFlow(){
-   G("sign_div").innerHTML = sign_in_flow;
-    G("sign_email").focus();
-};
-function cancelSign(){
-    G("sign_div").style.display = 'none';
-    G("cover_div").style.display = 'none';
-   document.body.style.overflow = '';
-};
-function popCoverDiv(){
-   if (G("cover_div")) {
-    G("cover_div").style.display = '';
-   } else {
-    var coverDiv = GC('div');
-    document.body.appendChild(coverDiv);
-    coverDiv.id = 'cover_div';
-    with(coverDiv.style) {
-     position = 'absolute';
-     background = '#CCCCCC';
-     left = '0px';
-     top = '0px';
-     var bodySize = getBodySize();
-     width = bodySize[0] + 'px'
-     height = bodySize[1] + 'px';
-     zIndex = 98;
-     if (isIE()) {
-      filter = "Alpha(Opacity=60)";
-     } else {
-      opacity = 0.6;
-     }
-    }
-   }
+			+ '</div><div>确定从购物车删除该商品吗？</div><br>'
+			/*    + '</div><div><a href="/ssm/shopping/delete?productid=pid">yes</a> '  */
+			+ '</div><div><input type="button" value="是" onclick="searchCurriculum();">'
+			+ '   <input type="button" value="否" onclick="cancelSign();"/></div><br>'
+	function searchCurriculum() {
+		var stateObject = {};
+		var title = "";
+		var newUrl = "/noobweb/shopping/delete?productid=" + pid;
+		history.pushState(stateObject, title, newUrl);
+		window.location.reload();
+	}
+	function loadSignInFlow() {
+		G("sign_div").innerHTML = sign_in_flow;
+		G("sign_email").focus();
+	};
+	function cancelSign() {
+		G("sign_div").style.display = 'none';
+		G("cover_div").style.display = 'none';
+		document.body.style.overflow = '';
+	};
+	function popCoverDiv() {
+		if (G("cover_div")) {
+			G("cover_div").style.display = '';
+		} else {
+			var coverDiv = GC('div');
+			document.body.appendChild(coverDiv);
+			coverDiv.id = 'cover_div';
+			with (coverDiv.style) {
+				position = 'absolute';
+				background = '#CCCCCC';
+				left = '0px';
+				top = '0px';
+				var bodySize = getBodySize();
+				width = bodySize[0] + 'px'
+				height = bodySize[1] + 'px';
+				zIndex = 98;
+				if (isIE()) {
+					filter = "Alpha(Opacity=60)";
+				} else {
+					opacity = 0.6;
+				}
+			}
+		}
+	}
+	function getBodySize() {
+		var bodySize = [];
+		with (document.documentElement) {
+			bodySize[0] = (scrollWidth > clientWidth) ? scrollWidth
+					: clientWidth;
+			bodySize[1] = (scrollHeight > clientHeight) ? scrollHeight
+					: clientHeight;
+		}
+		return bodySize;
+	}
+	function popSign(isLogin) {
+		if (G("sign_div")) {
+			G("sign_div").style.display = '';
+		} else {
+			var signDiv = GC('div');
+			document.body.appendChild(signDiv);
+			signDiv.id = 'sign_div';
+			signDiv.align = "center";
+			signDiv.onkeypress = function(evt) {
+				var e = window.event ? window.event : evt;
+				if (e.keyCode == 13 || e.which == 13) {
+					if (G("sign_button")) {
+						G("sign_div").focus();
+						G("sign_button").click();
+					}
+				}
+			};
+			with (signDiv.style) {
+				position = 'absolute';
+				left = (document.documentElement.clientWidth - loginDivWidth)
+						/ 2 + 'px';
+				top = (document.documentElement.clientHeight - 300) / 2 + 'px';
+				width = loginDivWidth + 'px';
+				zIndex = 99;
+				background = '#FFFFFF';
+				border = '#66CCFF solid 1px';
+			}
+		}
+		if (isLogin) {
+			G("sign_div").innerHTML = sign_in_flow;
+		} else {
+			G("sign_div").innerHTML = change_pwd_flow;
+		}
+
+	}
+	function popSignFlow(isLogin) {
+
+		pid = isLogin;
+		popCoverDiv();
+		popSign(isLogin);
+		document.body.style.overflow = "hidden";
+
+		if (isLogin) {
+			G("sign_email").focus();
+		} else {
+			G("old_pwd").focus();
+		}
+	}
+</script>
+<style>
+* {
+	margin: 0;
+	padding: 0
 }
-function getBodySize(){
-   var bodySize = [];
-   with(document.documentElement) {
-    bodySize[0] = (scrollWidth>clientWidth)?scrollWidth:clientWidth;
-    bodySize[1] = (scrollHeight>clientHeight)?scrollHeight:clientHeight;
-   }
-   return bodySize;
-} 
-function popSign(isLogin){
-   if (G("sign_div")) {
-    G("sign_div").style.display = '';
-   } else {
-    var signDiv = GC('div');
-    document.body.appendChild(signDiv);
-    signDiv.id = 'sign_div';
-    signDiv.align = "center";
-    signDiv.onkeypress = function(evt){
-          var e = window.event?window.event:evt;
-          if (e.keyCode==13 || e.which==13) {
-           if (G("sign_button")) {
-            G("sign_div").focus();
-            G("sign_button").click();
-           }
-          }
-         };
-    with (signDiv.style) {
-     position = 'absolute';
-     left = (document.documentElement.clientWidth - loginDivWidth)/2 + 'px';
-     top = (document.documentElement.clientHeight - 300)/2 + 'px';
-     width = loginDivWidth + 'px';
-     zIndex = 99;
-     background = '#FFFFFF';
-     border = '#66CCFF solid 1px';
-    }
-   }
-   if(isLogin) {
-    G("sign_div").innerHTML = sign_in_flow;
-   } else {
-    G("sign_div").innerHTML = change_pwd_flow;
-   }
-  
+
+body {
+	font: 12px "Microsoft YaHei";
 }
-function popSignFlow(isLogin) {
 
-
-    pid = isLogin;
-   popCoverDiv();  
-   popSign(isLogin);  
-   document.body.style.overflow = "hidden";
-     
-      if(isLogin) {
-       G("sign_email").focus();
-      } else {
-       G("old_pwd").focus();
-      }
+ul {
+	list-style: none;
 }
-     </script>    
-	</head>
 
-	<body>
-	 <% List<Product>cartproductList1 =  (List<Product>) request.getAttribute("cartproductList");
-      List<Shoppingcar>cartList1 =  ( List<Shoppingcar>) request.getAttribute("cartList"); %> 
-		<!--顶部导航条 -->
-		<div class="am-container header">
-			<ul class="message-l">
-				<div class="topMessage">
-					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
-					</div>
-				</div>
-			</ul>
-			<ul class="message-r">
-				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
-				</div>
-				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-				</div>
-				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-				</div>
-				<div class="topMessage favorite">
-					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
-			</ul>
-			</div>
+a {
+	text-decoration: none;
+}
 
-			<!--悬浮搜索框-->
+.data-table {
+	width: 990px;
+	margin: 50px auto;
+}
 
-			<div class="nav white">
-				<div class="logo"><img src="../images/logo.png" /></div>
-				<div class="logoBig">
-					<li><img src="../images/logobig.png" /></li>
-				</div>
+.data-table input[type=checkbox] {
+	position: relative;
+	top: 2px;
+	right: 5px;
+}
 
-				<div class="search-bar pr">
-					<a name="index_none_header_sysc" href="#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-					</form>
-				</div>
-			</div>
+.t-hd {
+	border-top: 2px solid #e6e6e6;
+	overflow: hidden;
+	padding: 20px 15px;
+}
 
-			<div class="clear"></div>
+.hd-check {
+	width: 120px;
+}
 
-			<!--购物车 -->
-			<div class="concent">
-				<div id="cartTable">
-					<div class="cart-table-th">
-						<div class="wp">
-							<div class="th th-chk">
-								<div id="J_SelectAll1" class="select-all J_SelectAll">
+.hd-commodityInfo {
+	width: 400px;
+}
 
-								</div>
-							</div>
-							<div class="th th-item">
-								<div class="td-inner">商品信息</div>
-							</div>
-							<div class="th th-price">
-								<div class="td-inner">单价</div>
-							</div>
-							<div class="th th-amount">
-								<div class="td-inner">数量</div>
-							</div>
-							<div class="th th-sum">
-								<div class="td-inner">金额</div>
-							</div>
-							<div class="th th-op">
-								<div class="td-inner">操作</div>
-							</div>
-						</div>
-					</div>
+.hd-unitPrice {
+	width: 120px;
+}
 
-	                
-					<div class="clear"></div>
-					<tr class="item-list">
-						<div class="bundle  bundle-last ">
-							<div class="bundle-hd">
-								<div class="bd-promos">
-									<div class="bd-has-promo">已享优惠:<span class="bd-has-promo-content">省￥19.50</span>&nbsp;&nbsp;</div>
-									<div class="act-promo">
-										<a href="#" target="_blank">第二支半价，第三支免费<span class="gt">&gt;&gt;</span></a>
-									</div>
-									<span class="list-change theme-login">编辑</span>
-								</div>
-							</div>
-			
-							<c:forEach  items="${cartproductList}" var="i" > 
-							<%int a=(Integer) request.getAttribute("a");%>
-							<div class="clear"></div>
-							<div class="bundle-main">
-								<ul class="item-content clearfix">
-									<li class="td td-chk">
-										<div class="cart-checkbox ">
-											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox">
-											<label for="J_CheckBox_170769542747"></label>
-										</div>
-									</li>
-									<li class="td td-item">
-										<div class="item-pic">
-											<a href="#" target="_blank" data-title="商品名" class="J_MakePoint" data-point="tbcart.8.12">
-												<img src="../images/${i.mainPicture}" class="itempic J_ItemImg"></a> 
-										</div>
-										<div class="item-info">
-											<div class="item-basic-info">
-												<a href="#" target="_blank" title="商品名" class="item-title J_MakePoint" data-point="tbcart.8.11">${i.productname}</a>
-											</div>
-										</div>
-									</li>
-									 <li class="td td-info">
-										<div class="item-props item-props-can">
-											<span class="sku-line">颜色：10#蜜橘色</span>
-											<span class="sku-line">包装：两支手袋装（送彩带）</span>
-											<span tabindex="0" class="btn-edit-sku theme-login">修改</span>
-											<i class="theme-login am-icon-sort-desc"></i>
-										</div>
-									</li> 
-									<li class="td td-price">
-										<div class="item-price price-promo-promo">
-											<div class="price-content">
-												<div class="price-line">
-													<em class="price-original">78.00</em>
-												</div>
-												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0">${i.price}</em>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li class="td td-amount">
-										<div class="amount-wrapper ">
-											<div class="item-amount ">
-											
-												<div class="sl">
-													<input class="min am-btn" name="" type="button" value="-" />
-																																	
-													<input class="text_box" name="" type="text" value="${cartList.get(a).getAmount()}" style="width:30px;" />
-																																					
-													<input class="add am-btn" name="" type="button" value="+" />
-												</div>
-												
-											</div>
-										</div>
-									</li>
-									<li class="td td-sum">
-										<div class="td-inner">
-										<%double b =cartList1.get(a).getAmount()*cartproductList1.get(a).getPrice(); %>
-											<em tabindex="0" class="J_ItemSum number"><%=b%></em>
-										</div>
-									</li>
-									<li class="td td-op">
-										<div class="td-inner">
-											<a title="移入收藏夹" class="btn-fav" href="#">移入收藏夹</a>
-											<%-- <a href="/ssm/user/delete?productid=<%=cartList1.get(a).getProductid()%>" data-point-url="#" class="delete">删除</a> --%>
-											<input type="hidden"  value="3"  id="pid"/> 											 
-										    <input type="button" onclick="popSignFlow('${i.productid}');" value="删除"/>  
-										    <%a=a+1;%>	
-											<%request.setAttribute("a", a); %>	
-										</div>
-									</li>
-								</ul>
-						</c:forEach>	
-							</div>
-						</div>
-					</tr>
-				</div>			
-		
-				<!-- <div class="clear"></div> -->
-                 
-				<div class="float-bar-wrapper">
-					<div id="J_SelectAll2" class="select-all J_SelectAll">
-						<div class="cart-checkbox">
-							<input class="check-all check" id="J_SelectAllCbx2" name="select-all" value="true" type="checkbox">
-							<label for="J_SelectAllCbx2"></label>
-						</div>
-						<span>全选</span>
-					</div>
-					<div class="operations">
-						<a href="#" hidefocus="true" class="deleteAll">删除</a>
-						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
-					</div>
-					<div class="float-bar-right">
-						<div class="amount-sum">
-							<span class="txt">已选商品</span>
-							<em id="J_SelectedItemsCount">0</em><span class="txt">件</span>
-							<div class="arrow-box">
-								<span class="selected-items-arrow"></span>
-								<span class="arrow"></span>
-							</div>
-						</div>
-						<div class="price-sum">
-							<span class="txt">合计:</span>
-							<strong class="price">¥<em id="J_Total">0.00</em></strong>
-						</div>
-						<div class="btn-area">
-							<a href="/noobweb/user/query" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
-								<span>结&nbsp;算</span></a>
-						</div>
-					</div>
+.hd-number {
+	width: 90px;
+}
 
-				</div>
+.hd-amount {
+	width: 140px;
+}
 
-				<div class="footer">
-					<div class="footer-hd">
-						<p>
-							<a href="#">恒望科技</a>
-							<b>|</b>
-							<a href="#">商城首页</a>
-							<b>|</b>
-							<a href="#">支付宝</a>
-							<b>|</b>
-							<a href="#">物流</a>
-						</p>
-					</div>
-					<div class="footer-bd">
-						<p>
-							<a href="#">关于恒望</a>
-							<a href="#">合作伙伴</a>
-							<a href="#">联系我们</a>
-							<a href="#">网站地图</a>
-							<em>© 2015-2025 Hengwang.com 版权所有</em>
-						</p>
-					</div>
-				</div>
+.hd-operate {
+	width: 80px;
+}
 
-			</div>
+.t-hd>div,.t-bd ul li>div,.t-ft>div,.bd-commodityInfo>div {
+	float: left;
+}
 
-			<!--操作页面-->
+.t-bd {
+	
+}
 
-			<div class="theme-popover-mask"></div>
+.t-bd ul li {
+	border: 1px solid #e7e7e7;
+	background-color: #fcfcfc;
+	margin-bottom: 15px;
+	padding: 15px;
+	overflow: hidden;
+}
 
-			<div class="theme-popover">
-				<div class="theme-span"></div>
-				<div class="theme-poptit h-title">
-					<a href="javascript:;" title="关闭" class="close">×</a>
-				</div>
-				<div class="theme-popbod dform">
-					<form class="theme-signin" name="loginform" action="" method="post">
+.t-bd ul li.selected {
+	background-color: #fff8e1;
+}
 
-						<div class="theme-signin-left">
+.bd-check {
+	width: 30px;
+	margin-left: 15px;
+}
 
-							<li class="theme-options">
-								<div class="cart-title">颜色：</div>
-								<ul>
-									<li class="sku-line selected">12#川南玛瑙<i></i></li>
-									<li class="sku-line">10#蜜橘色+17#樱花粉<i></i></li>
-								</ul>
-							</li>
-							<li class="theme-options">
-								<div class="cart-title">包装：</div>
-								<ul>
-									<li class="sku-line selected">包装：裸装<i></i></li>
-									<li class="sku-line">两支手袋装（送彩带）<i></i></li>
-								</ul>
-							</li>
-							<div class="theme-options">
-								<div class="cart-title number">数量</div>
-								<dd>
-									<input class="min am-btn am-btn-default" name="" type="button" value="-" />
-									<input class="text_box" name="" type="text" value="1" style="width:30px;" />
-									<input class="add am-btn am-btn-default" name="" type="button" value="+" />
-									<span  class="tb-hidden">库存<span class="stock">1000</span>件</span>
-								</dd>
+.bd-commodityInfo {
+	width: 440px;
+	height: 80px;
+}
 
-							</div>
-							<div class="clear"></div>
-							<div class="btn-op">
-								<div class="btn am-btn am-btn-warning">确认</div>
-								<div class="btn close am-btn am-btn-warning">取消</div>
-							</div>
+.bd-commodityInfo .info-pic {
+	width: 80px;
+	height: 80px;
+	margin-right: 10px;
+}
 
-						</div>
-						<div class="theme-signin-right">
-							<div class="img-info">
-								<img src="../images/kouhong.jpg_80x80.jpg" />
-							</div>
-							<div class="text-info">
-								<span class="J_Price price-now">¥39.00</span>
-								<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
-							</div>
-						</div>
+.bd-commodityInfo .info-text {
+	width: 190px;
+	line-height: 22px;
+}
 
-					</form>
+.bd-commodityInfo .info-text a {
+	color: #333;
+}
+
+.bd-commodityInfo .info-parameter {
+	width: 130px;
+	color: #999;
+	margin-left: 30px;
+}
+
+.bd-commodityInfo .info-parameter span {
+	display: block;
+}
+
+.bd-unitPrice {
+	width: 100px;
+	margin-left: 30px;
+}
+
+.bd-unitPrice del,.bd-unitPrice b {
+	display: block;
+}
+
+.bd-unitPrice del {
+	color: #999;
+}
+
+.bd-number {
+	width: 100px;
+}
+
+.bd-number a {
+	float: left;
+	width: 16px;
+	height: 22px;
+	line-height: 22px;
+	background-color: #f0f0f0;
+	border: 1px solid #e5e5e5;
+	text-align: center;
+}
+
+.bd-number input[type=text] {
+	float: left;
+	width: 40px;
+	height: 16px;
+	padding: 2px 5px;
+}
+
+.bd-amount {
+	width: 120px;
+	margin-left: 20px;
+}
+
+.bd-amount b,.ft-selectedGoods b,.t-ft .ft-totalPrice b {
+	color: #f40;
+}
+
+.bd-operate {
+	width: 80px;
+	margin-left: 15px;
+}
+
+.bd-operate a {
+	color: #333;
+}
+
+.bd-commodityInfo .info-text a:hover,.bd-operate a:hover,.ft-del a:hover
+	{
+	color: #f40;
+}
+
+.t-ft {
+	height: 50px;
+	line-height: 50px;
+	background-color: #e5e5e5;
+	position: relative;
+}
+
+.ft-check {
+	margin-left: 15px;
+}
+
+.ft-del {
+	padding: 0 40px;
+}
+
+.ft-del a {
+	color: #333;
+}
+
+.ft-selectedGoods {
+	margin-left: 350px;
+}
+
+.ft-selectedGoods b {
+	padding: 0 3px;
+}
+
+.t-ft .ft-totalPrice {
+	float: right;
+	line-height: 50px;
+	overflow: hidden;
+}
+
+.t-ft .ft-totalPrice span {
+	
+}
+
+.t-ft .ft-totalPrice b {
+	font-size: 20px;
+	padding-right: 20px;
+}
+
+.t-ft .ft-totalPrice a {
+	float: right;
+	width: 120px;
+	height: 50px;
+	text-align: center;
+	color: #aaa;
+	font-size: 22px;
+	border-radius: 3px;
+	cursor: not-allowed;
+}
+
+.t-ft .ft-totalPrice a.disable {
+	background-color: #f22d00;
+	color: #fff;
+}
+
+.t-ft .ft-totalPrice a.disable:hover {
+	background-color: #f40;
+}
+
+.checkShowPic {
+	width: 988px;
+	background-color: #fff;
+	border: 1px solid #aaa;
+	position: absolute;
+	left: 0;
+	bottom: 100%;
+}
+
+.checkShowPic li {
+	float: left;
+	margin: 10px;
+	position: relative;
+}
+
+.checkShowPic li span {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: #000;
+	color: #fff;
+	height: 20px;
+	line-height: 20px;
+	padding: 0 8px;
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+	<!--顶部导航条 -->
+	<div class="am-container header">
+		<ul class="message-l">
+			<div class="topMessage">
+				<div class="menu-hd">
+					<a href="#" target="_top" class="h">亲，请登录</a> <a href="#"
+						target="_top">免费注册</a>
 				</div>
 			</div>
-		<!--引导 -->
-		<div class="navCir">
-			<li><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
-			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-			<li class="active"><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
-			<li><a href="../person/index.html"><i class="am-icon-user"></i>我的</a></li>					
+		</ul>
+		<ul class="message-r">
+			<div class="topMessage home">
+				<div class="menu-hd">
+					<a href="home/home.jsp" target="_top" class="h">商城首页</a>
+				</div>
+			</div>
+			<div class="topMessage my-shangcheng">
+				<div class="menu-hd MyShangcheng">
+					<a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a>
+				</div>
+			</div>
+			<div class="topMessage mini-cart">
+				<div class="menu-hd">
+					<a id="mc-menu-hd" href="#" target="_top"><i
+						class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong
+						id="J_MiniCartNum" class="h">0</strong>
+					</a>
+				</div>
+			</div>
+			<div class="topMessage favorite">
+				<div class="menu-hd">
+					<a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span>
+					</a>
+				</div>
+		</ul>
+	</div>
+
+	<!--悬浮搜索框-->
+
+	<div class="nav white">
+		<div class="logo">
+			<img src="images/logo.png" />
 		</div>
-	</body>
+		<div class="logoBig">
+			<li><img src="images/logobig.png" />
+			</li>
+		</div>
 
+		<div class="search-bar pr">
+			<a name="index_none_header_sysc" href="#"></a>
+			<form>
+				<input id="searchInput" name="index_none_header_sysc" type="text"
+					placeholder="搜索" autocomplete="off"> <input
+					id="ai-topsearch" class="submit am-btn" value="搜索" index="1"
+					type="submit">
+			</form>
+		</div>
+	</div>
+
+	<div class="clear"></div>
+
+	<%
+		List<Product>cartproductList1 =  (List<Product>) request.getAttribute("cartproductList");
+	      List<Shoppingcar>cartList1 =  ( List<Shoppingcar>) request.getAttribute("cartList");
+	%>
+	<h2 align="center">购物车详情</h2>
+	<div class="data-table">
+
+		<div class="t-hd">
+			<div class="hd-check">
+				<label><input type="checkbox" class="checkAll" />全选</label>
+			</div>
+			<div class="hd-commodityInfo">商品信息</div>
+			<div class="hd-unitPrice">单价（元）</div>
+			<div class="hd-number">数量</div>
+			<div class="hd-amount">金额（元）</div>
+			<div class="hd-operate">操作</div>
+		</div>
+
+		<div class="t-bd">
+
+			<ul>
+				<c:forEach items="${cartproductList}" var="i" varStatus="is">
+					<%
+						int a=(Integer) request.getAttribute("a");
+					%>
+					<li>
+						<div class="bd-check">
+							<label><input type="checkbox" name="checked"
+								value="${is.index}" class="checkboxItem" />
+							</label>
+						</div>
+						<div class="bd-commodityInfo">
+							<div class="info-pic">
+								<img src="images/${i.mainPicture}" width="70" height="70" />
+							</div>
+							<div class="info-text">
+								<a href="#">${i.productname}</a>
+							</div>
+							<div class="info-parameter">
+								<span>颜色分类：图片色</span> <span>尺码：L</span>
+							</div>
+
+						</div>
+						<div class="bd-unitPrice">
+							<del>${i.beforeP}</del>
+							<b>${i.price}</b>
+						</div>
+						<div class="bd-number">
+							<a href="javascript:;" class="minus">-</a> <input type="text"
+								class="inputNum" name="amount"
+								value="${cartList.get(a).getAmount()}" /> <a href="javascript:;"
+								class="plus">+</a>
+						</div> <%
+ 	double b =cartList1.get(a).getAmount()*cartproductList1.get(a).getPrice();
+ %>
+						<div class="bd-amount">
+							<b><%=b%></b>
+						</div> <%
+ 	a=a+1;
+ %> <%
+ 	request.setAttribute("a", a);
+ %>
+						<div class="bd-operate">
+							<input type="button" onclick="popSignFlow('${i.productid}');"
+								value="删除" />
+						</div>
+				</c:forEach>
+				</li>
+			</ul>
+
+		</div>
+
+		<div class="t-ft">
+
+
+
+			<ul class="checkShowPic">
+				<!--<li><a href="javascript:;"><img src="images/80x80_1.jpg"/></a><span>取消选择</span></li>-->
+			</ul>
+
+
+
+			<div class="ft-check">
+				<label><input type="checkbox" class="checkAll" />全选</label>
+			</div>
+			<div class="ft-del">
+				<input type="submit" id="dodeletesubmit" value="删除">
+			</div>
+			<div class="ft-del">
+				<input type="submit" id="coll_submit" value="移入收藏夹">
+			</div>
+
+			<div class="ft-selectedGoods">
+				<span>已选商品<b>0</b>件</span>
+			</div>
+
+			<div class="ft-totalPrice">
+				<span>合计（不含运费）：</span><b>￥0.00</b>
+
+				<form action="">
+					<input style="color:black" type="submit" id="dosubmit" value="结算">
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div class="footer">
+		<div class="footer-hd">
+			<p>
+				<a href="#">恒望科技</a> <b>|</b> <a href="#">商城首页</a> <b>|</b> <a
+					href="#">支付宝</a> <b>|</b> <a href="#">物流</a>
+			</p>
+		</div>
+		<div class="footer-bd">
+			<p>
+				<a href="#">关于恒望</a> <a href="#">合作伙伴</a> <a href="#">联系我们</a> <a
+					href="#">网站地图</a> <em>© 2015-2025 Hengwang.com 版权所有</em>
+			</p>
+		</div>
+	</div>
+</body>
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script>
+	var price = 0;
+	var amount = [];
+	var a;//大用处
+	var b;
+	var orderitem = new Array();
+	(function() {
+		var cart = {
+			init : function() {
+				this.getDom();
+				this.bindEvent();
+				this.b = false;
+				this.bInput = false;
+				this.isCheck = false;
+			},
+			getDom : function() {
+				this.dataTable = $('.data-table');
+				this.checkBox = this.dataTable.find('input[type=checkbox]');
+				this.tBody = this.dataTable.find('.t-bd');
+				this.tBodyItem = this.tBody.find('li');
+				this.minusBtn = this.tBodyItem.find('.minus');
+				this.plusBtn = this.tBodyItem.find('.plus');
+				this.checkboxItem = this.tBodyItem.find('.checkboxItem');
+				this.tFoot = this.dataTable.find('.t-ft');
+				this.totalPrice = this.tFoot.find('.ft-totalPrice');
+				this.selectedGoods = this.tFoot.find('.ft-selectedGoods');
+			},
+			bindEvent : function() {
+				var self = this;
+				this.dataTable.on('click', function(e) {
+
+					//全选事件
+					if ($(e.target).hasClass('checkAll')) {
+
+						self.checkAll();
+						self.isCheck = !self.isCheck;
+						var a = self.getTotalPrice();
+						price = a;
+						self.totalPrice.find('b').html('￥' + a);
+
+						self.selectedGoods.find('b').html(self.isCheckNum());
+
+					}
+
+					//选择商品事件
+					if ($(e.target).hasClass('checkboxItem')) {
+
+						self.totalPrice.find('b').html(
+								'￥' + self.getTotalPrice());
+						self.selectedGoods.find('b').html(self.isCheckNum());
+						price = self.getTotalPrice();
+					}
+
+					//数量加事件
+					if ($(e.target).hasClass('plus')) {
+						self.bInput = true;
+						self.b = true;
+						var obj = $(e.target).parents('li');
+						self.getItemPrice(obj);
+						self.totalPrice.find('b').html(
+								'￥' + self.getTotalPrice());
+						price = self.getTotalPrice();
+
+					}
+
+					//数量减事件
+					if ($(e.target).hasClass('minus')) {
+						self.bInput = true;
+						self.b = false;
+						var obj = $(e.target).parents('li');
+						self.getItemPrice(obj);
+						self.totalPrice.find('b').html(
+								'￥' + self.getTotalPrice());
+						price = self.getTotalPrice();
+					}
+
+				})
+				/* .on('keyup',function(e){
+					//获取数量总数
+					self.bInput=false;
+					if($(e.target).hasClass('inputNum')){
+						
+						//var obj=$(e.target).parents('li');
+						//self.getItemPrice(obj);
+						//self.totalPrice.find('b').html('￥'+self.getTotalPrice());
+					}		
+
+					
+				}); */
+
+			},
+			checkAll : function() {//全选
+				for ( var i = 0; i < this.checkBox.length; i++) {
+					if (!this.isCheck) {
+						this.checkBox.eq(i).attr('checked', true);
+					} else {
+						this.checkBox.eq(i).removeAttr('checked');
+					}
+				}
+			},
+			getTotalPrice : function() {//总价格
+				var total = 0;
+
+				for ( var i = 0; i < this.checkboxItem.length; i++) {
+					if (this.checkboxItem.eq(i).is(':checked')) {
+						var price = this.checkboxItem.eq(i)
+								.parents('.bd-check').siblings('.bd-amount')
+								.find('b').html();
+
+						total += parseFloat(price);
+					}
+				}
+
+				return total.toFixed(2);
+
+			},
+			getItemPrice : function(obj) {//商品单价计算
+
+				var price = obj.find('.bd-unitPrice b').html();
+				var num = parseInt(obj.find('.bd-number input[type=text]')
+						.val());
+				if (this.bInput) {
+					if (this.b) {
+						num++;
+					} else {
+						num--;
+						if (num < 1) {
+							num = 1;
+						}
+					}
+				} else {
+					if (num < 1) {
+						num = 1;
+					}
+				}
+				obj.find('.bd-number input[type=text]').val(num);
+				obj.find('.bd-amount b').html((price * num).toFixed(2));
+				amount.push(num);
+				// $.post("/updatecart/"+itemid+"/"+num)+".action"此处需动态和数据库连接更新
+			},
+			isCheckNum : function() {//获取已选商品个数
+				var isCheckNum = 0;
+				for ( var i = 0; i < this.checkboxItem.length; i++) {
+
+					if (this.checkboxItem.eq(i).is(':checked')) {
+						isCheckNum++;
+						this.totalPrice.find('a').addClass('disable');
+						this.checkboxItem.eq(i).parents('li').addClass(
+								'selected');
+
+					} else {
+						this.isCheck = false;
+						this.dataTable.find('.checkAll').removeAttr('checked');
+						this.checkboxItem.eq(i).parents('li').removeClass(
+								'selected');
+
+						if (isCheckNum == 0) {
+							this.totalPrice.find('a').removeClass('disable');
+						}
+					}
+
+				}
+				return isCheckNum;
+
+			}
+
+		}
+		cart.init();
+	})();
+
+	$(function() {
+		$('#dosubmit').click(function() {
+			var checkID = [];//定义一个空数组 
+			// var count = [];
+			$("input[name='checked']:checked").each(function(i) {//把所有被选中的复选框的值存入数组
+				checkID[i] = $(this).val();
+				//count[i] = $('.amount:eq('+$(this).val()+')').val(); 传不了值
+			});
+
+			alert(checkID);
+			$.ajax('shopping/jiesuan', {
+				type : 'post',
+				data : {
+					"checkID" : checkID,
+					"amount" : amount,
+					"totalprice" : price
+				},
+				dataType : 'json',
+				success : function(address) {
+				}
+			});
+		})
+		$('#dodeletesubmit').click(function() {
+			var checkID = [];//定义一个空数组 
+			$("input[name='checked']:checked").each(function(i) {//把所有被选中的复选框的值存入数组
+				checkID[i] = $(this).val();
+			});
+			
+			
+			//alert('ready to delete ....');
+
+
+			$.ajax('shopping/deletesome', {
+				type : 'post',
+				data : {
+					"checkID" : checkID,
+				},
+				dataType : 'json',
+				success : function(data) {
+					if(data.success){
+						//alert('delete success ...')
+						window.location.href = window.location.href;
+					}
+				}
+			});
+		})
+		//执行移入收藏夹
+		$('#coll_submit').click(function() {
+			var checkID = [];//定义一个空数组 
+			$("input[name='checked']:checked").each(function(i) {//把所有被选中的复选框的值存入数组
+				checkID[i] = $(this).val();
+			});
+			//alert('ready to delete ....');
+
+
+			$.ajax('shopping/collection', {
+				type : 'post',
+				data : {
+					"checkID" : checkID,
+				},
+				dataType : 'json',
+				success : function(data) {
+					if(data.success){
+						//alert('delete success ...')
+						window.location.href = window.location.href;
+					}
+				}
+			});
+		})
+
+	});
+</script>
 </html>
 
-								购物车
-								</a>
+
+</html>

@@ -43,7 +43,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})
 		</script>
 	</head>
-
 	<body>
 
 
@@ -115,9 +114,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 			</div>
 				<ol class="am-breadcrumb am-breadcrumb-slash">
-					<li><a href="#">首页</a></li>
-					<li><a href="#">分类</a></li>
-					<li class="am-active">内容</li>
+					
+					
 				</ol>
 				<script type="text/javascript">
 					$(function() {});
@@ -166,22 +164,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="images/01.jpg"><img src="images/${product.mainPicture}" alt="细节展示放大镜特效" rel="images/01.jpg" class="jqzoom" /></a>
+								<a href="images/${product.mainPicture}"><img src="images/${product.mainPicture}" /></a>
 							</div>
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="images/01_small.jpg" mid="images/01_mid.jpg" big="images/01.jpg"></a>
+										<img src="images/${product.sidePicture1}" mid="images/${product.sidePicture1}" big="images/${product.sidePicture1}">
 									</div>
 								</li>
 								<li>
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="images/02_small.jpg" mid="images/02_mid.jpg" big="images/02.jpg"></a>
+										<img src="images/${product.sidePicture2}" mid="images/${product.sidePicture2}" big="images/${product.sidePicture2}">
 									</div>
 								</li>
 								<li>
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="images/03_small.jpg" mid="images/03_mid.jpg" big="images/03.jpg"></a>
+										<img src="images/${product.sidePicture3}" mid="images/${product.sidePicture3}" big="images/${product.sidePicture3}">
 									</div>
 								</li>
 							</ul>
@@ -240,14 +238,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<!--销量-->
 							<ul class="tm-ind-panel">
-								<li class="tm-ind-item tm-ind-sellCount canClick">
-									<div class="tm-indcon"><span class="tm-label">月销量</span><span class="tm-count">1015</span></div>
-								</li>
 								<li class="tm-ind-item tm-ind-sumCount canClick">
-									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">6015</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">${product.sales}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
-									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">${commentlistsize}</span></div>
 								</li>
 							</ul>
 							<div class="clear"></div>
@@ -284,9 +279,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<div>
 												<input type="hidden" id="buyType" name="buyoradd" value="buy" />
 												<input type="hidden" name="productid" value="${product.productid}" />
-												<button type="button" id="ai-topsearch" class="clearfix tb-btn tb-btn-buy theme-login btnType"   btnType="buy" >立即购买</button>
-												
 												<button type="button" id="ai-topsearch" class="clearfix tb-btn tb-btn-buy theme-login btnType"   btnType="cart" >添加购物车</button>
+												
+												<button type="button" id="ai-topsearch" class="clearfix tb-btn tb-btn-buy theme-login btnType"   btnType="buy" >立即购买</button>
 												<!-- <input id="ai-topsearch" class="clearfix tb-btn tb-btn-buy theme-login" keyname="buy" value="立即购买" index="1" type="submit"> -->
 												</div>
 											
@@ -299,22 +294,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clear"></div>
 							<!--活动	-->
 						</div>
-
-						<div class="pay">
-
-							<li>
-								<div class="clearfix tb-btn tb-btn-buy theme-login">
-
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
-								</div>
-							</li>
-							<li>
-								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="shopping/add"><i></i>加入购物车</a>
-								</div>
-							</li>
-						</div>
-
 					</div>
 
 					<div class="clear"></div>
@@ -329,11 +308,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<li class="am-active">
 									<a href="#">
 										<span class="index-needs-dt-txt">宝贝详情</span></a>
-										<h2>${product.productdetail}</h2>
+										
 								</li>
 								<li>
 									<a href="#">
-
 										<span class="index-needs-dt-txt">全部评价</span></a>
 								</li>
 							</ul>
@@ -341,6 +319,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="am-tabs-bd">
 
 								<div class="am-tab-panel am-fade am-in am-active">
+								
+								
+								
+								<div class="am-tab-panel am-fade am-in am-active">
+									<div class="J_Brand">
+
+										<div class="attr-list-hd tm-clear">
+											<h4>产品详情：</h4></div>
+										<div class="clear"></div>
+										<h2>${product.productdetail}</h2>
+										<div class="clear"></div>
+									</div>
+									<div class="clear"></div>
+
+								</div>
 									<div class="clear"></div>
 
 								</div>
