@@ -557,6 +557,10 @@ a {
 			<div class="ft-del">
 				<input type="submit" id="dodeletesubmit" value="删除">
 			</div>
+			
+			<div class="ft-del">
+				<input type="submit" id="dodeletesubmit" value="移入收藏夹">
+			</div>
 
 			<div class="ft-selectedGoods">
 				<span>已选商品<b>0</b>件</span>
