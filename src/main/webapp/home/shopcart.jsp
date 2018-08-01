@@ -499,6 +499,7 @@ a {
 		<div class="t-bd">
 
 			<ul>
+			<form action="shopping/jiesuan">
 				<c:forEach items="${cartproductList}" var="i" varStatus="is">
 					<%
 						int a=(Integer) request.getAttribute("a");
@@ -531,7 +532,7 @@ a {
 								value="${cartList.get(a).getAmount()}" /> <a href="javascript:;"
 								class="plus">+</a>
 						</div> <%
- 	double b =cartList1.get(a).getAmount()*cartproductList1.get(a).getPrice();
+ 								double b =cartList1.get(a).getAmount()*cartproductList1.get(a).getPrice();
  %>
 						<div class="bd-amount">
 							<b><%=b%></b>
@@ -717,7 +718,7 @@ a {
 						total += parseFloat(price);
 					}
 				}
-
+				
 				return total.toFixed(2);
 
 			},
@@ -793,7 +794,8 @@ a {
 					"totalprice" : price
 				},
 				dataType : 'json',
-				success : function(address) {
+				success : function(data) {
+					
 				}
 			});
 		})
