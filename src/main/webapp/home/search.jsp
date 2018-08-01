@@ -123,13 +123,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<p class="title font-normal">
 								<c:if test="${by=='bytype'}">
 								<span class="total fl">搜索到<strong class="num">${num}</strong>件</span>
-								<span class="fl">${key1}</span>
 								</c:if> 
 								<c:if test="${by=='bybrand'}">
 								<span class="total fl">品牌:<strong class="num">${key1}</strong>共:&nbsp; ${num} &nbsp;件</span>
 								</c:if> 
 								<c:if test="${by=='bybrandandtype'}">
-								<span class="total fl">品牌:<strong class="num">${key1}</strong>下，共有  $&nbsp;{key2}  &nbsp;${num} &nbsp;件</span>
+								<span class="total fl">品牌:<strong class="num">${key1}</strong>下，共有&nbsp;  ${key2}  &nbsp;${num} &nbsp;件</span>
 								</c:if> 
 								 
 								<c:if test="${by=='byname'}">
@@ -177,7 +176,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<strong>${product.price}</strong>
 											</p>
 											<p class="number fl">
-												销量<span>1110</span>
+												<span>${product.brand}</span>&nbsp;
+												销量<span>${product.sales}</span>
 											</p>
 										</div>
 										</a>
