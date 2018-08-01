@@ -105,10 +105,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("卫龙","UTF-8")%>">卫龙</a></li>
                                 <li class="qc last"><a href="href=search/bytype?search_brand=<%=java.net.URLEncoder.encode("良品铺子","UTF-8")%>">良品铺子</a></li>
 							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的购物车
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
 						</div>
 			</div>
 			
@@ -158,9 +154,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<li><button type="button" class="btnType"   btnType="sales" >销量排序</button></li>
 									<li><button type="button" class="btnType"   btnType="price" >价格优先</button></li>
 									<li class="big"><button type="button" class="btnType"   btnType="comment" >评论为主</button></li>
-									<!-- <li><a title="销量">销量排序</a></li>
-									<li><a title="价格">价格优先</a></li> -->
-									<!-- <li class="big"><a title="评价" href="#">评价为主</a></li> -->
 								</div>
 								</form>
 								<div class="clear"></div>

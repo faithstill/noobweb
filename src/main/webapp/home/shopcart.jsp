@@ -413,15 +413,30 @@ a {
 		<ul class="message-l">
 			<div class="topMessage">
 				<div class="menu-hd">
-					<a href="#" target="_top" class="h">亲，请登录</a> <a href="#"
-						target="_top">免费注册</a>
+					<c:choose> 
+					     <c:when test="${loginflag=='1'}">    <!--如果 --> 
+						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
+						 </c:when>      
+						<c:when test="${loginflag=='0'}">    <!--如果 --> 
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:when>      
+					   	<c:otherwise>  <!--否则 -->    
+							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
+							<a href="zhuce.jsp" target="_top">免费注册</a>
+						 </c:otherwise> 
+						</c:choose>
 				</div>
 			</div>
 		</ul>
 		<ul class="message-r">
 			<div class="topMessage home">
 				<div class="menu-hd">
+<<<<<<< HEAD
 					<a href="/noobweb/home/home.jsp" target="_top" class="h">商城首页</a>
+=======
+					<a href="/home" target="_top" class="h">商城首页</a>
+>>>>>>> 293d82b3f02033c00cf7c18196fc0f227b329724
 				</div>
 			</div>
 			<div class="topMessage my-shangcheng">
@@ -431,7 +446,7 @@ a {
 			</div>
 			<div class="topMessage mini-cart">
 				<div class="menu-hd">
-					<a id="mc-menu-hd" href="#" target="_top"><i
+					<a id="mc-menu-hd" href="http://localhost:8080/noobweb/shopping/show" target="_top"><i
 						class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong
 						id="J_MiniCartNum" class="h">0</strong>
 					</a>
@@ -458,11 +473,9 @@ a {
 
 		<div class="search-bar pr">
 			<a name="index_none_header_sysc" href="#"></a>
-			<form>
-				<input id="searchInput" name="index_none_header_sysc" type="text"
-					placeholder="搜索" autocomplete="off"> <input
-					id="ai-topsearch" class="submit am-btn" value="搜索" index="1"
-					type="submit">
+			<form method="post" action="search/byname">
+							<input id="searchInput" name="key" type="text" placeholder="搜索" autocomplete="off">
+							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 			</form>
 		</div>
 	</div>

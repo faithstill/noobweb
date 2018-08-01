@@ -1,5 +1,6 @@
 package com.neusoft.servce;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class OrderContentServiceImpl implements OrderContentService{
 		return OrderContents;
 	}
 	
+	
+	
 	public int queryNumByOrder(int orderid){
 		OrderContentExample ordcexm = new OrderContentExample();
 		Criteria cr = ordcexm.createCriteria();
@@ -31,6 +34,8 @@ public class OrderContentServiceImpl implements OrderContentService{
 		int size = OrderContents.size();
 		return size;
 	}
+	
+	
 	
 	
 	public boolean ordercontent_add(OrderContent orderContent)

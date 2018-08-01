@@ -2,6 +2,8 @@ package com.neusoft.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Orders {
     /**
      *
@@ -55,6 +57,7 @@ public class Orders {
      *
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date orderTime;
 
     /**
@@ -64,6 +67,7 @@ public class Orders {
      *
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date payTime;
 
     /**
@@ -73,6 +77,7 @@ public class Orders {
      *
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date deliveryTime;
 
     /**
@@ -82,6 +87,7 @@ public class Orders {
      *
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date finishTime;
 
     /**
@@ -91,6 +97,7 @@ public class Orders {
      *
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date cancelTime;
 
     /**
@@ -100,6 +107,7 @@ public class Orders {
      *
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date redeliveryTime;
 
     /**
@@ -109,6 +117,7 @@ public class Orders {
      *
      * @mbg.generated Tue Jul 31 15:29:35 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date refundTime;
 
     /**

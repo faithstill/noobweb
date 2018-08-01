@@ -46,15 +46,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a href="zhuce.jsp" target="_top">免费注册</a>
 						 </c:otherwise> 
 						</c:choose>
-												
-						
-						<%-- <c:if test="${loginflag=='1'}">
-						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
-						</c:if>
-						<c:if test="${loginflag=='0'}">
-							<a href="login.jsp" target="_top" class="h">亲，请登录</a>
-							<a href="zhuce.jsp" target="_top">免费注册</a>
-						</c:if> --%>
 						</div>
 					</div>
 				</ul>
@@ -66,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 					</div>
 					<div class="topMessage mini-cart">
-						<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+						<div class="menu-hd"><a id="mc-menu-hd" href="http://localhost:8080/noobweb/shopping/show" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="/noobweb/shopping/showcollection" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -89,11 +80,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</form>
 					</div>
 				</div>
-
 				<div class="clear"></div>
 			</div>
-			
-			
 			<div class="banner">
                       <!--轮播 -->
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
@@ -120,10 +108,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <li class="qc"><a href="search/bybrand?search_brand=<%=java.net.URLEncoder.encode("卫龙","UTF-8")%>">卫龙</a></li>
                                 <li class="qc last"><a href="href=search/bytype?search_brand=<%=java.net.URLEncoder.encode("良品铺子","UTF-8")%>">良品铺子</a></li>
 							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的购物车
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
 						</div>
 		        				
 						<!--侧边导航 -->

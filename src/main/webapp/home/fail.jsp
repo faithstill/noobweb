@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>付款成功页面</title>
+<title>付款失败页面</title>
 <link rel="stylesheet"  type="text/css" href="AmazeUI-2.4.2/assets/css/amazeui.css"/>
 <link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
 <link href="basic/css/demo.css" rel="stylesheet" type="text/css" />
@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <ul class="message-l">
     <div class="topMessage">
      <div class="menu-hd">
-       <c:choose> 
+      <c:choose> 
 					     <c:when test="${loginflag=='1'}">    <!--如果 --> 
 						<div target="_top" class="h">欢迎您 ! &nbsp; ${username}</div>
 						 </c:when>      
@@ -73,24 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="take-delivery">
  <div class="status">
-   <h2>您已成功付款</h2>
-   <div class="successInfo">
-     <ul>
-       <li>付款金额<em>${amount}</em></li>
-       <div class="user-info">
-         <p>收货人：${address.name}</p>
-         <p>联系电话：${address.phone}</p>
-         <p>收货地址：${address.province}  &nbsp;${address.city}&nbsp;${address.detailedaddress}&nbsp;</p>
-       </div>
-             请认真核对您的收货信息，如有错误请联系客服
-                               
-     </ul>
-     <div class="option">
-       <span class="info">您可以</span>
-        <a href="person/order.html" class="J_MakePoint">查看<span>已买到的宝贝</span></a>
-        <a href="person/orderinfo.html" class="J_MakePoint">查看<span>交易详情</span></a>
-     </div>
-    </div>
+   <h1>sorry,穷鬼你没钱了！</h1>
   </div>
 </div>
 
@@ -117,7 +100,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </p>
  </div>
 </div>
-
-
 </body>
 </html>
