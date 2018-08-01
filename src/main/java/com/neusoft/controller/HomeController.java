@@ -25,6 +25,7 @@ public class HomeController {
 		Object username = session.getAttribute("username");
 		if(username!=null){
 			loginflag=1;
+			System.out.println("home userid---"+session.getAttribute("userid"));
 		}
 		System.out.println("session"+loginflag);
 		int productid1 = 1;

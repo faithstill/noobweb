@@ -43,13 +43,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var sign_in_flow = '<div style="background:#FF9900;">确认框</div><div>  </div><br><br>'
 
 			+ '</div><div>确定从购物车删除该商品吗？</div><br>'
-			/*    + '</div><div><a href="/ssm/user/delete?productid=pid">yes</a> '  */
+			/*    + '</div><div><a href="/ssm/shopping/delete?productid=pid">yes</a> '  */
 			+ '</div><div><input type="button" value="是" onclick="searchCurriculum();">'
 			+ '   <input type="button" value="否" onclick="cancelSign();"/></div><br>'
 	function searchCurriculum() {
 		var stateObject = {};
 		var title = "";
-		var newUrl = "/noobweb/user/delete?productid=" + pid;
+		var newUrl = "/noobweb/shopping/delete?productid=" + pid;
 		history.pushState(stateObject, title, newUrl);
 		window.location.reload();
 	}
@@ -772,7 +772,7 @@ a {
 			});
 
 			alert(checkID);
-			$.ajax('user/jiesuan', {
+			$.ajax('shopping/jiesuan', {
 				type : 'post',
 				data : {
 					"checkID" : checkID,
@@ -793,7 +793,7 @@ a {
 			//alert('ready to delete ....');
 
 
-			$.ajax('user/deletesome', {
+			$.ajax('shopping/deletesome', {
 				type : 'post',
 				data : {
 					"checkID" : checkID,

@@ -76,10 +76,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 成功添加购物车</td>  
 </td>  
 <td>
-<label  style="width:200px "><a href="http://localhost:8080/noobweb/user/show" ><font color="red">去购物车结算</font></a></label>
+<label  style="width:200px "><a href="http://localhost:8080/noobweb/shopping/show" ><font color="red">去购物车结算</font></a></label>
 </td>
 <td>
-<label  style="width:300px "><a href="http://localhost:8080/noobweb/home/home.jsp" ><font color="red">继续购物</font></a></label>
+<label  style="width:300px "><a href="http://localhost:8080/noobweb/home" ><font color="red">继续购物</font></a></label>
 </td>
 </tr>
 </table>			
