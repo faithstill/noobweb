@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,6 +25,7 @@ import com.neusoft.domain.Address;
 import com.neusoft.domain.OrderContent;
 import com.neusoft.domain.Orders;
 import com.neusoft.domain.User;
+import com.neusoft.domain.littleorder;
 import com.neusoft.servce.AddressService;
 import com.neusoft.servce.OrderContentService;
 import com.neusoft.servce.OrderService;
@@ -52,6 +56,8 @@ public class OrderController {
 
 		return mav;
 	}
+	
+	
 	
 	@RequestMapping("/queryall")
 	public ModelAndView query() {
@@ -166,17 +172,31 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/add")
-	public ModelAndView order_add(int userid,int addressid){
-		//System.out.println("id:"+addressid);
-//		System.out.println("name:"+order.getName());
-//		System.out.println("phone:"+order.getPhone());
-//		System.out.println("province:"+order.getProvince());
-//		System.out.println("city:"+order.getCity());
-//		System.out.println("detail:"+order.getDetailedorder());
+	public ModelAndView order_add(HttpServletRequest request,HttpSession session,String addressid){
+		int addressid1 =Integer.parseInt(request.getParameter("addressid"));
+		int userid = (Integer) session.getAttribute("userid");
+		int total_price=(Integer) session.getAttribute("pricefinal");
+		List<littleorder> llist= new ArrayList();
+		llist= (List<littleorder>)session.getAttribute("lorderlist");
+		List productlist=new ArrayList();
+		List productamountlist=new ArrayList();
+
+		for(int i=0;i<llist.size();i++){
+			productlist.add(llist.get(i).getProductid());
+			productamountlist.add(llist.get(i).getNumber());
+		}
+		
+		
+		/*
+		 *addressid=address1 
+		 *userid,addressid,productidlist,productamountlist,total_price
+		 */
+		
+		
 		Orders order = new Orders();
 		
 		order.setUserid(userid);
-		order.setAddressid(addressid);
+		order.setAddressid(addressid1);
 		int orderid = orderService.order_add(order);
 		ModelAndView mav = new ModelAndView();
 		System.out.println(orderid);

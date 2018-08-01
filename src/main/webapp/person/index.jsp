@@ -177,14 +177,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="m-order">
 								<div class="s-bar">
 									<i class="s-icon"></i>我的订单
-									<a class="i-load-more-item-shadow" href="order.html">全部订单</a>
+									<a class="i-load-more-item-shadow" href="person/order.html">全部订单</a>
 								</div>
 								<ul>
-									<li><a href="order.html"><i><img src="images/pay.png"/></i><span>待付款</span></a></li>
-									<li><a href="order.html"><i><img src="images/send.png"/></i><span>待发货<em class="m-num">1</em></span></a></li>
-									<li><a href="order.html"><i><img src="images/receive.png"/></i><span>待收货</span></a></li>
-									<li><a href="order.html"><i><img src="images/comment.png"/></i><span>待评价<em class="m-num">3</em></span></a></li>
-									<li><a href="change.html"><i><img src="images/refund.png"/></i><span>退换货</span></a></li>
+									<li><a href="person/order.html"><i><img src="images/pay.png"/></i><span>待付款</span></a></li>
+									<li><a href="person/order.html"><i><img src="images/send.png"/></i><span>待发货<em class="m-num">1</em></span></a></li>
+									<li><a href="person/order.html"><i><img src="images/receive.png"/></i><span>待收货</span></a></li>
+									<li><a href="person/order.html"><i><img src="images/comment.png"/></i><span>待评价<em class="m-num">3</em></span></a></li>
+									<li><a href="person/change.html"><i><img src="images/refund.png"/></i><span>退换货</span></a></li>
 								</ul>
 								<div class="orderContentBox">
 									<div class="orderContent">
@@ -194,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 										</div>
 										<div class="detailContent">
-											<a href="orderinfo.html" class="delivery">签收</a>
+											<a href="person/orderinfo.html" class="delivery">签收</a>
 											<div class="orderID">
 												<span class="time">2016-03-09</span>
 												<span class="splitBorder">|</span>
@@ -242,17 +242,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i class="s-icon"></i>我的常用
 								</div>
 								<ul>
-									<a href="order.html">
+									<a href="person/order.html">
 										<li class="am-u-sm-4"><i class="am-icon-truck am-icon-md"></i>
 											<p>物流查询</p>
 										</li>
 									</a>
-									<a href="collection.html">
+									<a href="person/collection.html">
 										<li class="am-u-sm-4"><i class="am-icon-heart am-icon-md"></i>
 											<p>我的收藏</p>
 										</li>
 									</a>
-									<a href="foot.html">
+									<a href="person/foot.html">
 										<li class="am-u-sm-4"><i class="am-icon-paw am-icon-md"></i>
 											<p>我的足迹</p>
 										</li>
@@ -262,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<div class="user-suggestion">
 								<div class="s-bar">
-									<a href="suggest.html"><i class="s-icon"></i>意见反馈</a>
+									<a href="person/suggest.html"><i class="s-icon"></i>意见反馈</a>
 								</div>
 							</div>
 
@@ -391,23 +391,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li class="person">
 						<p><i class="am-icon-newspaper-o"></i>个人资料</p>
 						<ul>
-							<li> <a href="information.html">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
-							<li> <a href="address.html">地址管理</a></li>
+							<li> <a href="person/information.html">个人信息</a></li>
+							<li> <a href="person/safety.html">安全设置</a></li>
+							<li> <a href="person/address.html">地址管理</a></li>
 						</ul>
 					</li>
 					<li class="person">
-						<p><i class="am-icon-balance-scale"></i>我的交易</p>
+						<p><i class="person/am-icon-balance-scale"></i>我的交易</p>
 						<ul>
-							<li><a href="order.html">订单管理</a></li>
-							<li> <a href="change.html">退款售后</a></li>
-							<li> <a href="comment.html">评价商品</a></li>
+							<li><a href="person/order.html">订单管理</a></li>
+							<li> <a href="person/change.html">退款售后</a></li>
+							<li> <a href="person/comment.html">评价商品</a></li>
 						</ul>
 					</li>
 					<li class="person">
 						<p><i class="am-icon-dollar"></i>我的资产</p>
 						<ul>
-							<li> <a href="points.html">我的积分</a></li>
 							<li> <a href="walletlist.html">账户余额</a></li>
 							<li> <a href="bill.html">账单明细</a></li>
 						</ul>
@@ -416,8 +415,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li class="person">
 						<p><i class="am-icon-tags"></i>我的收藏</p>
 						<ul>
-							<li> <a href="collection.html">收藏</a></li>
-							<li> <a href="foot.html">足迹</a></li>														
+							<li> <a href="person/collection.html">收藏</a></li>
+							<li> <a href="person/foot.html">足迹</a></li>														
 						</ul>
 					</li>
 				</ul>

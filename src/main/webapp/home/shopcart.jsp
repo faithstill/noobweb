@@ -432,7 +432,7 @@ a {
 		<ul class="message-r">
 			<div class="topMessage home">
 				<div class="menu-hd">
-					<a href="/home" target="_top" class="h">商城首页</a>
+					<a href="home" target="_top" class="h">商城首页</a>
 				</div>
 			</div>
 			<div class="topMessage my-shangcheng">
@@ -450,7 +450,7 @@ a {
 			</div>
 			<div class="topMessage favorite">
 				<div class="menu-hd">
-					<a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span>
+					<a href="/noobweb/shopping/showcollection" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span>
 					</a>
 				</div>
 		</ul>
@@ -566,6 +566,7 @@ a {
 			<div class="ft-del">
 				<input type="submit" id="dodeletesubmit" value="删除">
 			</div>
+
 			<div class="ft-del">
 				<input type="submit" id="coll_submit" value="移入收藏夹">
 			</div>
@@ -577,7 +578,7 @@ a {
 			<div class="ft-totalPrice">
 				<span>合计（不含运费）：</span><b>￥0.00</b>
 
-				<form action="">
+				<form action="address/payquery">
 					<input style="color:black" type="submit" id="dosubmit" value="结算">
 				</form>
 

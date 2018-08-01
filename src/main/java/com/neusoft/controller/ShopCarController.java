@@ -85,7 +85,7 @@ public class ShopCarController {
 	    if(session.getAttribute("userid")!=null){
 	    	userid=(Integer) session.getAttribute("userid");
 	    	session.setAttribute("userid", userid);
-	    	System.out.println("productlid-----"+userid);
+	    	System.out.println("productlid--add---"+userid);
 	    }
 	    if(session.getAttribute("productid")!=null){
 	    	 productid=(String) session.getAttribute("productid");
@@ -94,7 +94,7 @@ public class ShopCarController {
 	    if(session.getAttribute("productnum")!=null){
 	    	 amount=(String) session.getAttribute("productnum");
 	    	 request.setAttribute("amount", amount);
-	 		System.out.println("productnum----"+amount);
+	 		System.out.println("productnum---add-"+amount);
 	    }
 	    shopCarService.addcart1(request, response,session);
 	  }
@@ -141,6 +141,12 @@ public class ShopCarController {
 		  result.put("success", true);
 
 		 return result;
+	}
+	  @RequestMapping("/showcollection")
+	 public void  showcollect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{	
+		 shopCarService.showcollect(request, response);
+		 
 	}
 	  
 	  //查询到该用户的购物车信息
@@ -195,3 +201,6 @@ public class ShopCarController {
 		}
 
 }
+
+
+

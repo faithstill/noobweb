@@ -47,7 +47,7 @@ public class ShopCarServiceImpl implements ShopCarService {
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('用户未登录或登录已过期，请重新登录，点确定后自动跳转到登录界面')</script>");
-				out.println("<script>window.location.href='/noobweb/home/login.html';</script>");
+				out.println("<script>window.location.href='/noobweb/login.jsp';</script>");
 				out.flush();
 				out.close();
 				System.out.println("未登录");
@@ -230,24 +230,87 @@ public class ShopCarServiceImpl implements ShopCarService {
 	@Override
 	public void collectSomeCart(HttpServletRequest request,HttpServletResponse response) {		
 		try {
-			if (request.getParameterValues("checkID[]") != null) {
+			if (request.getParameterValues("checkID[]") != null) 
+			{
 				List<Shoppingcar> cartList = init(request, response);
 				int userid = (Integer) request.getSession().getAttribute("userid");
 				String checkID[] = request.getParameterValues("checkID[]");
-				for (int i = 0; i < checkID.length; i++) {
+				for (int i = 0; i < checkID.length; i++)
+				{
 					int Productid = cartList.get(Integer.parseInt(checkID[i])).getProductid();// 获取待删除的产品id
-					//将所选的商品移入收藏夹					
-					Mycollection mycollection = new Mycollection();
-					mycollection.setUserid(userid);
-					mycollection.setProductid(Productid);					
-					collectionmapper.insert(mycollection);
+					//查询该用户的收藏夹
+					MycollectionExample example = new MycollectionExample();
+					MycollectionExample.Criteria cr = example.createCriteria();
+					cr.andUseridEqualTo(userid);
+					List<Mycollection> collectionList = collectionmapper.selectByExample(example);
+					//设置一个判断条件,有相同产品就不添加了
+					boolean flag = true;
+					for(Mycollection list:collectionList)
+					{
+						if(list.getProductid() == Productid)
+						{
+							flag=false;
+						}
+					}
+					if(flag)
+					{
+						//将所选的商品移入收藏夹					
+						Mycollection mycollection = new Mycollection();
+						mycollection.setUserid(userid);
+						mycollection.setProductid(Productid);					
+						collectionmapper.insert(mycollection);	
+					}					
 					//从购物车列表里删除所选商品
-					deleteSomeCart(request, response);					
-				}
-				
+					deleteSomeCart(request, response);		
+					/*//重新获取收藏夹的商品信息
+					MycollectionExample examplen = new MycollectionExample();
+					MycollectionExample.Criteria crn = examplen.createCriteria();
+					crn.andUseridEqualTo(userid);
+					List<Mycollection> collectionListn = collectionmapper.selectByExample(example);	
+					for(Mycollection list:collectionListn)
+					{
+						System.out.println(list.getUserid()+" "+list.getProductid());
+					}
+					List collectionproductList = new ArrayList();
+					if (collectionListn != null) 
+					{
+						for (Mycollection list : collectionListn)
+						{
+							Product p = productmapper.selectByPrimaryKey(list.getProductid());
+							collectionproductList.add(p);
+						}
+						request.setAttribute("collectionproductList", collectionproductList);
+				     }*/
+				  }
+			    }
 			}
-		}
 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	@Override
+	public void showcollect(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		try
+		{
+			if( request.getSession().getAttribute("userid")!=null){
+				int userid = (Integer) request.getSession().getAttribute("userid");
+				MycollectionExample examplen = new MycollectionExample();
+				MycollectionExample.Criteria crn = examplen.createCriteria();
+				crn.andUseridEqualTo(userid);
+			List<Mycollection> collectionListn = collectionmapper.selectByExample(examplen);	
+			List<Product>collectionproductList = new ArrayList();
+			for (Mycollection list : collectionListn)
+			{
+				Product p = productmapper.selectByPrimaryKey(list.getProductid());
+				collectionproductList.add(p);
+			}
+		request.setAttribute("collectionproductList", collectionproductList);
+		request.getRequestDispatcher("/home/mycolleaction.jsp").forward(request,response);
+		}}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
