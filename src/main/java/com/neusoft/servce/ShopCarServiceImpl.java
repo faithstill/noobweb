@@ -145,13 +145,11 @@ public class ShopCarServiceImpl implements ShopCarService {
 		try {
 			if (request.getParameterValues("checkID[]") != null) {
 				List<Shoppingcar> cartList = init(request, response);
-				int userid = (Integer) request.getSession().getAttribute(
-						"userid");
+				int userid = (Integer) request.getSession().getAttribute("userid");
 				System.out.println(userid);
 				String checkID[] = request.getParameterValues("checkID[]");
 				for (int i = 0; i < checkID.length; i++) {
-					int Productid = cartList.get(Integer.parseInt(checkID[i]))
-							.getProductid();// 获取待删除的产品id
+					int Productid = cartList.get(Integer.parseInt(checkID[i])).getProductid();// 获取待删除的产品id
 					ShoppingcarExample example = new ShoppingcarExample();
 					ShoppingcarExample.Criteria cr = example.createCriteria();
 					cr.andProductidEqualTo(Productid);
