@@ -83,11 +83,11 @@ public class TradeController {
 			userService.updateUser(user);
 			orderService.order_refund(orderid);
 			mav.addObject("orderid", orderid);
-			mav.setViewName("/refundsuccess.jsp");
+			mav.setViewName("/success.jsp");
 		
 		}
 		else{
-			mav.setViewName("/refundfailed.jsp");
+			mav.setViewName("/success.jsp");
 		}
 		return mav;
 	}

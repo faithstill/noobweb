@@ -2,6 +2,7 @@ package com.neusoft.servce;
 
 import java.util.Date;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,14 @@ public class OrderServiceImpl implements OrderService{
 		Orders order = orderMapper.selectByPrimaryKey(orderid);
 		return order;
 	}
+	
+	public List<Orders> queryByNameAndTime(String username,Date begintime,Date endtime)
+	{
+		List<Orders> orderlist = orderMapper.selectByUserandTime(username,begintime,endtime);
+		return orderlist;
+	}
+	
+	
 	
 	
 	

@@ -78,10 +78,7 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("quer-name----"+productname);
 		List<Product> productlist = productService.queryByName(productname);
-		for(Product product:productlist)
-		{
-			System.out.println(product.getProductid());
-		}
+		
 		mav.addObject("productlist",productlist);
 		mav.addObject("length", productlist.size());
 		mav.setViewName("/admin/products.jsp");
