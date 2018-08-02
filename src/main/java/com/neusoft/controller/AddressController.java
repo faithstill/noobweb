@@ -1,7 +1,9 @@
 package com.neusoft.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,42 +12,106 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.neusoft.domain.Address;
+import com.neusoft.domain.Orders;
+import com.neusoft.domain.Shoppingcar;
+import com.neusoft.domain.littleorder;
 import com.neusoft.servce.AddressService;
+import com.neusoft.servce.OrderService;
+import com.neusoft.servce.ProductService;
+import com.neusoft.servce.ShopCarService;
 
 
 
 @Controller
 @RequestMapping("/address") 
 public class AddressController {
+	
 	@Autowired
 	AddressService addressService;
 	
+	@Autowired
+	OrderService orderService;
+	
+	@Autowired
+	ShopCarService shopcarService;
+	
+	@Autowired
+	ProductService productService;
+	
+	
+	int loginflag=0;//0为没登录，1为已经登录
+	public void init(HttpSession session){
+		Object username = session.getAttribute("username");
+		if(username!=null){
+			loginflag=1;	
+	}
+	}
+	
 	@RequestMapping("/query")
-	public ModelAndView query(){
-		int userid = 1;
+	public ModelAndView query(HttpSession session){
+		int userid = (Integer) session.getAttribute("userid");
 		List<Address> addresslist = addressService.queryByUser(userid);
-		//System.out.println("userid---"+userid);
 		ModelAndView mav = new ModelAndView();
-		
-//		for(Address address: addresslist)
-//		{
-//			//System.out.println("address----"+address);
-//			System.out.println("addresslist"+i);
-//			mav.addObject("addresslist"+i,addresslist);
-//			i++;
-//		}
 		mav.addObject("addresslist",addresslist);
-		//mav.setViewName("/home/pay.jsp");
 		mav.setViewName("/person/address.jsp");
-		//mav.setViewName("/test.jsp");
+		
 		return mav;
 	}
 	
-	
+	@RequestMapping("/payquery")
+	public ModelAndView payquery(HttpSession session){
+		init(session);
+		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("userid")!=null){
+		int userid = (Integer) session.getAttribute("userid");
+		List<Address> addresslist = addressService.queryByUser(userid);
+	//	List<Orders> orders=orderService.queryByUser(userid);
+		List<Shoppingcar> carlist=shopcarService.queryByUser(userid);
+		
+		List<littleorder> lorderlist= new ArrayList();
+		float pricefinal=0;System.out.println("carlist------"+carlist.size());
+		
+		for(int i=0;i<carlist.size();i++){
+		 littleorder lorder=new littleorder();
+		 lorder.setProductid(carlist.get(i).getProductid());
+		 lorder.setName(productService.product_queryById(carlist.get(i).getProductid()).getProductname());
+		 lorder.setPrice(productService.product_queryById(carlist.get(i).getProductid()).getPrice());
+		 lorder.setNumber(carlist.get(i).getAmount());
+		 lorder.setAmount((lorder.price)*(lorder.number));
+		 lorder.setPicture(productService.product_queryById(carlist.get(i).getProductid()).getMainPicture());
+		 pricefinal=pricefinal+lorder.amount;
+		 lorderlist.add(lorder);
+		 System.out.println("lordername-----"+lorder.name);
+		}
+		for(int i=0;i<lorderlist.size();i++){
+			System.out.println("lorder----"+lorderlist.get(i).name);
+		}
+		mav.addObject("addresslist",addresslist);
+		mav.addObject("lorderlist",lorderlist);
+		mav.addObject("pricefinal", pricefinal);
+		session.setAttribute("lorderlist",lorderlist);
+		session.setAttribute("pricefinal", pricefinal);
+		mav.setViewName("/home/pay.jsp");
+		/**
+		 * productidlist
+		 * productAmount
+		 * pricefinal
+		 *  
+		 * 
+		 */
+		}
+		else{
+			System.out.println("payquery dont have session");
+		}
+		return mav;
+	}
 	
 	@RequestMapping("/add")
-	public ModelAndView address_add(Address address){
+	public ModelAndView address_add(Address address,HttpSession session){
 		//Address t_address = new Address(address.getUserid(),address.getName(),address.getPhone(),address.getProvince(),address.getCity(),address.getDetailedaddress());
+		if(session.getAttribute("userid")!=null){
+			address.setUserid(Integer.parseInt((String) session.getAttribute("userid")));
+		}
 		System.out.println("id:"+address.getUserid());
 		System.out.println("name:"+address.getName());
 		System.out.println("phone:"+address.getPhone());
@@ -56,6 +122,25 @@ public class AddressController {
 		addressService.address_add(address);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/address/query"); 
+		return mav;
+	}
+	
+	@RequestMapping("/payadd")
+	public ModelAndView address_add1(Address address,HttpSession session){
+		//Address t_address = new Address(address.getUserid(),address.getName(),address.getPhone(),address.getProvince(),address.getCity(),address.getDetailedaddress());
+		//System.out.println("id:"+address.getUserid());
+		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("userid")!=null){
+		address.setUserid(Integer.parseInt((String) session.getAttribute("userid")));
+		System.out.println("name:"+address.getName());
+		System.out.println("phone:"+address.getPhone());
+		System.out.println("province:"+address.getProvince());
+		System.out.println("city:"+address.getCity());
+		System.out.println("detail:"+address.getDetailedaddress());
+		
+		addressService.address_add(address);
+		mav.setViewName("/address/payquery"); 
+		}
 		return mav;
 	}
 	

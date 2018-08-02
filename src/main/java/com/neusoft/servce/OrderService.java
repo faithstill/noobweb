@@ -21,6 +21,7 @@ public interface OrderService {
 	public boolean order_finish(int orderid);
 	public boolean order_redelivery(int orderid);
 	public boolean order_refund(int orderid);
+	public boolean order_cancel(int orderid);
 	
 	public List queryByNameAndTime(String username,Date begintime,Date endtime);
 }

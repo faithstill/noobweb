@@ -25,7 +25,6 @@ public class HomeController {
 		Object username = session.getAttribute("username");
 		if(username!=null){
 			loginflag=1;
-			System.out.println("home userid---"+session.getAttribute("userid"));
 		}
 		System.out.println("session"+loginflag);
 		int productid1 = 1;
@@ -41,9 +40,6 @@ public class HomeController {
 			productlist.add(product2);
 		if(product3!=null)
 			productlist.add(product3);
-		if(productlist!=null)
-		for(Product product:productlist)
-			System.out.println(product.getMainPicture());
 		//List<Address> addresslist = addressService.queryByUser(userid);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("loginflag", loginflag);

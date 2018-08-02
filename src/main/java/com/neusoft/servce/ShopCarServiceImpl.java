@@ -297,10 +297,11 @@ public class ShopCarServiceImpl implements ShopCarService {
 	public void showcollect(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-			int userid = (Integer) request.getSession().getAttribute("userid");
-			MycollectionExample examplen = new MycollectionExample();
-			MycollectionExample.Criteria crn = examplen.createCriteria();
-			crn.andUseridEqualTo(userid);
+			if( request.getSession().getAttribute("userid")!=null){
+				int userid = (Integer) request.getSession().getAttribute("userid");
+				MycollectionExample examplen = new MycollectionExample();
+				MycollectionExample.Criteria crn = examplen.createCriteria();
+				crn.andUseridEqualTo(userid);
 			List<Mycollection> collectionListn = collectionmapper.selectByExample(examplen);	
 			List<Product>collectionproductList = new ArrayList();
 			for (Mycollection list : collectionListn)
@@ -310,7 +311,7 @@ public class ShopCarServiceImpl implements ShopCarService {
 			}
 		request.setAttribute("collectionproductList", collectionproductList);
 		request.getRequestDispatcher("/home/mycolleaction.jsp").forward(request,response);
-		}
+		}}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
