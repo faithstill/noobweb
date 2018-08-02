@@ -5,7 +5,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 request.setAttribute("path", basePath);  
 %>
-
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -176,6 +176,9 @@ function member_del(obj,id){
 		});		
 	});
 }
+
+
+
 </script> 
 </body>
 </html>

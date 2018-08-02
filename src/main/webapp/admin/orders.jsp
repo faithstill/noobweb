@@ -138,7 +138,8 @@ request.setAttribute("path", basePath);
 				
 				
 				
-				<td class="td-manage"> <a title="编辑" href="order/update_queryById?orderid=${order.orderid}"  class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>  <a title="删除" href="javascript:;" onclick="member_del('${order.orderid}',${order.addressid})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td class="td-manage"> <a title="编辑" href="order/update_queryById?orderid=${order.orderid}"  class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> 
+				 <a title="删除" href="order/deleteById?orderid=${order.orderid }"class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
 			</c:forEach>
 		</tbody>

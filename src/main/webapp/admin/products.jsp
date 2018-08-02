@@ -103,7 +103,12 @@ request.setAttribute("path", basePath);
 				<td >${product.getType()}</td>
 				<td >${product.brand}</td>
 				
-				<td class="td-manage"> <a title="编辑" href="product/update_queryById?productid=${product.productid}"  class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>  <a title="删除" href="javascript:;" onclick="member_del('${product.productname}',${product.productid})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td class="td-manage"> <a title="编辑" href="product/update_queryById?productid=${product.productid}"  class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> 
+				 <a title="删除" href="product/deleteById?productid=${product.productid}" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+				 
+				 
+				 </td>				
+			
 			</tr>
 			</c:forEach>
 		</tbody>

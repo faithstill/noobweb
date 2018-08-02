@@ -99,7 +99,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="center">
 			<div class="col-main">
 				<div class="main-wrap">
-
 					<div class="user-order">
 
 						<!--标题 -->
@@ -158,6 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														<c:forEach items="${order_firstproduct}" var="content" begin="${order_i.index}" end="${order_i.index}">
 															<li class="td td-item">
 																<div class="item-pic">
+																
 																	<a href="#" class="J_MakePoint">
 																		<img src="images/${content.mainPicture }" class="itempic J_ItemImg">
 																	</a>
@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 																<div class="item-number">
 																	<c:forEach items="${contentnumlist}" var="contentnum" begin="${order_i.index}" end="${order_i.index}">
 				
-																			<p>共  ${contentnum} 件商品</p>
+																			<p>等  ${contentnum} 种商品</p>
 																	</c:forEach>
 																	
 																	
@@ -213,19 +213,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 																<c:if test="${order.tradeStatus == 'delivered'}">
 																	<p class="Mystatus">已发货</p>
 																</c:if>
-																<c:if test="${order.tradeStatus == 'finishied'}">
+																<c:if test="${order.tradeStatus == 'finished'}">
 																	<p class="Mystatus">交易成功</p>
 																</c:if>
 																<c:if test="${order.tradeStatus == 'redelivered'}">
 																	<p class="Mystatus">已退货</p>
 																</c:if>
-																<c:if test="${order.tradeStatus == 'refund'}">
+																<c:if test="${order.tradeStatus == 'refunded'}">
 																	<p class="Mystatus">已退款</p>
 																</c:if>
 																<c:if test="${order.tradeStatus == 'canceled'}">
 																	<p class="Mystatus">已取消</p>
 																</c:if>
-																	<p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+<!-- 																	<p class="order-info"><a href="orderinfo.html">订单详情</a></p> -->
 												
 																</div>
 															</li>
@@ -238,7 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 																<c:if test="${order.tradeStatus == 'delivered'}">
 																		<div class="am-btn am-btn-danger anniu"><a href="order/finish?orderid=${order.orderid }">确认收货</a></div>
 																</c:if>
-																<c:if test="${order.tradeStatus == 'finishied'}">
+																<c:if test="${order.tradeStatus == 'finished'}">
 																	<div class="am-btn am-btn-danger anniu"><a href="order/redelivery?orderid=${order.orderid }">申请退货</a></div>
 																</c:if>
 															

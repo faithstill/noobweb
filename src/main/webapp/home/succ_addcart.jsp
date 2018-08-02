@@ -8,6 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
+	
 	    <base href="<%=basePath%>"> 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -83,10 +84,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 成功添加购物车</td>  
 </td>  
 <td>
-<label  style="width:200px "><a href="http://localhost:8080/noobweb/shopping/show" ><font color="red">去购物车结算</font></a></label>
+<label  style="width:200px "><a href="shopping/show" ><font color="red">去购物车结算</font></a></label>
 </td>
 <td>
-<label  style="width:300px "><a href="http://localhost:8080/noobweb/home" ><font color="red">继续购物</font></a></label>
+<label  style="width:300px "><a href="home" ><font color="red">继续购物</font></a></label>
 </td>
 </tr>
 </table>			

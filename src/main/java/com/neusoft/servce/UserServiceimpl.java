@@ -34,7 +34,8 @@ public class UserServiceimpl implements UserService{
 	@Override
 	public void deleteUser(User user) {
 		// TODO Auto-generated method stub
-		userMapper.deleteUser(user);
+		//userMapper.deleteUser(user);
+		userMapper.deleteByPrimaryKey(user.getUserid());
 	}
 
 	@Override

@@ -130,8 +130,9 @@ public class OrderController {
 			if(ordercontentlist.size()>0)
 			{
 				o_productid = ordercontentlist.get(0).getProductid();
-				Product productname = productService.queryByProductid(o_productid);
-				order_firstproduct.add(productname);
+				Product product = productService.queryByProductid(o_productid);
+				//System.out.println(product.getProductname());
+				order_firstproduct.add(product);
 			}
 			
 			Address address = addressService.address_queryById(order.getAddressid());
@@ -273,7 +274,7 @@ public class OrderController {
 	{
 		orderService.order_deleteById(orderid);
 		ModelAndView mav = new ModelAndView();
-		//mav.setViewName("/order/query"); 
+		mav.setViewName("/order/queryall"); 
 		return mav;
 		
 	}
@@ -326,7 +327,7 @@ public class OrderController {
 	{
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_delivery(orderid);
-		//mav.setViewName("/delivery");
+		mav.setViewName("/home/houtaisucc.jsp");
 		return mav;
 	}
 	
@@ -336,7 +337,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_finish(orderid);
 		//mav.setViewName("/order/query");
-		mav.setViewName("/success.jsp");
+		mav.setViewName("/home/succ_nb.jsp");
 		return mav;
 	}
 	
@@ -346,7 +347,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_redelivery(orderid);
 		//mav.setViewName("/order/query");
-		mav.setViewName("/success.jsp");
+		mav.setViewName("/home/succ_nb.jsp");
 		return mav;
 	}
 	
@@ -356,11 +357,8 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_refund(orderid);
 		Orders order = orderService.order_queryById(orderid);
-		if(order.getTradeStatus().equals("unpaid"))
-		{
-			mav.setViewName("/success.jsp");
-		}
-
+		mav.setViewName("/home/houtaisucc.jsp");
+		
 		return mav;
 	}
 	
@@ -369,7 +367,7 @@ public class OrderController {
 	{
 		ModelAndView mav = new ModelAndView();
 		boolean suc= orderService.order_cancel(orderid);
-		mav.setViewName("/success.jsp");
-		return mav;
+		mav.setViewName("/home/houtaisucc.jsp");
+		return mav;	
 	}
 }

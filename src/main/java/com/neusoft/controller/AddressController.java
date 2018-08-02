@@ -148,8 +148,8 @@ public class AddressController {
 	@ResponseBody 
 	public Address queryAddress(int addressid)
 	{
-		System.out.println("qweqwe");
-		System.out.println("adr-que----------"+addressid);
+		//System.out.println("qweqwe");
+		//System.out.println("adr-que----------"+addressid);
 		Address address =  addressService.address_queryById(addressid);
 		System.out.println("query---"+address.getName());
 		return address;

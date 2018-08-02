@@ -32,7 +32,7 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	String path_or="D:\\myeclipse\\ssm-0726\\src\\main\\webapp\\images\\"; //根据自己的电脑路径设置
+	String path_or="C:\\study\\internet\\ku\\github_respo\\noobweb\\src\\main\\webapp\\images"; //根据自己的电脑路径设置
 	
 	
 	@RequestMapping("/queryall")
@@ -163,7 +163,7 @@ public class ProductController {
 		System.out.println("del----"+productid);
 		productService.product_deleteById(productid);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/product/query"); 
+		mav.setViewName("/product/queryall"); 
 		return mav;
 		
 	}

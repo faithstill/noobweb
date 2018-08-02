@@ -50,7 +50,7 @@ public class TradeController {
 		{
 			System.out.println("payfail-----moneynotenough");
 			mav.addObject("orderid", orderid);
-			mav.setViewName("/moneynotenough.jsp");
+			mav.setViewName("/home/fail.jsp");
 		}
 		else{
 			user.setMoney(user.getMoney()-order.getAmount());
@@ -83,7 +83,7 @@ public class TradeController {
 			userService.updateUser(user);
 			orderService.order_refund(orderid);
 			mav.addObject("orderid", orderid);
-			mav.setViewName("/success.jsp");
+			mav.setViewName("/home/houtaisucc.jsp");
 		
 		}
 		else{
