@@ -100,6 +100,12 @@ public class ShopCarController {
 		  shopCarService.deleteCart(request, response);
 		 
 	  }
+	  @RequestMapping({"/showmyfoot"})//一条一条删
+	  public void showmyfoot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+		  shopCarService.showmyfoot(request, response);
+		 
+	  }
 	  
 	  @RequestMapping("/deletesome")
 	  @ResponseBody 
@@ -136,6 +142,22 @@ public class ShopCarController {
 		 shopCarService.showcollect(request, response);
 		 
 	}
+	  @RequestMapping("/min")
+		 public void  updateamount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+		{	
+		  // String a =request.getParameter("orderid");
+		   shopCarService.minamount(request, response);
+		  	 
+		}
+	  @RequestMapping("/plus")
+		 public void  plusamount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+		{	
+		  // String a =request.getParameter("orderid");
+		   shopCarService.plusamount(request, response);
+		  	 
+		}
+	  
+	  
 	  
 	  //查询到该用户的购物车信息
 	  @RequestMapping("/query")
@@ -147,6 +169,11 @@ public class ShopCarController {
 			mav.setViewName("/home/pay.jsp");
 			return mav;
 		}
+	  
+	  
+	  
+	  
+	  
 	  @RequestMapping("/jiesuan")
 		  @ResponseBody 
 	  public void pay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

@@ -633,7 +633,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							<div class="login_btnbox ">
 								<a href="# " class="login_order ">我的订单</a>
-								<a href="# " class="login_favorite ">我的收藏</a>
+								<a href="#" class="login_favorite ">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
@@ -659,7 +659,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 
 					<div id="foot " class="item ">
-						<a href="# ">
+						<a href="/noobweb/shopping/showmyfoot">
 							<span class="zuji "></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -669,7 +669,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 
 					<div id="brand " class="item ">
-						<a href="#">
+						<a href="/noobweb/shopping/showcollection">
 							<span class="wdsc "><img src="images/wdsc.png " /></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -679,7 +679,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 
 					<div id="broadcast " class="item ">
-						<a href="# ">
+						<a href="/noobweb/shopping/showcollection">
 							<span class="chongzhi "><img src="images/chongzhi.png " /></span>
 						</a>
 						<div class="mp_tooltip ">

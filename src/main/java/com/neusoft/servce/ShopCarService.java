@@ -31,6 +31,15 @@ public interface ShopCarService {
 
 		public abstract void showcollect(HttpServletRequest request,
 				HttpServletResponse response) throws ServletException, IOException;
+
+		public abstract void minamount(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException;
+
+		public abstract void plusamount(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException;
+
+		public abstract void showmyfoot(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException;
 		
 		
 		

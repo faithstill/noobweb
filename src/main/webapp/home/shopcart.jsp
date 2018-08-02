@@ -432,11 +432,9 @@ a {
 		<ul class="message-r">
 			<div class="topMessage home">
 				<div class="menu-hd">
-<<<<<<< HEAD
-					<a href="/noobweb/home/home.jsp" target="_top" class="h">商城首页</a>
-=======
+
 					<a href="/home" target="_top" class="h">商城首页</a>
->>>>>>> 293d82b3f02033c00cf7c18196fc0f227b329724
+
 				</div>
 			</div>
 			<div class="topMessage my-shangcheng">
@@ -446,7 +444,7 @@ a {
 			</div>
 			<div class="topMessage mini-cart">
 				<div class="menu-hd">
-					<a id="mc-menu-hd" href="http://localhost:8080/noobweb/shopping/show" target="_top"><i
+					<a id="mc-menu-hd" href="/noobweb/shopping/show" target="_top"><i
 						class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong
 						id="J_MiniCartNum" class="h">0</strong>
 					</a>
@@ -521,7 +519,7 @@ a {
 								<a href="#">${i.productname}</a>
 							</div>
 							<div class="info-parameter">
-								<span>颜色分类：图片色</span> <span>尺码：L</span>
+								<span>颜色分类：图片色</span> <span></span>
 							</div>
 
 						</div>
@@ -530,15 +528,28 @@ a {
 							<b>${i.price}</b>
 						</div>
 						<div class="bd-number">
-							<a href="javascript:;" class="minus">-</a> <input type="text"
-								class="inputNum" name="amount"
-								value="${cartList.get(a).getAmount()}" /> <a href="javascript:;"
-								class="plus">+</a>
+						
+							<form action="<%=basePath%>shopping/min">
+							<input type="hidden" name="orderid" value="${cartList.get(a).getProductid()}"/>
+							 <input class="minus" name="-" type="submit" value="-" />  
+						<!-- 	<a href="javascript:;" class="minus" type="submit">-</a>   -->
+							</form>						
+							
+							
+							
+							 <input type="text" class="inputNum" name="amount" value="${cartList.get(a).getAmount()}" /> 
+							 
+							 
+							 <form action="<%=basePath%>shopping/plus">
+							<input type="hidden" name="orderid" value="${cartList.get(a).getProductid()}"/>
+							 <input class="plus" name="+" type="submit" value="+" />  					
+							</form>						
+							<!-- <a href="javascript:;"class="plus">+</a> -->
 						</div> <%
  	double b =cartList1.get(a).getAmount()*cartproductList1.get(a).getPrice();
  %>
 						<div class="bd-amount">
-							<b><%=b%></b>
+							<b><%=String.format("%.2f", b)%></b>
 						</div> <%
  	a=a+1;
  %> <%

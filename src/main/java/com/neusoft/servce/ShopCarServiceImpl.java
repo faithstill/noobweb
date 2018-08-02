@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -313,6 +314,87 @@ public class ShopCarServiceImpl implements ShopCarService {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+
+	@Override
+	public void minamount(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		int userid = (Integer) request.getSession().getAttribute("userid");
+		String productid =request.getParameter("orderid");		
+		int productId = Integer.parseInt(productid);
+		//根据用户id，产品id获取购物车表中某行
+		ShoppingcarExample example = new ShoppingcarExample();
+		ShoppingcarExample.Criteria cr = example.createCriteria();
+		cr.andUseridEqualTo(userid);
+		cr.andProductidEqualTo(productId);
+		List<Shoppingcar> shopcar = shopcarmapper.selectByExample(example);
+		for(Shoppingcar list:shopcar)
+		{
+			int amount = list.getAmount();
+			if(amount!=1)
+			amount--;
+			list.setAmount(amount);
+			ShoppingcarExample examplen = new ShoppingcarExample();
+			ShoppingcarExample.Criteria crn = examplen.createCriteria();
+			cr.andProductidEqualTo(productId);
+			cr.andUseridEqualTo(userid);
+			shopcarmapper.updateByExample(list, example);
+		}
+		 request.getRequestDispatcher("/shopping/show").forward(request,response);	
+	}
+
+
+	@Override
+	public void plusamount(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		int userid = (Integer) request.getSession().getAttribute("userid");
+		String productid =request.getParameter("orderid");		
+		int productId = Integer.parseInt(productid);
+		//根据用户id，产品id获取购物车表中某行
+		ShoppingcarExample example = new ShoppingcarExample();
+		ShoppingcarExample.Criteria cr = example.createCriteria();
+		cr.andUseridEqualTo(userid);
+		cr.andProductidEqualTo(productId);
+		List<Shoppingcar> shopcar = shopcarmapper.selectByExample(example);
+		for(Shoppingcar list:shopcar)
+		{
+			int amount = list.getAmount();
+			amount++;
+			list.setAmount(amount);
+			ShoppingcarExample examplen = new ShoppingcarExample();
+			ShoppingcarExample.Criteria crn = examplen.createCriteria();
+			cr.andProductidEqualTo(productId);
+			cr.andUseridEqualTo(userid);
+			shopcarmapper.updateByExample(list, example);
+		}
+		 request.getRequestDispatcher("/shopping/show").forward(request,response);
+		
+	}
+
+
+	@Override
+	public void showmyfoot(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		
+		Cookie[] cookies = request.getCookies();
+		List footproductList = new ArrayList();
+		for (int i = 0; cookies != null && i < cookies.length; i++){
+			
+			//找到我们想要的cookie
+			if (cookies[i].getName().equals("historyCookie")){
+				String[] ids = cookies[i].getValue().split("\\,");
+				
+				//得到cookie中存在的id，展现浏览过的商品
+				for (String id : ids){
+					int idn = Integer.parseInt(id);
+					Product p = productmapper.selectByPrimaryKey(idn);
+					footproductList.add(p);
+					//System.out.print(idn+"  ");
+				}
+							}
+					
+		}	
+		request.setAttribute("footproductList", footproductList);
+		request.getRequestDispatcher("/home/myfootprint.jsp").forward(request,response);
 		
 	}
 }

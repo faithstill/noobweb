@@ -1,7 +1,10 @@
 package com.neusoft.controller;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -66,8 +69,56 @@ public class IntroductionController {
 		mav.addObject("commentlist",commentlist_div);
 		mav.addObject("Commentpage",Commentpage1);
 		
+		/*
+		 * 
+		 * 我的足迹，在此处写入cookie
+		 * 
+		 * 
+		 */
 		
+		//给浏览器回写cookie
+	     String cookieValue;
+         String historyCookie = null;
 		
+		//得到请求中带来的cookie值
+		Cookie[] cookies = request.getCookies();
+		for (int i = 0; cookies != null && i < cookies.length; i++){
+			if (cookies[i].getName().equals("historyCookie") ){
+				historyCookie = cookies[i].getValue();
+			}
+		}
+		
+		//如果为空返回当前商品的id
+		if (historyCookie == null){
+			cookieValue = product_id;
+		}
+		else
+		{
+		
+		LinkedList<String> list = new LinkedList<String>( Arrays.asList((historyCookie.split("\\,"))));
+		
+		//对不同的情况进行分析返回id的值
+		if (list.contains(product_id)){
+			list.remove(product_id);
+		}/*else{
+			if (list.size() >= 5){
+				list.removeLast();
+			}
+		}*/
+		list.addFirst(product_id);
+		
+		StringBuffer sb = new StringBuffer();
+		for (String sid : list){
+			sb.append(sid + ",");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		
+		cookieValue =  sb.toString();
+		}
+		Cookie cookie = new Cookie("historyCookie", cookieValue);
+		cookie.setMaxAge(1*24*3600);
+		cookie.setPath("/noobweb");
+		rp.addCookie(cookie);
 		
 		mav.setViewName("/home/introduction.jsp");
 		return mav;
